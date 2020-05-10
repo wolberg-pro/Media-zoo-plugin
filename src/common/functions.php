@@ -1,28 +1,70 @@
 <?php
-// Remove all default WP template redirects/lookups
-remove_action( 'template_redirect', 'redirect_canonical' );
+
 
 // Redirect all requests to index.php so the Vue app is loaded and 404s aren't thrown
-function remove_redirects() {
-	add_rewrite_rule( '^/(.+)/?', 'index.php', 'top' );
+function remove_redirects()
+{
+    add_rewrite_rule('^/(.+)/?', 'index.php', 'top');
 }
-add_action( 'init', 'remove_redirects' );
 
 // Load scripts
-function load_vue_scripts() {
-	wp_enqueue_script(
-		'vuejs-wordpress-theme-starter-js',
-		get_stylesheet_directory_uri() . '/dist/scripts/index.js',
-		array( 'jquery' ),
-		filemtime( get_stylesheet_directory() . '/dist/scripts/index.js' ),
-		true
-	);
+function load_vue_scripts()
+{
+    wp_enqueue_script(
+        'MediaZoo_asset_js',
+        get_stylesheet_directory_uri() . '/dist/scripts/index.js',
+        array('jquery'),
+        filemtime(get_stylesheet_directory() . '/dist/scripts/index.js'),
+        true
+    );
 
-	wp_enqueue_style(
-		'vuejs-wordpress-theme-starter-css',
-		get_stylesheet_directory_uri() . '/dist/styles.css',
-		null,
-		filemtime( get_stylesheet_directory() . '/dist/styles.css' )
-	);
+    wp_enqueue_style(
+        'MediaZoo_asset_css',
+        get_stylesheet_directory_uri() . '/dist/styles.css',
+        null,
+        filemtime(get_stylesheet_directory() . '/dist/styles.css')
+    );
 }
-add_action( 'wp_enqueue_scripts', 'load_vue_scripts', 100 );
+
+// add_action('plugins_loaded', 'MediaZoo_init_deactivation');
+
+/**
+ * Initialise deactivation functions.
+ */
+function MediaZoo_init_deactivation()
+{
+    if (current_user_can('activate_plugins')) {
+        add_action('admin_init', 'MediaZoo_deactivate');
+        add_action('admin_notices', 'MediaZoo_deactivation_notice');
+    }
+}
+
+/**
+ * Deactivate the plugin.
+ */
+function MediaZoo_deactivate()
+{
+    deactivate_plugins(plugin_basename(__FILE__));
+}
+
+/**
+ * Show deactivation admin notice.
+ */
+function MediaZoo_deactivation_notice()
+{
+    $notice = sprintf(
+        // Translators: 1: Required PHP version, 2: Current PHP version.
+        '<strong>Plugin Boilerplate</strong> requires PHP %1$s to run. This site uses %2$s, so the plugin has been <strong>deactivated</strong>.',
+        '7.1',
+        PHP_VERSION
+    ); ?>
+	<div class="updated">
+		<p><?php echo wp_kses_post($notice); ?></p>
+	</div>
+<?php
+    // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- not using value, only checking if it is set.
+    if (isset($_GET['activate'])) {
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- not using value, only checking if it is set.
+        unset($_GET['activate']);
+    }
+}

@@ -1,17 +1,14 @@
 <?php
+
 /**
- * Initialise the plugin
+ * Loading Zone
  *
- * This file can use syntax from the required level of PHP or later.
- *
- * @package      Gamajo\PluginSlug
- * @author       Gary Jones
- * @copyright    2020 Gary Jones
- * @license      GPL-2.0-or-later
+ * @package      MediaZoo\MediaZooPlugin
+ * @author       Sivan Wolberg
+ * @copyright    2020 Wolberg pro
  */
 
-declare(strict_types = 1);
-
+declare(strict_types=1);
 namespace MediaZoo\MediaZooPlugin;
 
 use BrightNucleus\Config\ConfigFactory;
@@ -21,19 +18,59 @@ if (!defined('WPINC')) {
     die;
 }
 
-if (!defined('MEDIA_ZOO_DIR')) {
-    define('MEDIA_ZOO_DIR', plugin_dir_path(__FILE__));
+if (!defined('MediaZoo_DIR')) {
+    define('MediaZoo_DIR', plugin_dir_path(__FILE__));
 }
 
-if (!defined('MEDIA_ZOO_URL')) {
-    define('MEDIA_ZOO_URL', plugin_dir_url(__FILE__));
+if (!defined('MediaZoo_URL')) {
+    define('MediaZoo_URL', plugin_dir_url(__FILE__));
 }
 
+define('MediaZoo_VERSION', '1.0.0');
 // Load Composer autoloader.
 if (file_exists(__DIR__ . '/vendor/autoload.php')) {
     require_once __DIR__ . '/vendor/autoload.php';
 }
+/**
+ * The code that runs during plugin activation.
+ * This action is documented in includes/class-plugin-name-activator.php
+ */
+function activate_plugin_name()
+{
+    require_once plugin_dir_path(__FILE__) . 'src/includes/class-plugin-name-activator.php';
+    MediaZoo_Activator::activate();
+}
 
-// Initialize the plugin.
-$GLOBALS['media_zoo'] = new Plugin(ConfigFactory::create(__DIR__ . '/config/defaults.php')->getSubConfig('MediaZoo\MediaZooPlugin'));
-$GLOBALS['media_zoo']->run();
+/**
+ * The code that runs during plugin deactivation.
+ * This action is documented in includes/class-plugin-name-deactivator.php
+ */
+function deactivate_plugin_name()
+{
+    require_once plugin_dir_path(__FILE__) . 'src/includes/class-plugin-name-deactivator.php';
+    MediaZoo_Deactivator::deactivate();
+}
+
+register_activation_hook(__FILE__, 'activate_plugin_name');
+register_deactivation_hook(__FILE__, 'deactivate_plugin_name');
+/**
+ * The core plugin class that is used to define internationalization,
+ * admin-specific hooks, and public-facing site hooks.
+ */
+require plugin_dir_path(__FILE__) . 'src/includes/class-plugin-name.php';
+
+/**
+ * Begins execution of the plugin.
+ *
+ * Since everything within the plugin is registered via hooks,
+ * then kicking off the plugin from this point in the file does
+ * not affect the page life cycle.
+ *
+ * @since    1.0.0
+ */
+function run_plugin_name()
+{
+    $plugin = new  MediaZoo(ConfigFactory::create(__DIR__ . '/config/defaults.php')->getSubConfig('MediaZoo\MediaZooPlugin'));
+    $plugin->run();
+}
+run_plugin_name();

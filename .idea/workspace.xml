@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="83f9ca73-4963-4456-81fb-7dda1f6fde62" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/Plugin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Plugin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/functions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/admin-page.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin-page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/views/readme.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1bi00fHYk5lXElkVT0DtwHhqT5d" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="83f9ca73-4963-4456-81fb-7dda1f6fde62" name="Default Changelist" comment="" />
+      <created>1589099385116</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1589099385116</updated>
+      <workItem from="1589099405468" duration="253000" />
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="461" y="164" key="SettingsEditor" timestamp="1589099666036">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040/-1366.206.1366.728@0.0.1920.1040" timestamp="1589099666036" />
+  </component>
+</project>

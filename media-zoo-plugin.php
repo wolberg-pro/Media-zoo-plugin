@@ -26,52 +26,7 @@ if (!defined('WPINC')) {
     die;
 }
 
-if (version_compare(PHP_VERSION, '7.4', '<')) {
-    add_action('plugins_loaded', 'media_zoo_init_deactivation');
-
-    /**
-     * Initialise deactivation functions.
-     */
-    function media_zoo_init_deactivation()
-    {
-        if (current_user_can('activate_plugins')) {
-            add_action('admin_init', 'media_zoo_deactivate');
-            add_action('admin_notices', 'media_zoo_deactivation_notice');
-        }
-    }
-
-    /**
-     * Deactivate the plugin.
-     */
-    function media_zoo_deactivate()
-    {
-        deactivate_plugins(plugin_basename(__FILE__));
-    }
-
-    /**
-     * Show deactivation admin notice.
-     */
-    function media_zoo_deactivation_notice()
-    {
-        $notice = sprintf(
-            // Translators: 1: Required PHP version, 2: Current PHP version.
-            '<strong>Plugin Boilerplate</strong> requires PHP %1$s to run. This site uses %2$s, so the plugin has been <strong>deactivated</strong>.',
-            '7.1',
-            PHP_VERSION
-        ); ?>
-<div class="updated">
-    <p><?php echo wp_kses_post($notice); ?></p>
-</div>
-<?php
-// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- not using value, only checking if it is set.
-        if (isset($_GET['activate'])) {
-            // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- not using value, only checking if it is set.
-            unset($_GET['activate']);
-        }
-    }
-
-    return false;
-}
+require_once(__DIR__ . 'src/common/functions.php');
 
 /**
  * Load plugin initialisation file.

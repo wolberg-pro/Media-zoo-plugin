@@ -24,32 +24,32 @@ $plugin_slug_settings = [
             'menu_title' => __('Plugin Slug', 'plugin-slug'),
             'capability' => 'manage_options',
             'menu_slug' => 'plugin-slug',
-            'view' => PLUGIN_SLUG_DIR . 'views/admin-page.php',
+            'view' => MediaZoo_DIR . 'views/admin-page.php',
             'dependencies' => [
                 'styles' => [],
                 'scripts' => [
-                    [
-                        'handle' => 'plugin-slug-js',
-                        'src' => PLUGIN_SLUG_URL . 'js/admin-page.js',
-                        'deps' => ['jquery'],
-                        'ver' => '1.2.3',
-                        'in_footer' => true,
-                        'is_needed' => function ($context): bool {
-                            if ($context) {
-                                return false;
-                            }
+                    // [
+                    //     'handle' => 'plugin-slug-js',
+                    //     'src' => PLUGIN_SLUG_URL . 'js/admin-page.js',
+                    //     'deps' => ['jquery'],
+                    //     'ver' => '1.2.3',
+                    //     'in_footer' => true,
+                    //     'is_needed' => function ($context): bool {
+                    //         if ($context) {
+                    //             return false;
+                    //         }
 
-                            return true;
-                        },
-                        'localize' => [
-                            'name' => 'pluginSlugI18n',
-                            'data' => function ($context): array {
-                                return [
-                                    'test_localize_data' => 'test_localize_value',
-                                    'context' => $context,
-                                ];
-                            },
-                        ],
+                    //         return true;
+                    //     },
+                    //     'localize' => [
+                    //         'name' => 'pluginSlugI18n',
+                    //         'data' => function ($context): array {
+                    //             return [
+                    //                 'test_localize_data' => 'test_localize_value',
+                    //                 'context' => $context,
+                    //             ];
+                    //         },
+                    //     ],
                     ],
                 ],
                 'handlers' => [
@@ -66,11 +66,11 @@ $plugin_slug_settings = [
             'sections' => [
                 'section1' => [
                     'title' => __('My Section Title', 'plugin-slug'),
-                    'view' => PLUGIN_SLUG_DIR . 'views/section1.php',
+                    'view' => MediaZoo_DIR . 'views/section1.php',
                     'fields' => [
                         'field1' => [
                             'title' => __('My Field Title', 'plugin-slug'),
-                            'view' => PLUGIN_SLUG_DIR . 'views/field1.php',
+                            'view' => MediaZoo_DIR . 'views/field1.php',
                         ],
                     ],
                 ],

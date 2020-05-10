@@ -1,30 +1,11 @@
-<?php
-/**
- * Admin page view
- *
- * @package      Gamajo\PluginSlug
- * @author       Gary Jones
- * @copyright    2017 Gamajo
- * @license      GPL-2.0+
- */
+<div id="app"></div>
 
-declare( strict_types = 1 );
-?>
-<div class="wrap">
-	<form method="post" action="options.php">
-
-		<?php settings_fields( 'pluginslug' ); /* Name of settings field in table. */ ?>
-
-		<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
-
-		<?php
-		do_settings_sections( 'pluginslug' );
-		?>
-
-		<div class="bottom-buttons">
-			<?php
-			submit_button( __( 'Save Changes', 'plugin-slug' ), 'primary', 'submit', false );
-			?>
-		</div>
-	</form>
-</div>
+<?php if (preg_match("/(.*.local|.*.test|.*.loc|localhost:.*)/i", $_SERVER['HTTP_HOST'])): ?>
+<!-- HMR Reloader -->
+<script id="__bs_script__">
+//<![CDATA[
+document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js?v=2.26.5'><\/script>".replace(
+    "HOST", location.hostname));
+//]]>
+</script>
+<?php endif;?>
