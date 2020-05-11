@@ -22,5 +22,6 @@ class MediaZoo_Deactivator
      */
     public static function deactivate()
     {
+        MediaZoo_init_deactivation();
     }
 }

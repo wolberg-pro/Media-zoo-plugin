@@ -50,7 +50,7 @@ $plugin_slug_settings = [
                     //             ];
                     //         },
                     //     ],
-                    ],
+                    // ],
                 ],
                 'handlers' => [
                     'scripts' => 'BrightNucleus\Dependency\ScriptHandler',

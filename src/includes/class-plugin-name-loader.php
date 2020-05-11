@@ -6,6 +6,10 @@
  * @author       Sivan Wolberg
  * @copyright    2020 Wolberg pro
  */
+
+declare(strict_types=1);
+namespace MediaZoo\MediaZooPlugin;
+
 /**
  * Register all actions and filters for the plugin.
  *

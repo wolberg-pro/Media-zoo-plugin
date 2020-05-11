@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace MediaZoo\MediaZooPlugin;
 
 use BrightNucleus\Config\ConfigInterface;
+use MediaZoo\MediaZooPlugin\common\Configuration;
 
 class MediaZoo_i18n
 {
@@ -24,6 +25,7 @@ class MediaZoo_i18n
      */
     public function load_plugin_textdomain(ConfigInterface $config)
     {
+        $config = Configuration::getInstance()->getConfig();
         $text_domain = $config->getKey('Plugin.textdomain');
         $languages_dir = 'languages';
         if ($this->config->hasKey('Plugin/languages_dir')) {

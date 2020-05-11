@@ -16,6 +16,8 @@ declare(strict_types=1);
 namespace MediaZoo\MediaZooPlugin;
 
 use BrightNucleus\Config\ConfigInterface;
+use MediaZoo\MediaZooPlugin\common\Configuration;
+
 use BrightNucleus\Config\ConfigTrait;
 use BrightNucleus\Config\Exception\FailedToProcessConfigException;
 use BrightNucleus\Settings\Settings;
@@ -32,7 +34,6 @@ use BrightNucleus\Settings\Settings;
  */
 class MediaZoo
 {
-    use ConfigTrait;
 
     /**
      * The loader that's responsible for maintaining and registering all hooks that power
@@ -63,6 +64,10 @@ class MediaZoo
     protected $version;
 
     /**
+    * Overall C
+    */
+    protected ConfigInterface $config;
+    /**
      * Define the core functionality of the plugin.
      *
      * Set the plugin name and the plugin version that can be used throughout the plugin.
@@ -81,8 +86,9 @@ class MediaZoo
         } else {
             $this->version = '1.0.0';
         }
+        Configuration::getInstance()->setConfig($config);
+
         $this->plugin_name = 'media-zoo';
-        $this->processConfig($config);
         $this->load_dependencies();
         $this->set_locale();
         $this->define_admin_hooks();
@@ -159,7 +165,7 @@ class MediaZoo
      */
     private function define_admin_hooks()
     {
-        $plugin_admin = new Plugin_Name_Admin($this->get_plugin_name(), $this->get_version());
+        $plugin_admin = new MediaZooAdmin($this->get_plugin_name(), $this->get_version());
 
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');

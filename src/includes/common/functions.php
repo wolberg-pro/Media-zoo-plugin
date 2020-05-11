@@ -17,7 +17,9 @@ function load_vue_scripts()
         filemtime(get_stylesheet_directory() . '/dist/scripts/index.js'),
         true
     );
-
+}
+function load_vue_styles()
+{
     wp_enqueue_style(
         'MediaZoo_asset_css',
         get_stylesheet_directory_uri() . '/dist/styles.css',
