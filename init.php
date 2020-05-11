@@ -8,7 +8,7 @@
  * @copyright    2020 Wolberg pro
  */
 
-declare(strict_types=1);
+
 namespace MediaZoo\MediaZooPlugin;
 
 use BrightNucleus\Config\ConfigFactory;
@@ -37,7 +37,7 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
  */
 function activate_plugin_name()
 {
-    require_once plugin_dir_path(__FILE__) . 'src/includes/class-plugin-name-activator.php';
+    require_once plugin_dir_path(__FILE__) . 'src/class-plugin-name-activator.php';
     MediaZoo_Activator::activate();
 }
 
@@ -47,7 +47,7 @@ function activate_plugin_name()
  */
 function deactivate_plugin_name()
 {
-    require_once plugin_dir_path(__FILE__) . 'src/includes/class-plugin-name-deactivator.php';
+    require_once plugin_dir_path(__FILE__) . 'src/class-plugin-name-deactivator.php';
     MediaZoo_Deactivator::deactivate();
 }
 
@@ -57,7 +57,7 @@ register_deactivation_hook(__FILE__, 'deactivate_plugin_name');
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path(__FILE__) . 'src/includes/class-plugin-name.php';
+require plugin_dir_path(__FILE__) . 'src/class-plugin-name.php';
 
 /**
  * Begins execution of the plugin.

@@ -1,23 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="83f9ca73-4963-4456-81fb-7dda1f6fde62" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Plugin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Plugin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/functions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin-page.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin-page.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/views/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/class-plugin-name.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/common/Configuration.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Media-zoo-plugin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Media-zoo-plugin.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/init.php" beforeDir="false" afterPath="$PROJECT_DIR$/init.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media-zoo-plugin.php" beforeDir="false" afterPath="$PROJECT_DIR$/media-zoo-plugin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin/MediaZooAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/MediaZooAdmin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin/class-plugin-name-admin.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/includes/class-plugin-name-activator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/class-plugin-name-activator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/includes/class-plugin-name-deactivator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/class-plugin-name-deactivator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/includes/class-plugin-name-i18n.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/class-plugin-name-i18n.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/includes/class-plugin-name-loader.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/class-plugin-name-loader.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/includes/class-plugin-name.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/includes/common/Configuration.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/includes/common/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/functions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/includes/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/thecodingmachine/safe" />
+      <path value="$PROJECT_DIR$/vendor/amphp/amp" />
+      <path value="$PROJECT_DIR$/vendor/amphp/byte-stream" />
+      <path value="$PROJECT_DIR$/vendor/antecedent/patchwork" />
+      <path value="$PROJECT_DIR$/vendor/hamcrest/hamcrest-php" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/vendor/felixfbecker/language-server-protocol" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/vendor/felixfbecker/advanced-json-rpc" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/vendor/seld/jsonlint" />
+      <path value="$PROJECT_DIR$/vendor/mockery/mockery" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/vendor/dealerdirect/phpcodesniffer-composer-installer" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/resource-operations" />
+      <path value="$PROJECT_DIR$/vendor/netresearch/jsonmapper" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/vendor/phpcompatibility/php-compatibility" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/vendor/phpcompatibility/phpcompatibility-wp" />
+      <path value="$PROJECT_DIR$/vendor/phpcompatibility/phpcompatibility-paragonie" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/vendor/phpspec/prophecy" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/vendor/brain/monkey" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-token-stream" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/pimple/pimple" />
+      <path value="$PROJECT_DIR$/vendor/wp-coding-standards/wpcs" />
+      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/vendor/symfony/options-resolver" />
+      <path value="$PROJECT_DIR$/vendor/webmozart/path-util" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
+      <path value="$PROJECT_DIR$/vendor/webmozart/glob" />
+      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/vendor/brightnucleus/config" />
+      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/vendor/brightnucleus/exceptions" />
+      <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/vendor/infection/infection" />
+      <path value="$PROJECT_DIR$/vendor/cedaro/wp-plugin" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/vendor/ocramius/package-versions" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/vendor/automattic/vipwpcs" />
+      <path value="$PROJECT_DIR$/vendor/openlss/lib-array2xml" />
+      <path value="$PROJECT_DIR$/vendor/justinrainbow/json-schema" />
+      <path value="$PROJECT_DIR$/vendor/vimeo/psalm" />
+      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/vendor/squizlabs/php_codesniffer" />
+    </include_path>
   </component>
   <component name="ProjectId" id="1bi00fHYk5lXElkVT0DtwHhqT5d" />
   <component name="ProjectViewState">
@@ -27,9 +134,16 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\laragon\www\site\wp-content\plugins\Media-zoo-plugin\src" />
+      <recent name="D:\laragon\www\site\wp-content\plugins\Media-zoo-plugin\src\includes" />
+    </key>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -42,13 +156,32 @@
       <option name="presentableId" value="Default" />
       <updated>1589099385116</updated>
       <workItem from="1589099405468" duration="253000" />
+      <workItem from="1589207963758" duration="2530000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="WindowStateProjectService">
     <state x="461" y="164" key="SettingsEditor" timestamp="1589099666036">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="164" key="SettingsEditor/0.0.1920.1040/-1366.206.1366.728@0.0.1920.1040" timestamp="1589099666036" />
+    <state x="668" y="128" width="583" height="783" key="find.popup" timestamp="1589211638850">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="668" y="128" width="583" height="783" key="find.popup/0.0.1920.1040/-1366.206.1366.728@0.0.1920.1040" timestamp="1589211638850" />
   </component>
 </project>

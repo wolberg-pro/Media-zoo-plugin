@@ -7,7 +7,7 @@
  * @copyright    2020 Wolberg pro
  */
 
-declare(strict_types=1);
+
 namespace MediaZoo\MediaZooPlugin;
 
 /**

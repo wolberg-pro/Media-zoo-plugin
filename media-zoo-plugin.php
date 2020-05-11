@@ -22,15 +22,15 @@
  */
 
 namespace MediaZoo\MediaZooPlugin;
-
+error_reporting(E_ALL ^ E_WARNING);
 // If this file is called directly, abort.
 if (!defined('WPINC')) {
     die;
 }
 
-require_once(__DIR__ . '/src/includes/common/functions.php');
+require_once(__DIR__ . '/src/common/functions.php');
 
 /**
  * Load plugin initialisation file.
  */
-require plugin_dir_path(__FILE__) . '/init.php';
+require plugin_dir_path(__FILE__) .'/init.php';
