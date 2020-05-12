@@ -5,4 +5,7 @@
 /.phpcs.xml
 /phpcs.xml
 /phpunit.xml
+.vscode
+.idea
 /.phpunit.result.cache
+.idea/workspace.xml

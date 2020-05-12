@@ -13,7 +13,6 @@ namespace MediaZoo\MediaZooPlugin\admin;
 
 use MediaZoo\MediaZooPlugin\common\Loader;
 
-require_once plugin_dir_path(dirname(__FILE__)) . 'src/class-plugin-name-i18n.php';
 class MediaZooAdmin
 {
 
@@ -61,8 +60,8 @@ class MediaZooAdmin
 
 	private function load_dependencies()
 	{
-		require_once plugin_dir_path(dirname(__FILE__)) . '../common/Loader.php';
-		require_once(plugin_dir_path(__FILE__) .'../common/Configuration.php');
+		require_once plugin_dir_path(dirname(__FILE__)) . 'common/Loader.php';
+		require_once(plugin_dir_path(dirname(__FILE__)) .'common/Configuration.php');
 		$this->loader = Loader::getInstance();
 	}
 	private function build_menu() {

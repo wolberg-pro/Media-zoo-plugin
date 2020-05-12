@@ -125,7 +125,7 @@ class MediaZoo
 		 */
 		require_once(plugin_dir_path(dirname(__FILE__)) . 'src/common/Configuration.php');
 		require_once(plugin_dir_path(dirname(__FILE__))  . 'src/admin/MediaZooAdmin.php');
-		$this->loader = Loader::getInstance();
+		$this->loader = common\Loader::getInstance();
 	}
 
 	/**

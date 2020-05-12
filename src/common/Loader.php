@@ -10,7 +10,7 @@
 
 namespace MediaZoo\MediaZooPlugin\common;
 
-require_once plugin_dir_path(dirname(__FILE__)) . 'MediaZooHelperLoader.php';
+require_once plugin_dir_path(dirname(__FILE__)) . 'common/MediaZooHelperLoader.php';
 /**
  * Loader Helper class for Wordpress
  *

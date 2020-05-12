@@ -24,39 +24,8 @@ $plugin_slug_settings = [
 			'menu_title' => __('Plugin Slug', 'plugin-slug'),
 			'capability' => 'manage_options',
 			'menu_slug' => 'plugin-slug',
-			'view' => MediaZoo_DIR . 'views/admin-page.php',
-			'dependencies' => [
-				'styles' => [],
-				'scripts' => [
-					// [
-					//     'handle' => 'plugin-slug-js',
-					//     'src' => PLUGIN_SLUG_URL . 'js/admin-page.js',
-					//     'deps' => ['jquery'],
-					//     'ver' => '1.2.3',
-					//     'in_footer' => true,
-					//     'is_needed' => function ($context): bool {
-					//         if ($context) {
-					//             return false;
-					//         }
+			'view' => MediaZoo_DIR . 'views/admin-page.php'
 
-					//         return true;
-					//     },
-					//     'localize' => [
-					//         'name' => 'pluginSlugI18n',
-					//         'data' => function ($context): array {
-					//             return [
-					//                 'test_localize_data' => 'test_localize_value',
-					//                 'context' => $context,
-					//             ];
-					//         },
-					//     ],
-					// ],
-				],
-				'handlers' => [
-					'scripts' => 'BrightNucleus\Dependency\ScriptHandler',
-					'styles' => 'BrightNucleus\Dependency\StyleHandler',
-				],
-			],
 		],
 	],
 	'settings' => [
