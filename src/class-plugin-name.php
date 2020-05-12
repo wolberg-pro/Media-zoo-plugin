@@ -38,7 +38,7 @@ class MediaZoo
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Plugin_Name_Loader $loader Maintains and registers all hooks for the plugin.
+	 * @var      MediaZoo_Loader $loader Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -113,12 +113,7 @@ class MediaZoo
 	private function load_dependencies()
 	{
 
-		/**
-		 * The class responsible for orchestrating the actions and filters of the
-		 * core plugin.
-		 */
-		require_once plugin_dir_path(dirname(__FILE__)) . 'src/class-plugin-name-loader.php';
-
+		require_once plugin_dir_path(dirname(__FILE__)) . 'src/common/Loader.php';
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
@@ -130,7 +125,7 @@ class MediaZoo
 		 */
 		require_once(plugin_dir_path(dirname(__FILE__)) . 'src/common/Configuration.php');
 		require_once(plugin_dir_path(dirname(__FILE__))  . 'src/admin/MediaZooAdmin.php');
-		$this->loader = new MediaZoo_Loader();
+		$this->loader = Loader::getInstance();
 	}
 
 	/**
@@ -158,7 +153,7 @@ class MediaZoo
 	 */
 	private function define_admin_hooks()
 	{
-		$plugin_admin = new admin\MediaZooAdmin($this->get_plugin_name(), $this->get_version());
+		$plugin_admin = new admin\MediaZooAdmin($this->get_plugin_name(), $this->get_version(),$this->loader);
 
 		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
 		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');

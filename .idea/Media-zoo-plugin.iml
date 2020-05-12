@@ -5,6 +5,10 @@
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" packagePrefix="Gamajo\PluginSlug\Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="Gamajo\PluginSlug\" />
+      <sourceFolder url="file://$MODULE_DIR$/bin" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/config" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/languages" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/views" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/amphp/amp" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/amphp/byte-stream" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/antecedent/patchwork" />

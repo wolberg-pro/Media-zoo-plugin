@@ -20,25 +20,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83f9ca73-4963-4456-81fb-7dda1f6fde62" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/class-plugin-name.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/common/Configuration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/.editorconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/common/Loader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/common/MediaZooHelperLoader.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/Media-zoo-plugin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Media-zoo-plugin.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/defaults.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/defaults.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/init.php" beforeDir="false" afterPath="$PROJECT_DIR$/init.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/media-zoo-plugin.php" beforeDir="false" afterPath="$PROJECT_DIR$/media-zoo-plugin.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/admin/MediaZooAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/MediaZooAdmin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin/class-plugin-name-admin.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/includes/class-plugin-name-activator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/class-plugin-name-activator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/includes/class-plugin-name-deactivator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/class-plugin-name-deactivator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/includes/class-plugin-name-i18n.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/class-plugin-name-i18n.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/includes/class-plugin-name-loader.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/class-plugin-name-loader.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/includes/class-plugin-name.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/includes/common/Configuration.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/includes/common/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/functions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/includes/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/class-plugin-name-i18n.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/class-plugin-name-i18n.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/class-plugin-name-loader.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/class-plugin-name.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/class-plugin-name.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +44,11 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpServers">
+    <servers>
+      <server host="http://site.test" id="b2cb12d7-702a-4448-882d-8f0d35e3d34a" name="Unnamed" port="8080" use_path_mappings="true" />
+    </servers>
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -124,6 +122,7 @@
       <path value="$PROJECT_DIR$/vendor/vimeo/psalm" />
       <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
       <path value="$PROJECT_DIR$/vendor/squizlabs/php_codesniffer" />
+      <path value="$PROJECT_DIR$/../../.." />
     </include_path>
   </component>
   <component name="ProjectId" id="1bi00fHYk5lXElkVT0DtwHhqT5d" />
@@ -136,14 +135,23 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../.." />
+    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\laragon\www\site\wp-content\plugins\Media-zoo-plugin\src\common" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\laragon\www\site\wp-content\plugins\Media-zoo-plugin\src\common" />
       <recent name="D:\laragon\www\site\wp-content\plugins\Media-zoo-plugin\src" />
       <recent name="D:\laragon\www\site\wp-content\plugins\Media-zoo-plugin\src\includes" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Localhost" type="PhpRemoteDebugRunConfigurationType" factoryName="PHP Remote Debug" filter_connections="FILTER" server_name="Unnamed" session_id="PHPSTORM">
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -156,7 +164,7 @@
       <option name="presentableId" value="Default" />
       <updated>1589099385116</updated>
       <workItem from="1589099405468" duration="253000" />
-      <workItem from="1589207963758" duration="2530000" />
+      <workItem from="1589207963758" duration="7406000" />
     </task>
     <servers />
   </component>
@@ -175,10 +183,30 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="461" y="164" key="SettingsEditor" timestamp="1589099666036">
+    <state x="679" y="81" key="#PHP" timestamp="1589276039269">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040/-1366.206.1366.728@0.0.1920.1040" timestamp="1589099666036" />
+    <state x="679" y="81" key="#PHP/0.0.1920.1040/-1366.206.1366.728@0.0.1920.1040" timestamp="1589276039269" />
+    <state x="540" y="174" key="#Servers" timestamp="1589275727900">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="540" y="174" key="#Servers/0.0.1920.1040/-1366.206.1366.728@0.0.1920.1040" timestamp="1589275727900" />
+    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589275862912">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1366.206.1366.728@0.0.1920.1040" timestamp="1589275862912" />
+    <state x="690" y="274" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1589273418782">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="274" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040/-1366.206.1366.728@0.0.1920.1040" timestamp="1589273418782" />
+    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1589276034911">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040/-1366.206.1366.728@0.0.1920.1040" timestamp="1589276034911" />
+    <state x="461" y="164" key="SettingsEditor" timestamp="1589276176087">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040/-1366.206.1366.728@0.0.1920.1040" timestamp="1589276176087" />
     <state x="668" y="128" width="583" height="783" key="find.popup" timestamp="1589211638850">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

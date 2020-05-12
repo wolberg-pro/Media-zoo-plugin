@@ -9,12 +9,12 @@
  */
 
 
-
 namespace MediaZoo\MediaZooPlugin;
 
 use BrightNucleus\Config\ConfigInterface;
 
-require_once(plugin_dir_path(__FILE__) .'./common/Configuration.php');
+require_once(plugin_dir_path(__FILE__) . './common/Configuration.php');
+
 class MediaZoo_i18n
 {
 
@@ -23,20 +23,20 @@ class MediaZoo_i18n
 	 *
 	 * @since    1.0.0
 	 */
-    public function load_plugin_textdomain()
-    {
-        $config = common\Configuration::getInstance()->getConfig();
-        $text_domain = $config->getKey('Plugin.textdomain');
-        $languages_dir = 'languages';
-        if ($config->hasKey('Plugin/languages_dir')) {
-            /**
-             * Directory path.
-             *
-             * @var string
-             */
-            $languages_dir = $config->getKey('Plugin.languages_dir');
-        }
+	public function load_plugin_textdomain()
+	{
+		$config = common\Configuration::getInstance()->getConfig();
+		$text_domain = $config->getKey('Plugin.textdomain');
+		$languages_dir = 'languages';
+		if ($config->hasKey('Plugin/languages_dir')) {
+			/**
+			 * Directory path.
+			 *
+			 * @var string
+			 */
+			$languages_dir = $config->getKey('Plugin.languages_dir');
+		}
 
-        load_plugin_textdomain($text_domain, false, $text_domain . '/' . $languages_dir);
-    }
+		load_plugin_textdomain($text_domain, false, $text_domain . '/' . $languages_dir);
+	}
 }

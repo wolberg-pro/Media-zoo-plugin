@@ -15,21 +15,21 @@ use BrightNucleus\Config\ConfigFactory;
 
 // If this file is called directly, abort.
 if (!defined('WPINC')) {
-    die;
+	die;
 }
 
 if (!defined('MediaZoo_DIR')) {
-    define('MediaZoo_DIR', plugin_dir_path(__FILE__));
+	define('MediaZoo_DIR', plugin_dir_path(__FILE__));
 }
 
 if (!defined('MediaZoo_URL')) {
-    define('MediaZoo_URL', plugin_dir_url(__FILE__));
+	define('MediaZoo_URL', plugin_dir_url(__FILE__));
 }
 
 define('MediaZoo_VERSION', '1.0.0');
 // Load Composer autoloader.
 if (file_exists(__DIR__ . '/vendor/autoload.php')) {
-    require_once __DIR__ . '/vendor/autoload.php';
+	require_once __DIR__ . '/vendor/autoload.php';
 }
 /**
  * The code that runs during plugin activation.
@@ -37,8 +37,8 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
  */
 function activate_plugin_name()
 {
-    require_once plugin_dir_path(__FILE__) . 'src/class-plugin-name-activator.php';
-    MediaZoo_Activator::activate();
+	require_once plugin_dir_path(__FILE__) . 'src/class-plugin-name-activator.php';
+	MediaZoo_Activator::activate();
 }
 
 /**
@@ -47,8 +47,8 @@ function activate_plugin_name()
  */
 function deactivate_plugin_name()
 {
-    require_once plugin_dir_path(__FILE__) . 'src/class-plugin-name-deactivator.php';
-    MediaZoo_Deactivator::deactivate();
+	require_once plugin_dir_path(__FILE__) . 'src/class-plugin-name-deactivator.php';
+	MediaZoo_Deactivator::deactivate();
 }
 
 register_activation_hook(__FILE__, 'activate_plugin_name');
@@ -70,7 +70,8 @@ require plugin_dir_path(__FILE__) . 'src/class-plugin-name.php';
  */
 function run_plugin_name()
 {
-    $plugin = new  MediaZoo(ConfigFactory::create(__DIR__ . '/config/defaults.php')->getSubConfig('MediaZoo\MediaZooPlugin'));
-    $plugin->run();
+	$plugin = new  MediaZoo(ConfigFactory::create(__DIR__ . '/config/defaults.php')->getSubConfig('MediaZoo\MediaZooPlugin'));
+	$plugin->run();
 }
+
 run_plugin_name();
