@@ -1,17 +1,11 @@
 <?php
-
-
 /**
  *
  * @package      MediaZoo\MediaZooPlugin
  * @author       Sivan Wolberg
  * @copyright    2020 Wolberg pro
  */
-
-
-namespace MediaZoo\MediaZooPlugin\admin;
-
-use MediaZoo\MediaZooPlugin\common\Loader;
+namespace MediaZoo\MediaZooPlugin;
 
 class MediaZooAdmin
 {
@@ -56,34 +50,11 @@ class MediaZooAdmin
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 		$this->load_dependencies();
+		$this->build_menu();
+		$this->run();
 	}
 
-	private function load_dependencies()
-	{
-		require_once plugin_dir_path(dirname(__FILE__)) . 'common/Loader.php';
-		require_once(plugin_dir_path(dirname(__FILE__)) .'common/Configuration.php');
-		$this->loader = Loader::getInstance();
-	}
-	private function build_menu() {
-		$config = Configuration::getInstance()->getConfig();
-		if ($config->hasKey('Settings.submenu_pages')) {
-			$menuItems = $config->getKey('Settings.submenu_pages');
-			$menuItem = null;
-			foreach ($menuItem as $menuItems) {
-				$this->buildMenuItem($menuItem);
-			}
 
-		}
-	}
-
-	private function buildMenuItem($menuItem) {
-		add_menu_page(
-			$menuItem['page_title'],
-			$menuItem['menu_title'],
-			$menuItem['capability'],
-			$menuItem['view']
-		);
-	}
 	/**
 	 * Register the stylesheets for the admin area.
 	 *
@@ -102,5 +73,46 @@ class MediaZooAdmin
 	public function enqueue_scripts()
 	{
 		load_vue_scripts();
+	}
+	/**
+	 * Run the loader to execute all of the hooks with WordPress.
+	 *
+	 * @since    1.0.0
+	 */
+	private function run()
+	{
+		$this->loader->run();
+	}
+	private function load_dependencies()
+	{
+		require_once plugin_dir_path(dirname(__FILE__)) . 'common/Loader.php';
+		require_once plugin_dir_path(dirname(__FILE__)) .'common/Configuration.php';
+		$this->loader = Loader::getInstance();
+	}
+	private function build_menu() {
+		$config = Configuration::getInstance()->getConfig();
+		if ($config->hasKey('Settings.submenu_pages')) {
+			$menuItems = $config->getKey('Settings.submenu_pages');
+			foreach ($menuItems as $menuItem) {
+//				var_dump($menuItem);
+				\add_action('admin_menu',
+					function () use ($menuItem) {
+						$this->buildMenuItem($menuItem);
+					});
+//				\do_action('admin_init', $menuItem);
+			}
+		}
+	}
+
+	private function buildMenuItem($menuItem) {
+//		var_dmup(debug_backtrace());
+		if (is_array($menuItem)) {
+			\add_menu_page(
+				$menuItem['page_title'],
+				$menuItem['menu_title'],
+				$menuItem['capability'],
+				$menuItem['view']
+			);
+		}
 	}
 }

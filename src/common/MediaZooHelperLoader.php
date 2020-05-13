@@ -8,7 +8,7 @@
  */
 
 
-namespace MediaZoo\MediaZooPlugin\common;
+namespace MediaZoo\MediaZooPlugin;
 
 /**
  * Register all actions and filters for the plugin.

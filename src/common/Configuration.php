@@ -8,7 +8,7 @@
  */
 
 
-namespace MediaZoo\MediaZooPlugin\common;
+namespace MediaZoo\MediaZooPlugin;
 
 use BrightNucleus\Config\ConfigInterface;
 use BrightNucleus\Config\ConfigTrait;

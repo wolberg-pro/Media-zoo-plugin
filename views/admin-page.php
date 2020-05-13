@@ -1,6 +1,6 @@
 <div id="app"></div>
 
-<?php if (preg_match("/(.*.local|.*.test|.*.loc|localhost:.*)/i", $_SERVER['HTTP_HOST'])): ?>
+<?php if (preg_match("/(.*.local|.*.test|.*.loc|localhost|127.*.1:.*)/i", $_SERVER['HTTP_HOST'])): ?>
 <!-- HMR Reloader -->
 <script id="__bs_script__">
 //<![CDATA[

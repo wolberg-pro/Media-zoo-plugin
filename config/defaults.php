@@ -24,7 +24,7 @@ $plugin_slug_settings = [
 			'menu_title' => __('Plugin Slug', 'plugin-slug'),
 			'capability' => 'manage_options',
 			'menu_slug' => 'plugin-slug',
-			'view' => MediaZoo_DIR . 'views/admin-page.php'
+			'view' => 'Media-zoo-plugin/views/admin-page.php'
 
 		],
 	],

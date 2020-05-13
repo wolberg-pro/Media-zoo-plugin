@@ -88,7 +88,7 @@ class MediaZoo
 		$this->plugin_name = 'media-zoo';
 		$this->load_dependencies();
 
-		common\Configuration::getInstance()->setConfig($config);
+		Configuration::getInstance()->setConfig($config);
 		$this->set_locale();
 		$this->define_admin_hooks();
 		// $this->define_public_hooks();
@@ -125,7 +125,7 @@ class MediaZoo
 		 */
 		require_once(plugin_dir_path(dirname(__FILE__)) . 'src/common/Configuration.php');
 		require_once(plugin_dir_path(dirname(__FILE__))  . 'src/admin/MediaZooAdmin.php');
-		$this->loader = common\Loader::getInstance();
+		$this->loader = Loader::getInstance();
 	}
 
 	/**
@@ -153,7 +153,7 @@ class MediaZoo
 	 */
 	private function define_admin_hooks()
 	{
-		$plugin_admin = new admin\MediaZooAdmin($this->get_plugin_name(), $this->get_version(),$this->loader);
+		$plugin_admin = new MediaZooAdmin($this->get_plugin_name(), $this->get_version(),$this->loader);
 
 		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
 		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
