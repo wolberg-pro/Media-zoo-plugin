@@ -1,6 +1,11 @@
 <div id="app"></div>
+<script>
+	_wp_ASSEST_URL = '<?php echo MediaZoo_URL . 'views/dist'; ?>';
+	_wp_API_URL = '<?php echo MediaZoo_URL; ?>';
+	_wp_ROOT_URL = '<?php get_site_url(); ?>';
+</script>
 
-<?php if (preg_match("/(.*.local|.*.test|.*.loc|localhost|127.*.1:.*)/i", $_SERVER['HTTP_HOST'])): ?>
+<?php if (preg_match("/(.*.local|.*.test|.*.loc|localhost|127.*.1)/i", $_SERVER['HTTP_HOST'])): ?>
 <!-- HMR Reloader -->
 <script id="__bs_script__">
 //<![CDATA[

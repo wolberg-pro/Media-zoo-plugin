@@ -94,18 +94,15 @@ class MediaZooAdmin
 		if ($config->hasKey('Settings.submenu_pages')) {
 			$menuItems = $config->getKey('Settings.submenu_pages');
 			foreach ($menuItems as $menuItem) {
-//				var_dump($menuItem);
 				\add_action('admin_menu',
 					function () use ($menuItem) {
 						$this->buildMenuItem($menuItem);
 					});
-//				\do_action('admin_init', $menuItem);
 			}
 		}
 	}
 
 	private function buildMenuItem($menuItem) {
-//		var_dmup(debug_backtrace());
 		if (is_array($menuItem)) {
 			\add_menu_page(
 				$menuItem['page_title'],
