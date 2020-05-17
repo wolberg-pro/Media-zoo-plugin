@@ -11,6 +11,19 @@ declare(strict_types=1);
 
 namespace MediaZoo\MediaZooPlugin;
 
+$plugin_slug_routes = [
+	'currentVersion' => 'v1',
+	'list' => [
+		[
+			'version' => 'v1',
+			'route' => 'request_ping/(?P<id>\d+)',
+			'method' => 'GET',
+			'namespace' => 'TestController@test',
+			'dependency' => 'TestController.php',
+			'validation' => 'validationTest'
+		]
+	]
+];
 $plugin_slug_plugin = [
 	'textdomain' => 'media-zoo-plugin',
 	'languages_dir' => 'languages',
@@ -28,6 +41,7 @@ $plugin_slug_settings = [
 
 		],
 	],
+
 	'settings' => [
 		'setting1' => [
 			'option_group' => 'pluginslug',
@@ -53,6 +67,7 @@ return [
 		'MediaZooPlugin' => [
 			'Plugin' => $plugin_slug_plugin,
 			'Settings' => $plugin_slug_settings,
+			'Routes' => $plugin_slug_routes
 		],
 	],
 ];

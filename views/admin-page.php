@@ -2,7 +2,7 @@
 <script>
 	_wp_ASSEST_URL = '<?php echo MediaZoo_URL . 'views/dist'; ?>';
 	_wp_API_URL = '<?php echo MediaZoo_URL; ?>';
-	_wp_ROOT_URL = '<?php get_site_url(); ?>';
+	_wp_ROOT_URL = '<?php echo get_site_url() .'/index.php/'; ?>';
 </script>
 
 <?php if (preg_match("/(.*.local|.*.test|.*.loc|localhost|127.*.1)/i", $_SERVER['HTTP_HOST'])): ?>

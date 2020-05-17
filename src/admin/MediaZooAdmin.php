@@ -5,7 +5,10 @@
  * @author       Sivan Wolberg
  * @copyright    2020 Wolberg pro
  */
+
 namespace MediaZoo\MediaZooPlugin;
+
+use MediaZoo\MediaZooPlugin\common\RegisterRoutes;
 
 class MediaZooAdmin
 {
@@ -38,6 +41,7 @@ class MediaZooAdmin
 	 * @var      Loader $loader Maintains and registers all hooks for the plugin.
 	 */
 	protected ?Loader $loader = null;
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -51,9 +55,17 @@ class MediaZooAdmin
 		$this->version = $version;
 		$this->load_dependencies();
 		$this->build_menu();
+		$this->register_routes();
 		$this->run();
 	}
 
+
+	public function register_routes()
+	{
+		add_action('rest_api_init', function () {
+			RegisterRoutes::getInstance()->load_routes();
+		});
+	}
 
 	/**
 	 * Register the stylesheets for the admin area.
@@ -74,6 +86,7 @@ class MediaZooAdmin
 	{
 		load_vue_scripts();
 	}
+
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
 	 *
@@ -83,13 +96,16 @@ class MediaZooAdmin
 	{
 		$this->loader->run();
 	}
+
 	private function load_dependencies()
 	{
 		require_once plugin_dir_path(dirname(__FILE__)) . 'common/Loader.php';
-		require_once plugin_dir_path(dirname(__FILE__)) .'common/Configuration.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'common/Configuration.php';
 		$this->loader = Loader::getInstance();
 	}
-	private function build_menu() {
+
+	private function build_menu()
+	{
 		$config = Configuration::getInstance()->getConfig();
 		if ($config->hasKey('Settings.submenu_pages')) {
 			$menuItems = $config->getKey('Settings.submenu_pages');
@@ -102,7 +118,8 @@ class MediaZooAdmin
 		}
 	}
 
-	private function buildMenuItem($menuItem) {
+	private function buildMenuItem($menuItem)
+	{
 		if (is_array($menuItem)) {
 			\add_menu_page(
 				$menuItem['page_title'],
