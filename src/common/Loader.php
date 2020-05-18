@@ -10,6 +10,9 @@
 
 namespace MediaZoo\MediaZooPlugin;
 
+if (!defined('WPINC')) {
+	die;
+}
 require_once plugin_dir_path(dirname(__FILE__)) . 'common/MediaZooHelperLoader.php';
 /**
  * Loader Helper class for Wordpress

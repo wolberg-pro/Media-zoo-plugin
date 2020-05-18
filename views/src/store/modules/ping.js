@@ -1,9 +1,9 @@
-import {ApiCategories} from '../../api';
+import {ApiPing} from '../../api'
 import * as types from '../mutation-types'
 
 // initial state
 const state = {
-	all: [],
+	pongs: [],
 	loaded: false
 }
 
@@ -16,10 +16,10 @@ const getters = {
 
 // actions
 const actions = {
-	getAllCategories({commit}) {
-		ApiCategories.getCategories(categories => {
-			commit(types.STORE_FETCHED_CATEGORIES, {categories})
-			commit(types.CATEGORIES_LOADED, true)
+	getPongs({commit},{count}) {
+		ApiPing.getPings(count , data => {
+			commit(types.STORE_FETCHED_PING, {data.pings})
+			commit(types.PING_LOADED, true)
 			commit(types.INCREMENT_LOADING_PROGRESS)
 		})
 	}
@@ -27,7 +27,7 @@ const actions = {
 
 // mutations
 const mutations = {
-	[types.STORE_FETCHED_CATEGORIES](state, {categories}) {
+	[types.STORE_FETCHED_PING](state, {categories}) {
 		state.all = categories
 	},
 

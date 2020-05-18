@@ -10,6 +10,9 @@ namespace MediaZoo\MediaZooPlugin;
 
 use MediaZoo\MediaZooPlugin\common\RegisterRoutes;
 
+if (!defined('WPINC')) {
+	die;
+}
 class MediaZooAdmin
 {
 

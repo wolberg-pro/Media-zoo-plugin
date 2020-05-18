@@ -10,6 +10,9 @@
  * @subpackage Plugin_Name/public
  */
 
+if (!defined('WPINC')) {
+	die;
+}
 /**
  * The public-facing functionality of the plugin.
  *

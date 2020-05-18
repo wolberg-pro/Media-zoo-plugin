@@ -1,3 +1,8 @@
+<?php
+if (!defined('WPINC')) {
+	die;
+}
+?>
 <div id="app"></div>
 <script>
 	_wp_ASSEST_URL = '<?php echo MediaZoo_URL . 'views/dist'; ?>';

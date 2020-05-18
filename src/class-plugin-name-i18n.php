@@ -13,6 +13,9 @@ namespace MediaZoo\MediaZooPlugin;
 
 use BrightNucleus\Config\ConfigInterface;
 
+if (!defined('WPINC')) {
+	die;
+}
 require_once(plugin_dir_path(dirname(__FILE__)) . 'src/common/Configuration.php');
 
 class MediaZoo_i18n

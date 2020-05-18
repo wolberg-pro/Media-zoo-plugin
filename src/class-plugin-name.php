@@ -18,6 +18,9 @@ use BrightNucleus\Config\ConfigTrait;
 use BrightNucleus\Config\Exception\FailedToProcessConfigException;
 use BrightNucleus\Settings\Settings;
 
+if (!defined('WPINC')) {
+	die;
+}
 
 /**
  * The core plugin class.

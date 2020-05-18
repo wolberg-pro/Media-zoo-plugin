@@ -1,6 +1,9 @@
 <?php
 
 
+if (!defined('WPINC')) {
+	die;
+}
 // Redirect all requests to index.php so the Vue app is loaded and 404s aren't thrown
 function remove_redirects()
 {

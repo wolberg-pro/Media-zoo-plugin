@@ -11,6 +11,9 @@ declare(strict_types=1);
 
 namespace MediaZoo\MediaZooPlugin;
 
+if (!defined('WPINC')) {
+	die;
+}
 $plugin_slug_routes = [
 	'currentVersion' => 'v1',
 	'list' => [
@@ -18,9 +21,11 @@ $plugin_slug_routes = [
 			'version' => 'v1',
 			'route' => 'request_ping/(?P<id>\d+)',
 			'method' => 'GET',
-			'namespace' => 'TestController@test',
+			'namespace' => '\MediaZoo\MediaZooPlugin\admin\controllers\TestController@test',
 			'dependency' => 'TestController.php',
-			'validation' => 'validationTest'
+			'validation' => 'validationTest',
+			'permission' => 'manage_options',
+			'permissionCallback' => 'permissionTest'
 		]
 	]
 ];

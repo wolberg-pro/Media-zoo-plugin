@@ -4,7 +4,12 @@
 namespace MediaZoo\MediaZooPlugin\common;
 
 
+if (!defined('WPINC')) {
+	die;
+}
 use MediaZoo\MediaZooPlugin\Configuration;
+use ReflectionClass;
+use WP_REST_Request;
 
 class RegisterRoutes
 {
@@ -71,25 +76,29 @@ class RegisterRoutes
 	{
 		$classArgs = explode('@' , $route['namespace']);
 		$callbackObject = $this->load_dependencies($route,$classArgs);
+		$func =  $classArgs[1];
+		$validationRoute = $route['validation'];
 		if ($hasValidation) {
 			register_rest_route( 'media-zoo/'.$currentVersion, $route['route'], array(
 				'methods' => $route['method'],
-				'callback' => function () use ($callbackObject ,$route,$currentVersion ) {
-					$callbackObject['callback']();
-				},
+				'callback' => array($callbackObject , $func),
 				'args' => array(
 					'id' => array(
-						'validate_callback' => function($param, $request, $key) use ($callbackObject) {
-							return $callbackObject['validation']($param ,$request , $key);
+						'validate_callback' => function($param, $request, $key) use ($callbackObject,$validationRoute) {
+							return $callbackObject->$validationRoute($param ,$request , $key);
 						}
 					),
 				),
+				'permission_callback' => function (WP_REST_Request $request) use ($route,$callbackObject) {
+					return $this->checkPermission($route, $request,$callbackObject);
+				}
 			));
 		} else {
 			register_rest_route( 'mediazoo/'.$currentVersion, $route['route'], array(
 				'methods' => $route['method'],
-				'callback' => function () use ($callbackObject ,$route,$currentVersion ) {
-					$callbackObject['callback']();
+				'callback' => array($callbackObject , $func),
+				'permission_callback' => function (WP_REST_Request $request) use ($route,$callbackObject) {
+					return $this->checkPermission($route, $request,$callbackObject);
 				}
 			));
 
@@ -97,16 +106,24 @@ class RegisterRoutes
 	}
 	private function load_dependencies($route,$classArgs=[]) {
 		$dynamicLoad = plugin_dir_path(dirname(__FILE__)) . 'admin/controller/'. $route['dependency'];
-		var_dump($dynamicLoad);
-		require_once $dynamicLoad;
+		require_once($dynamicLoad);
 		$class = $classArgs[0];
-		$func =  $classArgs[1];
-		$validationRoute = $route['validation'];
 		$instance = new $class();
-		return [
-			'callback'=>$instance->$func,
-			'validation' => $instance->$validationRoute,
-		];
+		return $instance;
 
+	}
+
+	private function checkPermission($route, WP_REST_Request $request , $callbackObject)
+	{
+		if (!is_null($route['permission']) && $route['permission']!= '') {
+			if (is_null($route['permissionCallback']) || $route['permissionCallback'] == '') {
+				return current_user_can($route['permission']);
+			} else {
+				$func = $route['permissionCallback'];
+				return $callbackObject->$func($route, $request);
+			}
+		} else {
+			return true;
+		}
 	}
 }
