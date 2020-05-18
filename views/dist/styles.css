@@ -14733,7 +14733,10 @@
 .el-popconfirm__action{
   text-align:right;
   margin:0
-}/* Don't want tailwindcss?
+}.el-menu-item.is-active[data-v-487e4155] {
+  color: inherit;
+}
+/* Don't want tailwindcss?
    Simply remove the import
    statement below and write
    your CSS as normal! */
@@ -83256,10 +83259,10 @@ h4 {
 .page-content[data-v-3eaf23d0] p {
   margin-bottom: 1rem;
 }
-.logo-cls-1[data-v-71d2e5dd] {
+.logo-cls-1[data-v-44f85b4e] {
   fill: #ffffff;
 }
-.site-header[data-v-71d2e5dd] {
+.site-header[data-v-44f85b4e] {
   background: linear-gradient(to right, #92025f, #3b1e58);
 }
 

@@ -1,6 +1,6 @@
 <template>
 	<div class="warp">
-		<div id="my-app" class="flex flex-col md:max-h-screen">
+		<div id="my-app" class="flex flex-col">
 
 			<app-header/>
 
@@ -9,7 +9,7 @@
 			</transition>
 
 			<transition name="page-transition" mode="out-in" appear>
-				<div class="site-content mx-auto py-16 flex-1 px-10 md:px-0 max-w-2xl">
+				<div class="site-content py-5 flex-1 px-10 md:px-0">
 					<router-view></router-view>
 				</div>
 			</transition>
