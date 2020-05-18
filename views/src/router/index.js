@@ -4,6 +4,7 @@ import Router from 'vue-router';
 // Components
 import Home from '../components/Home.vue';
 import Post from '../components/Post/Post.vue';
+import Ping from '../components/Ping/Ping';
 import Page from '../components/Page/Page.vue';
 
 Vue.use(Router);
@@ -18,7 +19,7 @@ const router = new Router({
 		{
 			path: '/ping',
 			name: 'Ping',
-			component: Home,
+			component: Ping,
 		},
 		{
 			// Assuming you're using the default permalink structure for posts
@@ -31,8 +32,13 @@ const router = new Router({
 			name: 'Page',
 			component: Page,
 		},
+		{
+			// will match everything
+			path: '*',
+			redirect: '/'
+		}
 	],
-	mode: 'history',
+	mode: 'hash',
 	base: '',
 
 	// Prevents window from scrolling back to top
@@ -47,7 +53,7 @@ const router = new Router({
 });
 
 router.afterEach((to) => { // (to, from)
-													 // Add a body class specific to the route we're viewing
+	// Add a body class specific to the route we're viewing
 	let body = document.querySelector('body');
 
 	const slug = !(to.params.postSlug)

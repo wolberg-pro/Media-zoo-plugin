@@ -19,9 +19,9 @@ $plugin_slug_routes = [
 	'list' => [
 		[
 			'version' => 'v1',
-			'route' => 'request_ping/(?P<id>\d+)',
+			'route' => 'request_ping/(?P<count>\d+)',
 			'method' => 'GET',
-			'namespace' => '\MediaZoo\MediaZooPlugin\admin\controllers\TestController@test',
+			'namespace' => '\MediaZoo\MediaZooPlugin\admin\controller\TestController@test',
 			'dependency' => 'TestController.php',
 			'validation' => 'validationTest',
 			'permission' => 'manage_options',

@@ -1,8 +1,11 @@
 <template>
 	<div class="pt-10">
-		<template v-if="allPagesLoaded">
-			<h1 class="text-3xl mb-5">{{ pageContent.title.rendered }}</h1>
-			<div class="page-content" v-html="pageContent.content.rendered"></div>
+		<template v-if="pingsLoaded">
+			<ul>
+				<li v-for="ping in pings">
+					{{ping}}
+				</li>
+			</ul>
 		</template>
 		<Loader v-else/>
 	</div>
@@ -15,8 +18,8 @@
 	export default {
 		computed: {
 			...mapGetters({
-				page: 'page',
-				allPagesLoaded: 'allPagesLoaded',
+				pings: 'allPings',
+				pingsLoaded: 'allPingsLoaded',
 			}),
 
 			pageContent() {
@@ -27,6 +30,9 @@
 		components: {
 			Loader,
 		},
+		mounted() {
+			this.$store.dispatch('getPongs',{count: 5});
+		}
 	};
 </script>
 

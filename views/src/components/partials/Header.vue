@@ -14,7 +14,7 @@
 <template>
 	<nav class="site-header flex items-center justify-between flex-wrap bg-teal-500 p-6">
 		<div class="site-header__interior flex items-center flex-shrink-0 mr-6">
-			<router-link to="/">
+			<router-link :to="{ name: 'Home'}">
 				<el-image
 					:src="logoImage"
 				></el-image>
@@ -35,6 +35,9 @@
 				<a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
 					Views
 				</a>
+				<router-link :to="{ name: 'Ping'}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+					Pings
+				</router-link>
 				<a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
 					Settings
 				</a>

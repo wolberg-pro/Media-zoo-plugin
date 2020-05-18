@@ -19,7 +19,6 @@ new Vue({
 	created() {
 		this.$store.commit(types.RESET_LOADING_PROGRESS);
 		this.$store.dispatch('getAllCategories');
-		this.$store.dispatch('getPongs');
 		this.$store.dispatch('getAllPages');
 	},
 });

@@ -83250,13 +83250,16 @@ h4 {
     transition-delay: 1000ms;
   }
 }
+.page-content[data-v-566aa9ce] p {
+  margin-bottom: 1rem;
+}
 .page-content[data-v-3eaf23d0] p {
   margin-bottom: 1rem;
 }
-.logo-cls-1[data-v-057f997e] {
+.logo-cls-1[data-v-71d2e5dd] {
   fill: #ffffff;
 }
-.site-header[data-v-057f997e] {
+.site-header[data-v-71d2e5dd] {
   background: linear-gradient(to right, #92025f, #3b1e58);
 }
 

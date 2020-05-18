@@ -10,28 +10,31 @@ const state = {
 // getters
 const getters = {
 	// Returns an array all categories
-	allCategories: state => state.all,
-	allCategoriesLoaded: state => state.loaded
+	allPings: state => state.all,
+	allPingsLoaded: state => state.loaded
 }
 
 // actions
 const actions = {
 	getPongs({commit},{count}) {
 		ApiPing.getPings(count , data => {
-			commit(types.STORE_FETCHED_PING, {data.pings})
-			commit(types.PING_LOADED, true)
-			commit(types.INCREMENT_LOADING_PROGRESS)
+			if (data['pings']) {
+				const pings = data.pings
+				commit(types.STORE_FETCHED_PING, {pings})
+				commit(types.PING_LOADED, true)
+				commit(types.INCREMENT_LOADING_PROGRESS)
+			}
 		})
 	}
 }
 
 // mutations
 const mutations = {
-	[types.STORE_FETCHED_PING](state, {categories}) {
-		state.all = categories
+	[types.STORE_FETCHED_PING](state, {pings}) {
+		state.all = pings
 	},
 
-	[types.CATEGORIES_LOADED](state, bool) {
+	[types.PING_LOADED](state, bool) {
 		state.loaded = bool
 	}
 }
