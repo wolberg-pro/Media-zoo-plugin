@@ -14733,10 +14733,7 @@
 .el-popconfirm__action{
   text-align:right;
   margin:0
-}.el-menu-item.is-active[data-v-487e4155] {
-  color: inherit;
-}
-/* Don't want tailwindcss?
+}/* Don't want tailwindcss?
    Simply remove the import
    statement below and write
    your CSS as normal! */
@@ -83252,6 +83249,9 @@ h4 {
   .xl\:delay-1000 {
     transition-delay: 1000ms;
   }
+}
+.el-menu-item.is-active[data-v-4dfdcb1b] {
+  color: inherit;
 }
 .page-content[data-v-566aa9ce] p {
   margin-bottom: 1rem;
