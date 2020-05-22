@@ -26,7 +26,15 @@ $plugin_slug_routes = [
 			'validation' => 'validationTest',
 			'permission' => 'manage_options',
 			'permissionCallback' => 'permissionTest'
-		]
+		],[
+			'version' => 'v1',
+			'route' => 'files/all',
+			'method' => 'GET',
+			'namespace' => '\MediaZoo\MediaZooPlugin\admin\controller\FileSystemController@index',
+			'dependency' => 'FileSystemController.php',
+//			'permission' => 'manage_options',
+//			'permissionCallback' => 'permissionFileSystem'
+		],
 	]
 ];
 $plugin_slug_plugin = [

@@ -94,7 +94,7 @@ class RegisterRoutes
 				}
 			));
 		} else {
-			register_rest_route( 'mediazoo/'.$currentVersion, $route['route'], array(
+			register_rest_route( 'media-zoo/'.$currentVersion, $route['route'], array(
 				'methods' => $route['method'],
 				'callback' => array($callbackObject , $func),
 				'permission_callback' => function (WP_REST_Request $request) use ($route,$callbackObject) {

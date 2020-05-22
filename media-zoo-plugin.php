@@ -22,7 +22,7 @@
  */
 
 namespace MediaZoo\MediaZooPlugin;
-error_reporting(E_ALL ^ E_WARNING);
+error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE ^  E_DEPRECATED);
 // If this file is called directly, abort.
 if (!defined('WPINC')) {
 	die;
