@@ -18,7 +18,5 @@ new Vue({
 	render: h => h(App),
 	created() {
 		this.$store.commit(types.RESET_LOADING_PROGRESS);
-		this.$store.dispatch('getAllCategories');
-		this.$store.dispatch('getAllPages');
 	},
 });

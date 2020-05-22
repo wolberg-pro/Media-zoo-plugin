@@ -68,8 +68,6 @@
 </template>
 
 <script>
-	import RecentPostsWidget from "./widgets/RecentPosts.vue";
-	import PagesWidget from "./widgets/Pages.vue";
 	import GridView from "./MediaViews/GridView";
 
 	export default {
@@ -80,8 +78,6 @@
 		},
 		components: {
 			GridView,
-			RecentPostsWidget,
-			PagesWidget
 		},
 		methods: {
 			handleSelect(key, keyPath) {

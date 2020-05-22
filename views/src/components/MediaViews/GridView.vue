@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<sort-bar :options="options"/>
-		<comp-view :data="ScreenMediaIOData"/>
+		<comp-view :files="ScreenMediaIOData.files" :folders="ScreenMediaIOData.folders" :dataLoad="dataLoad"/>
 	</div>
 </template>
 
@@ -14,9 +14,9 @@
 			compView: View,
 			SortBar
 		},
-		props: {},
 		data() {
 			return {
+				dataLoad: true,
 				options: [
 					{label: 'Field 1', value: 'field_1'},
 					{label: 'Field 2', value: 'field_2'},
@@ -25,14 +25,15 @@
 				ScreenMediaIOData: this.mockMediaData()
 			};
 		},
-
 		methods: {
-
 			mockMediaData() {
-				const data = [];
+				const data = {
+					folders: [],
+					files: []
+				};
 				// let mock folder data
-				for (let i = 0; i < 4; i++) {
-					data.push({
+				for (let i = 0; i < 12; i++) {
+					data.folders.push({
 						id: i + 141,
 						name: 'Media Folder' + i,
 						type: 'folder'
@@ -49,7 +50,7 @@
 				]
 
 				for (let i = 0; i <= this.getRandomArbitrary(15, 35); i++) {
-					data.push({
+					data.files.push({
 						id: i + 741,
 						name: 'Dragon ' + i,
 						type: 'file',
@@ -59,6 +60,7 @@
 						media_url: images[this.getRandomArbitrary(0, images.length - 1)]
 					})
 				}
+				this.dataLoad = true;
 				return data;
 			},
 			getRandomArbitrary(min, max) {

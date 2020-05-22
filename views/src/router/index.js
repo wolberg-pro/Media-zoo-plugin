@@ -3,9 +3,7 @@ import Router from 'vue-router';
 
 // Components
 import Home from '../components/Home.vue';
-import Post from '../components/Post/Post.vue';
 import Ping from '../components/Ping/Ping';
-import Page from '../components/Page/Page.vue';
 
 Vue.use(Router);
 
@@ -20,17 +18,6 @@ const router = new Router({
 			path: '/ping',
 			name: 'Ping',
 			component: Ping,
-		},
-		{
-			// Assuming you're using the default permalink structure for posts
-			path: '/:year/:month/:day/:postSlug',
-			name: 'Post',
-			component: Post,
-		},
-		{
-			path: '/:pageSlug',
-			name: 'Page',
-			component: Page,
 		},
 		{
 			// will match everything
