@@ -1,3 +1,15 @@
+.el-menu-item.is-active[data-v-a4e50a96] {
+  color: inherit;
+}
+.page-content[data-v-566aa9ce] p {
+  margin-bottom: 1rem;
+}
+.logo-cls-1[data-v-44f85b4e] {
+  fill: #ffffff;
+}
+.site-header[data-v-44f85b4e] {
+  background: linear-gradient(to right, #92025f, #3b1e58);
+}
 @charset "UTF-8";
 
 .el-pagination--small .arrow.disabled,.el-table .hidden-columns,.el-table td.is-hidden>*,.el-table th.is-hidden>*,.el-table--hidden{
@@ -14733,7 +14745,15 @@
 .el-popconfirm__action{
   text-align:right;
   margin:0
-}/* Don't want tailwindcss?
+}.el-carousel__item h3[data-v-4a04a290] {
+  color: #475669;
+  font-size: 14px;
+  opacity: 0.75;
+  line-height: 20px;
+  margin: 0;
+}
+
+/* Don't want tailwindcss?
    Simply remove the import
    statement below and write
    your CSS as normal! */
@@ -83250,25 +83270,3 @@ h4 {
     transition-delay: 1000ms;
   }
 }
-.el-carousel__item h3[data-v-4a04a290] {
-  color: #475669;
-  font-size: 14px;
-  opacity: 0.75;
-  line-height: 20px;
-  margin: 0;
-}
-
-.el-menu-item.is-active[data-v-a4e50a96] {
-  color: inherit;
-}
-.page-content[data-v-566aa9ce] p {
-  margin-bottom: 1rem;
-}
-.logo-cls-1[data-v-44f85b4e] {
-  fill: #ffffff;
-}
-.site-header[data-v-44f85b4e] {
-  background: linear-gradient(to right, #92025f, #3b1e58);
-}
-
-/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzdHlsZXMuY3NzIiwic291cmNlUm9vdCI6IiJ9*/

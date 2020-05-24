@@ -14,6 +14,12 @@ namespace MediaZoo\MediaZooPlugin;
 if (!defined('WPINC')) {
 	die;
 }
+$plugin_slug_migration = [
+	'load' => [
+		'Migration_Init_1590332550'
+	]
+];
+
 $plugin_slug_routes = [
 	'currentVersion' => 'v1',
 	'list' => [
@@ -26,7 +32,7 @@ $plugin_slug_routes = [
 			'validation' => 'validationTest',
 			'permission' => 'manage_options',
 			'permissionCallback' => 'permissionTest'
-		],[
+		], [
 			'version' => 'v1',
 			'route' => 'files/all',
 			'method' => 'GET',
@@ -80,6 +86,7 @@ return [
 		'MediaZooPlugin' => [
 			'Plugin' => $plugin_slug_plugin,
 			'Settings' => $plugin_slug_settings,
+			'Migration' => $plugin_slug_migration,
 			'Routes' => $plugin_slug_routes
 		],
 	],

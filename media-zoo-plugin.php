@@ -30,6 +30,39 @@ if (!defined('WPINC')) {
 
 require_once(__DIR__ . '/src/common/functions.php');
 
+if (!defined('MediaZoo_DIR')) {
+	define('MediaZoo_DIR', plugin_dir_path(__FILE__));
+}
+
+if (!defined('MediaZoo_URL')) {
+	define('MediaZoo_URL', plugin_dir_url(__FILE__));
+}
+
+define('MediaZoo_VERSION', '1.0.0');
+// Load Composer autoloader.
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+	require_once __DIR__ . '/vendor/autoload.php';
+}
+/**
+ * The code that runs during plugin activation.
+ * This action is documented in includes/class-plugin-name-activator.php
+ */
+
+
+register_activation_hook(__FILE__, function () {
+	require_once plugin_dir_path(__FILE__) . 'src/class-plugin-name-activator.php';
+	MediaZoo_Activator::activate();
+});
+
+/**
+ * The code that runs during plugin deactivation.
+ * This action is documented in includes/class-plugin-name-deactivator.php
+ */
+
+register_deactivation_hook(__FILE__, function () {
+	require_once plugin_dir_path(__FILE__) . 'src/class-plugin-name-deactivator.php';
+	MediaZoo_Deactivator::deactivate();
+});
 /**
  * Load plugin initialisation file.
  */

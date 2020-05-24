@@ -11,6 +11,9 @@ declare(strict_types=1);
 
 namespace MediaZoo\MediaZooPlugin;
 
+
+use MediaZoo\MediaZooPlugin\migration\MigrationHandller;
+
 if (!defined('WPINC')) {
 	die;
 }
@@ -27,7 +30,7 @@ class MediaZoo_Activator
 	 */
 	public static function activate()
 	{
-
+		MigrationHandller::getInstance()->install();
 		// Remove all default WP template redirects/lookups
 		remove_action('template_redirect', 'redirect_canonical');
 		add_action('init', 'remove_redirects');

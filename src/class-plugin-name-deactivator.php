@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace MediaZoo\MediaZooPlugin;
 
+use MediaZoo\MediaZooPlugin\migration\MigrationHandller;
+
 if (!defined('WPINC')) {
 	die;
 }
@@ -26,6 +28,7 @@ class MediaZoo_Deactivator
 	 */
 	public static function deactivate()
 	{
+		MigrationHandller::getInstance()->uninstall();
 		MediaZoo_init_deactivation();
 	}
 }
