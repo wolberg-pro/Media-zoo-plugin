@@ -32,8 +32,8 @@ $plugin_slug_routes = [
 			'method' => 'GET',
 			'namespace' => '\MediaZoo\MediaZooPlugin\admin\controller\FileSystemController@index',
 			'dependency' => 'FileSystemController.php',
-//			'permission' => 'manage_options',
-//			'permissionCallback' => 'permissionFileSystem'
+			'permission' => 'manage_options',
+			'permissionCallback' => 'permissionFileSystem'
 		],
 	]
 ];
@@ -46,8 +46,8 @@ $plugin_slug_settings = [
 	'submenu_pages' => [
 		[
 			'parent_slug' => 'options-general.php',
-			'page_title' => __('Plugin Slug Settings', 'plugin-slug'),
-			'menu_title' => __('Plugin Slug', 'plugin-slug'),
+			'page_title' => __('Plugin Slug Settings', 'Media Zoo'),
+			'menu_title' => __('Plugin Slug', 'Media Zoo'),
 			'capability' => 'manage_options',
 			'menu_slug' => 'plugin-slug',
 			'view' => 'Media-zoo-plugin/views/admin-page.php'

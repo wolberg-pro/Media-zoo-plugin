@@ -15,6 +15,7 @@ class File
 	public string $name;
 	public string $file_path;
 	public string $file_url;
+	public string $file_thumb_url;
 	public string $file_mine_type;
 
 	/***
@@ -26,6 +27,7 @@ class File
 	 * @param string $name
 	 * @param string $path
 	 * @param string $url
+	 * @param string $thoumb
 	 * @param string $mine_type
 	 */
 	public function __construct(int $id,
@@ -35,6 +37,7 @@ class File
 															string $name,
 															string $path,
 															string $url,
+															string $thoumb,
 															string $mine_type)
 	{
 		$this->id = $id;
@@ -42,9 +45,10 @@ class File
 		$this->registerDateTime = $registerDateTime;
 		$this->title = $title;
 		$this->name = $name;
-		$this->file_path = $path;
-		$this->file_url = $url;
-		$this->file_mine_type = $mine_type;
+		$this->file_path =  $path;
+		$this->file_url =  $url;
+		$this->file_thumb_url = $thoumb;
+		$this->file_mine_type =  $mine_type;
 	}
 
 }

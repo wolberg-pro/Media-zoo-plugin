@@ -1,3 +1,2 @@
-export * from './categories';
-export * from './pages';
+export * from './filesystem.js';
 export * from './ping';

@@ -18,7 +18,7 @@ class FileSystemController extends Controller
 	{
 //		$pingNum = $request->get_param('count');
 		$data = new \stdClass();
-		$data->status =false;
+		$data->status = false;
 		$data->files = FileSystemService::getInstance()->GetFiles('');
 		$data->folders = [];
 		$data->metaData = [
@@ -31,4 +31,5 @@ class FileSystemController extends Controller
 	{
 		return current_user_can($route['permission']);
 	}
+
 }

@@ -72,11 +72,12 @@ class FileQuery
 				$registerDate = $row->post_date;
 				$title = $row->post_title;
 				$name = $row->post_name;
-				$url = esc_url_raw ($row->guid);
-				$path = esc_url(get_attached_file($id));
-				$mine_type = esc_url($row->post_mime_type);
+				$url = $row->guid;
+				$path = get_attached_file($id);
+				$mine_type = $row->post_mime_type;
+				$thumb = wp_get_attachment_thumb_url($id);
 				$file = new File($id, $author, $registerDate, $title, $name
-					, $path, $url, $mine_type);
+					, $path, $url,$thumb, $mine_type);
 				array_push($files,$file);
 			}
 		}

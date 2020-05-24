@@ -16,4 +16,5 @@ abstract class Controller
 		$nonce = $request->get_header('X-WP-Nonce');
 		return wp_verify_nonce($nonce);
 	}
+
 }

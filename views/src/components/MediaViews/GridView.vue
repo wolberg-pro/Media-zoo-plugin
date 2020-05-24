@@ -1,22 +1,28 @@
 <template>
 	<div>
-		<sort-bar :options="options"/>
-		<comp-view :files="ScreenMediaIOData.files" :folders="ScreenMediaIOData.folders" :dataLoad="dataLoad"/>
+		<sort-bar :options="options" v-if="true == 0"/>
+		<comp-view :files="allFiles" :folders="ScreenMediaIOData.folders" :dataLoad="allFilesLoaded"/>
 	</div>
 </template>
 
 <script>
+	import { mapGetters } from 'vuex';
 	import SortBar from './partials/GridView/Bar/SortBar';
 	import View from './partials/GridView/View/View';
 
 	export default {
+		computed: {
+			...mapGetters({
+				allFiles: 'allFiles',
+				allFilesLoaded: 'allFilesLoaded',
+			}),
+		},
 		components: {
 			compView: View,
 			SortBar
 		},
 		data() {
 			return {
-				dataLoad: true,
 				options: [
 					{label: 'Field 1', value: 'field_1'},
 					{label: 'Field 2', value: 'field_2'},
@@ -25,6 +31,10 @@
 				ScreenMediaIOData: this.mockMediaData()
 			};
 		},
+
+		mounted() {
+			this.$store.dispatch('getFiles');
+		},
 		methods: {
 			mockMediaData() {
 				const data = {
@@ -32,35 +42,13 @@
 					files: []
 				};
 				// let mock folder data
-				for (let i = 0; i < 12; i++) {
+				for (let i = 0; i < 0; i++) {
 					data.folders.push({
 						id: i + 141,
 						name: 'Media Folder' + i,
 						type: 'folder'
 					})
 				}
-				// let mock file data
-				const images = [
-					'https://vignette.wikia.nocookie.net/monster/images/6/6e/DragonRed.jpg/revision/latest?cb=20160809235604',
-					'https://thoughtcatalog.files.wordpress.com/2018/08/dragons.jpg?w=1920&h=1280&crop=1&resize=1920,1280&quality=95&strip=all',
-					'https://www.ancient-origins.net/sites/default/files/field/image/Knight-and-dragon-.jpg',
-					'https://cdn.mos.cms.futurecdn.net/rZgUH5JiEpSxCve2RPK3T3-1200-80.jpg',
-					'https://www.sciencenewsforstudents.org/wp-content/uploads/2019/11/860-dragon-header-iStock-494839519.gif',
-					'https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Chinese_dragon_asset_heraldry.svg/1200px-Chinese_dragon_asset_heraldry.svg.png'
-				]
-
-				for (let i = 0; i <= this.getRandomArbitrary(15, 35); i++) {
-					data.files.push({
-						id: i + 741,
-						name: 'Dragon ' + i,
-						type: 'file',
-						path: '/var/www/imgs/image' + i + '.png',
-						folder_id: null,
-						filename: 'image' + i + '.png',
-						media_url: images[this.getRandomArbitrary(0, images.length - 1)]
-					})
-				}
-				this.dataLoad = true;
 				return data;
 			},
 			getRandomArbitrary(min, max) {

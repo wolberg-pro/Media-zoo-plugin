@@ -22,11 +22,8 @@
 						<div class="actions px-4 py-2 m-2">
 							<el-breadcrumb separator-class="el-icon-arrow-right">
 								<el-breadcrumb-item :to="{ path: '/' }">root</el-breadcrumb-item>
-								<el-breadcrumb-item>Folder a</el-breadcrumb-item>
-								<el-breadcrumb-item>Folder B</el-breadcrumb-item>
 							</el-breadcrumb>
-
-							<el-menu mode="horizontal" class="el-menu-horizontal-actions" @select="handleSelect">
+							<el-menu mode="horizontal" class="el-menu-horizontal-actions" @select="handleSelect" v-if="true == 0">
 								<el-menu-item index="1">
 									<i class="el-icon-upload"></i>
 									<span slot="title">Add New Files</span>

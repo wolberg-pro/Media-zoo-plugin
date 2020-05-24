@@ -1,12 +1,13 @@
 <template>
 	<div class="h-40 divide-y divide-gray-400">
-		<div class="flex  flex-col px-4 py-2 m-2" v-if="item.type == 'file'">
+		<div class="flex  flex-col px-4 py-2 m-2" v-if="type == 'file'" @click="previewImages(item)" >
 			<div class="avatar">
-				<el-avatar shape="square" :size="120" :src="item.media_url"></el-avatar>
+				<el-avatar v-if="isFileImage(item)" class="cursor-pointer" shape="square" :size="120" :src="item.file_thumb_url"></el-avatar>
+				<i  v-else class="el-icon-files text-5xl"></i>
 			</div>
 			<div class="flex flex-col bg-gray-200">
-				<div class="text-gray-700 text-justify">{{ item.filename }}</div>
-				<div class="text-gray-700 text-justify">{{ item.name }}</div>
+				<div class="text-gray-700 text-justify">{{ item.title }}</div>
+				<div class="text-gray-700 text-justify">{{ item.registerDateTime }}</div>
 			</div>
 		</div>
 
@@ -23,12 +24,18 @@
 
 <script>
 	export default {
-		props: ['item'],
-		data() {
-			return {
-				value: null
+		props: ['item', 'type'],
+		methods: {
+			previewImages(item) {
+				if (this.isFileImage(item)) {
+					this.$parent.$emit("start_preview", item);
+				}
+			},
+			isFileImage(item ) {
+				return item.file_mine_type.toLowerCase().indexOf('image') != -1;
 			}
 		}
+
 	}
 </script>
 

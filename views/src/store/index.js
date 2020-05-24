@@ -5,11 +5,8 @@ import * as actions from './actions'
 import * as getters from './getters'
 import hub from './modules/hub'
 import user from './modules/user'
-import post from './modules/post'
 import ping from './modules/ping'
-import page from './modules/page'
-import categories from './modules/categories'
-
+import filesystem from './modules/filesystem'
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
@@ -26,10 +23,8 @@ export default new Vuex.Store({
 	modules: {
 		hub,
 		user,
-		post,
+		filesystem,
 		ping,
-		page,
-		categories
 	},
 	strict: debug,
 	plugins: [localStorage]
