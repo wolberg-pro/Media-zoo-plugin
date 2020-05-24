@@ -46,10 +46,10 @@ $plugin_slug_settings = [
 	'submenu_pages' => [
 		[
 			'parent_slug' => 'options-general.php',
-			'page_title' => __('Plugin Slug Settings', 'Media Zoo'),
-			'menu_title' => __('Plugin Slug', 'Media Zoo'),
+			'page_title' => __('Media Zoo File Control', 'Media Zoo File Control'),
+			'menu_title' => __('Media Zoo', 'Media Zoo'),
 			'capability' => 'manage_options',
-			'menu_slug' => 'plugin-slug',
+			'menu_slug' => 'media-zoo',
 			'view' => 'Media-zoo-plugin/views/admin-page.php'
 
 		],
@@ -57,11 +57,11 @@ $plugin_slug_settings = [
 
 	'settings' => [
 		'setting1' => [
-			'option_group' => 'pluginslug',
+			'option_group' => 'media-zoo',
 			'sanitize_callback' => null,
 			'sections' => [
 				'section1' => [
-					'title' => __('My Section Title', 'plugin-slug'),
+					'title' => __('My Section Title', 'Media Zoo'),
 					'view' => MediaZoo_DIR . 'views/section1.php',
 					'fields' => [
 						'field1' => [

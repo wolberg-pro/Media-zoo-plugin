@@ -1,7 +1,8 @@
 <template>
 	<div>
 		<sort-bar :options="options" v-if="true == 0"/>
-		<comp-view :files="allFiles" :folders="ScreenMediaIOData.folders" :dataLoad="allFilesLoaded"/>
+		<comp-view v-if="allFiles.length > 0" :files="allFiles" :folders="ScreenMediaIOData.folders" :dataLoad="allFilesLoaded"/>
+		<div v-else>No Files Uploaded</div>
 	</div>
 </template>
 

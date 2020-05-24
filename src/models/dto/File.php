@@ -17,6 +17,8 @@ class File
 	public string $file_url;
 	public string $file_thumb_url;
 	public string $file_mine_type;
+	public array $file_meta_data;
+	public array $file_info;
 
 	/***
 	 * File constructor.
@@ -29,6 +31,8 @@ class File
 	 * @param string $url
 	 * @param string $thoumb
 	 * @param string $mine_type
+	 * @param array $file_metaData
+	 * @param array $file_info
 	 */
 	public function __construct(int $id,
 															string $author,
@@ -38,7 +42,9 @@ class File
 															string $path,
 															string $url,
 															string $thoumb,
-															string $mine_type)
+															string $mine_type,
+															array $file_metaData,
+															array $file_info)
 	{
 		$this->id = $id;
 		$this->author = $author;
@@ -49,6 +55,8 @@ class File
 		$this->file_url =  $url;
 		$this->file_thumb_url = $thoumb;
 		$this->file_mine_type =  $mine_type;
+		$this->file_meta_data = $file_metaData;
+		$this->file_info = $file_info;
 	}
 
 }

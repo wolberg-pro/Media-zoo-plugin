@@ -58,7 +58,8 @@ class FileQuery
 		global $wpdb;
 		$query = $wpdb->prepare('
 						select
-						post.`ID`,  user.`user_nicename` as `post_author`,  post.`post_date`, post.`post_title`, post.`post_name` , post.`guid` ,post.`post_mime_type`
+						post.`ID`,  user.`user_nicename` as `post_author`,  post.`post_date`, post.`post_title`, post.`post_name` ,
+						post.`post_excerpt` as caption,post.`post_content` as description, post.`guid` ,post.`post_mime_type`
 						from ' . $wpdb->prefix . 'posts as post
 						left join ' . $wpdb->prefix . 'users as user on user.`ID` = post.`post_author`
 						where post.`post_type` = \'attachment\'
@@ -74,11 +75,21 @@ class FileQuery
 				$name = $row->post_name;
 				$url = $row->guid;
 				$path = get_attached_file($id);
+				$metaData = wp_get_attachment_metadata($id);
 				$mine_type = $row->post_mime_type;
 				$thumb = wp_get_attachment_thumb_url($id);
+				$attachmentInfo = [
+					'alt' => '',
+					'description' => $row->description,
+					'caption' => $row->caption,
+
+				];
+				if (strcmp($mine_type , 'image')) {
+					$attachmentInfo['alt'] = get_post_meta( $id, '_wp_attachment_image_alt', true );
+				}
 				$file = new File($id, $author, $registerDate, $title, $name
-					, $path, $url,$thumb, $mine_type);
-				array_push($files,$file);
+					, $path, $url, $thumb, $mine_type, (is_array($metaData)) ? $metaData : [], (is_array($attachmentInfo)) ? $attachmentInfo : []);
+				array_push($files, $file);
 			}
 		}
 		return $files;
