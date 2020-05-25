@@ -1,6 +1,7 @@
 import axios from "axios";
 import Vue from 'vue';
 import Element from 'element-ui';
+import {Form} from 'element-ui';
 
 // import 'element-ui/lib/theme-chalk/reset.css'
 // import 'element-ui/lib/theme-chalk/index.css'
@@ -20,7 +21,9 @@ try {
 } catch (e) {
 	console.log(e);
 }
-Vue.use(Element, {size: 'small', zIndex: 3000});
+Vue.use(Element, {size: 'small', zIndex: 29000});
+
+Vue.component(Form.name, Form);
 new Vue({
 	el: '#app',
 	store,

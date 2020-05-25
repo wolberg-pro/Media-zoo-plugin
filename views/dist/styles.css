@@ -1,3 +1,11 @@
+.el-carousel__item h3[data-v-904ea096] {
+  color: #475669;
+  font-size: 14px;
+  opacity: 0.75;
+  line-height: 20px;
+  margin: 0;
+}
+
 @charset "UTF-8";
 
 .el-pagination--small .arrow.disabled,.el-table .hidden-columns,.el-table td.is-hidden>*,.el-table th.is-hidden>*,.el-table--hidden{
@@ -14733,10 +14741,7 @@
 .el-popconfirm__action{
   text-align:right;
   margin:0
-}.el-menu-item.is-active[data-v-1bf091dc] {
-  color: inherit;
-}
-/* Don't want tailwindcss?
+}/* Don't want tailwindcss?
    Simply remove the import
    statement below and write
    your CSS as normal! */
@@ -83253,14 +83258,9 @@ h4 {
     transition-delay: 1000ms;
   }
 }
-.el-carousel__item h3[data-v-4a04a290] {
-  color: #475669;
-  font-size: 14px;
-  opacity: 0.75;
-  line-height: 20px;
-  margin: 0;
+.el-menu-item.is-active[data-v-1bf091dc] {
+  color: inherit;
 }
-
 .page-content[data-v-566aa9ce] p {
   margin-bottom: 1rem;
 }

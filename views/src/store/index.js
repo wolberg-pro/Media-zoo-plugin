@@ -6,6 +6,7 @@ import * as getters from './getters'
 import hub from './modules/hub'
 import user from './modules/user'
 import ping from './modules/ping'
+import utils from './modules/utils'
 import filesystem from './modules/filesystem'
 Vue.use(Vuex)
 
@@ -25,6 +26,7 @@ export default new Vuex.Store({
 		user,
 		filesystem,
 		ping,
+		utils,
 	},
 	strict: debug,
 	plugins: [localStorage]
