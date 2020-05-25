@@ -40,6 +40,14 @@ $plugin_slug_routes = [
 			'dependency' => 'FileSystemController.php',
 			'permission' => 'manage_options',
 			'permissionCallback' => 'permissionFileSystem'
+		], [
+			'version' => 'v1',
+			'route' => 'files/create',
+			'method' => 'POST',
+			'namespace' => '\MediaZoo\MediaZooPlugin\admin\controller\FileSystemController@create',
+			'dependency' => 'FileSystemController.php',
+			'permission' => 'manage_options',
+			'permissionCallback' => 'permissionFileSystem'
 		],
 	]
 ];

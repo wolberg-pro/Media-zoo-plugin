@@ -3,7 +3,7 @@
 		<el-row>
 			<el-col :span="24">
 				<div class="flex flex-col bg-gray-200">
-					<div class="nav-page px-4 py-2 m-2">
+					<div class="nav-page px-4 py-2 m-2" v-if="true == 0">
 						<el-menu mode="horizontal" class="el-menu-horizontal-actions" @select="handleSelect">
 							<el-menu-item index="2">
 								<i class="el-icon-menu"></i>
@@ -23,31 +23,15 @@
 							<el-breadcrumb separator-class="el-icon-arrow-right">
 								<el-breadcrumb-item :to="{ path: '/' }">root</el-breadcrumb-item>
 							</el-breadcrumb>
-							<el-menu mode="horizontal" class="el-menu-horizontal-actions" @select="handleSelect" v-if="true == 0">
-								<el-menu-item index="1">
-									<i class="el-icon-upload"></i>
-									<span slot="title">Add New Files</span>
-								</el-menu-item>
-								<el-menu-item index="1">
-									<i class="el-icon-remove"></i>
-									<span slot="title">Delete Selected</span>
-								</el-menu-item>
-								<el-menu-item index="2">
-									<i class="el-icon-menu"></i>
-									<span slot="title">Action A</span>
-								</el-menu-item>
-								<el-menu-item index="3">
-									<i class="el-icon-menu"></i>
-									<span slot="title">Action B</span>
-								</el-menu-item>
-								<el-menu-item index="4">
-									<i class="el-icon-menu"></i>
-									<span slot="title">Action C</span>
-								</el-menu-item>
-								<el-menu-item index="5">
-									<i class="el-icon-menu"></i>
-									<span slot="title">Action D</span>
-								</el-menu-item>
+							<el-menu mode="horizontal" class="el-menu-horizontal-actions" @select="handleSelect" >
+								<el-submenu index="1">
+									<template slot="title">
+										<i class="el-icon-upload"></i>
+										<span slot="title">New</span>
+									</template>
+									<el-menu-item index="1-1">Create Folder</el-menu-item>
+									<el-menu-item index="1-2">Upload File/s</el-menu-item>
+								</el-submenu>
 							</el-menu>
 							<div class="nav-page px-4 py-2 m-2">
 								<el-row>

@@ -3,7 +3,7 @@
 
 namespace MediaZoo\MediaZooPlugin\services;
 
-use MediaZoo\MediaZooPlugin\models\FileQuery;
+use MediaZoo\MediaZooPlugin\models\FileSystemQuery;
 
 if (!defined('WPINC')) {
 	die;
@@ -52,8 +52,25 @@ class FileSystemService
 		}
 		return self::$instance;
 	}
-	public function GetFiles(string $rootFolder) {
-		return FileQuery::getInstance()->getFiles();
+
+	public function getFiles(int $folder_id = null)
+	{
+		return FileSystemQuery::getInstance()->getFiles($folder_id);
+	}
+
+	public function getFolders(int $folder_id = null)
+	{
+		return FileSystemQuery::getInstance()->getCurrentLevelMediaFolders($folder_id);
+	}
+
+	public function createFolder(string $folder_name, ?string $folder_color, ?string $folder_description, ?int $folder_id)
+	{
+		if (FileSystemQuery::getInstance()->hasFolderOnCurrentLevel($folder_name,$folder_id)) {
+			return false;
+		} else {
+
+		}
+
 	}
 
 }

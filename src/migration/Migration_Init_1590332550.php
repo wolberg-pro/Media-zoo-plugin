@@ -14,9 +14,10 @@ class Migration_Init_1590332550 extends Migration
 		$queries = [];
 		array_push($queries, $wpdb->prepare('CREATE TABLE `wp_media_folders` (
 																											`id` INT(10) NOT NULL AUTO_INCREMENT,
-																											`name` INT NULL,
-																											`color` INT NULL,
-																											`description` INT NULL,
+																											`parent_id` INT(10) NULL DEFAULT NULL,
+																											`name` VARCHAR(30) NOT NULL COLLATE \'utf8mb4_bin\',
+																											`color` VARCHAR(15) NULL DEFAULT NULL COLLATE \'utf8mb4_bin\',
+																											`description` TEXT NULL COLLATE \'utf8mb4_bin\',
 																											PRIMARY KEY (`id`)
 																										)'));
 		array_push($queries, $wpdb->prepare('ALTER TABLE `wp_posts` ADD COLUMN `post_meida_folder_id` INT(10) UNSIGNED NULL DEFAULT NULL AFTER `ID`;'));
