@@ -1,11 +1,10 @@
-.el-carousel__item h3[data-v-904ea096] {
+.el-carousel__item h3[data-v-09ca9af7] {
   color: #475669;
   font-size: 14px;
   opacity: 0.75;
   line-height: 20px;
   margin: 0;
 }
-
 @charset "UTF-8";
 
 .el-pagination--small .arrow.disabled,.el-table .hidden-columns,.el-table td.is-hidden>*,.el-table th.is-hidden>*,.el-table--hidden{
@@ -83257,6 +83256,23 @@ h4 {
   .xl\:delay-1000 {
     transition-delay: 1000ms;
   }
+}
+.badge-text[data-v-1ec62d4b] {
+  margin-left: 10px;
+}
+.badge[data-v-1ec62d4b] {
+  background-color: #000;
+  color: #fff;
+  margin-left: 5px;
+  display: inline-block;
+  padding-left: 8px;
+  padding-right: 8px;
+  width: 15px;
+  height: 15px;
+  text-align: center
+}
+.badge[data-v-1ec62d4b] {
+  border-radius: 50%
 }
 .el-menu-item.is-active[data-v-1bf091dc] {
   color: inherit;

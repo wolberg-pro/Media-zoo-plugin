@@ -16,8 +16,12 @@
 			<div class="avatar">
 				<i class="el-icon-folder text-5xl"></i>
 			</div>
-			<div class="flex flex-col bg-gray-200">
-				<div class="text-gray-700 text-justify">{{ item.name }}</div>
+			<div class="flex flex-row bg-gray-200">
+
+				<div v-if="item.color&&item.color != ''" class="badge" :style="{backgroundColor: item.color}">
+					<div class="badge-text text-gray-700 text-justify">{{ item.name }}</div>
+				</div>
+				<div v-else  class="badge-text text-gray-700 text-justify">{{ item.name }}</div>
 			</div>
 		</div>
 	</div>
@@ -41,4 +45,22 @@
 
 
 <style type="postcss" scoped>
+	.badge-text {
+		margin-left: 10px;
+	}
+	.badge {
+		background-color: #000;
+		color: #fff;
+		margin-left: 5px;
+		display: inline-block;
+		padding-left: 8px;
+		padding-right: 8px;
+		width: 15px;
+		height: 15px;
+		text-align: center
+	}
+
+	.badge {
+		border-radius: 50%
+	}
 </style>

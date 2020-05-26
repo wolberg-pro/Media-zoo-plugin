@@ -16,7 +16,8 @@
 			</div>
 			<div class="clearfix"></div>
 		</div>
-		<el-carousel :autoplay="false" trigger="click" indicator-position="outside" type="card" height="350px">
+		<el-carousel :autoplay="false" trigger="click" indicator-position="outside" @change="onPreviewImageChange"
+								 type="card" height="350px">
 			<el-carousel-item v-for="item in items" :key="item.id">
 				<el-card :body-style="{ padding: '0px' }">
 					<el-image
@@ -37,26 +38,41 @@
 			</el-carousel-item>
 		</el-carousel>
 		<el-divider content-position="left">Image Meta Data</el-divider>
-		<el-form ref="form" :model="form" label-width="120px" :disabled="allowToEdit()">
-			<el-collapse accordion>
-				<el-collapse-item name="1">
-					<template slot="title">
-						Consistency<i class="header-icon el-icon-info"></i>
-					</template>
-					<div>Consistent with real life: in line with the process and logic of real life, and comply with languages
-						and
-						habits that the users are used to;
-					</div>
-					<div>Consistent within interface: all elements should be consistent, such as: design style, icons and texts,
-						position of elements, etc.
-					</div>
-				</el-collapse-item>
-			</el-collapse>
+		<el-form ref="form" :label-position="labelPosition" :rules="formFules" :model="form" label-width="200px"
+						 :disabled="isAllowToEdit()">
+
+			<el-form-item label="Media Name" prop="name" required>
+				<el-input placeholder="Media Name input"
+									v-model="form.name"
+									maxlength="20"
+									minlength="3"
+									show-word-limit></el-input>
+			</el-form-item>
+
+			<el-form-item label="Media Alt" prop="alt">
+				<el-input placeholder="Media Alt input"
+									v-model="form.alt"
+									maxlength="50"
+									minlength="3"
+									show-word-limit></el-input>
+			</el-form-item>
+
+			<el-form-item label="Media caption" prop="caption">
+				<el-input placeholder="Media Caption input"
+									v-model="form.caption"
+									maxlength="50"
+									minlength="3"
+									show-word-limit></el-input>
+			</el-form-item>
+
+			<el-form-item label="Media Description" prop="description">
+				<el-input type="textarea" placeholder="Media Description input" v-model="form.description"></el-input>
+			</el-form-item>
 
 			<el-divider content-position="left">Actions</el-divider>
-			<el-form-item >
-				<el-button type="primary" @click="onSubmit" :disabled="allowToEdit()">Create</el-button>
-				<el-button :disabled="allowToEdit()">Cancel</el-button>
+			<el-form-item>
+				<el-button type="primary" @click="submitForm('form')" :disabled="isAllowToEdit()">Submit</el-button>
+				<el-button @click="resetForm('form')" :disabled="isAllowToEdit()">Reset</el-button>
 			</el-form-item>
 		</el-form>
 	</el-card>
@@ -67,23 +83,49 @@
 		props: ['items'],
 		data() {
 			return {
+				labelPosition: 'left',
+				selectItem: this.items[0],
 				editMode: 'false',
 				form: {
-					name: '',
+					description:  '',
 					caption: '',
-					alt: ''
+					alt: '',
+					name: ''
+				},
+				formFules: {
+					alt: {min: 3, max: 50, message: 'Length should be 3 to 50', trigger: 'blur'},
+					name: {required: true, min: 3, max: 20, message: 'Length should be 3 to 20', trigger: 'blur'},
+					caption: {min: 3, max: 50, message: 'Length should be 3 to 50', trigger: 'blur'}
 				}
 			}
 		},
+		mounted() {
+			this.updateForm();
+			this.editMode = 'false';
+		},
 		methods: {
-			allowToEdit() {
-				return this.editMode ==='true';
+			isAllowToEdit() {
+				return this.editMode !== 'true';
 			},
 			openDirectLink(item) {
 				window.open(item.file_url);
 			},
+			onPreviewImageChange(newIdx, oldIdx) {
+				this.openMessage('Please Note New preview been selected all field reset', 'warn')
+				this.selectItem = this.items[newIdx];
+				this.resetForm('form');
+				this.updateForm();
+			},
+			updateForm() {
+				if (this.selectItem || this.selectItem.file_info) {
+					this.form.alt = this.selectItem.file_info.alt;
+					this.form.name = this.selectItem.name;
+					this.form.caption = this.selectItem.file_info.caption;
+					this.form.description = this.selectItem.file_info.description;
+				}
+			},
 			onEditModeChange(value) {
-				if (value === 'true') {
+				if (!this.isAllowToEdit()) {
 					this.openMessage('Preview Set the edit mode ON', 'warn');
 				} else {
 					this.openMessage('Preview set the edit mode OFF', 'success')
@@ -97,7 +139,19 @@
 					type: type
 				});
 			},
-			onSubmit() {
+
+			submitForm(formName) {
+				this.$refs[formName].validate((valid) => {
+					if (valid) {
+						alert('submit!');
+					} else {
+						console.log('error submit!!');
+						return false;
+					}
+				});
+			},
+			resetForm(formName) {
+				this.$refs[formName].resetFields();
 			}
 		}
 	}
@@ -112,6 +166,5 @@
 		line-height: 20px;
 		margin: 0;
 	}
-
 </style>
 
