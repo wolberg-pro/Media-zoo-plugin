@@ -38,13 +38,13 @@
 			</el-carousel-item>
 		</el-carousel>
 		<el-divider content-position="left">Image Meta Data</el-divider>
-		<el-form ref="form" :label-position="labelPosition" :rules="formFules" :model="form" label-width="200px"
+		<el-form ref="form" :label-position="labelPosition" :rules="formRules" :model="form" label-width="200px"
 						 :disabled="isAllowToEdit()">
 
 			<el-form-item label="Media Name" prop="name" required>
 				<el-input placeholder="Media Name input"
 									v-model="form.name"
-									maxlength="20"
+									maxlength="100"
 									minlength="3"
 									show-word-limit></el-input>
 			</el-form-item>
@@ -83,18 +83,18 @@
 		props: ['items'],
 		data() {
 			return {
-				labelPosition: 'left',
 				selectItem: this.items[0],
 				editMode: 'false',
+				labelPosition: 'left',
 				form: {
 					description:  '',
 					caption: '',
 					alt: '',
 					name: ''
 				},
-				formFules: {
+				formRules: {
 					alt: {min: 3, max: 50, message: 'Length should be 3 to 50', trigger: 'blur'},
-					name: {required: true, min: 3, max: 20, message: 'Length should be 3 to 20', trigger: 'blur'},
+					name: {required: true, min: 3, max: 100, message: 'Length should be 3 to 100', trigger: 'blur'},
 					caption: {min: 3, max: 50, message: 'Length should be 3 to 50', trigger: 'blur'}
 				}
 			}

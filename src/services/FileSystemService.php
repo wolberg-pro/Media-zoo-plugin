@@ -67,10 +67,8 @@ class FileSystemService
 	{
 		if (FileSystemQuery::getInstance()->hasFolderOnCurrentLevel($folder_name,$folder_id)) {
 			return false;
-		} else {
-
 		}
-
+		return FileSystemQuery::getInstance()->createFolder($folder_name,$folder_color,$folder_description,$folder_id);
 	}
 
 }

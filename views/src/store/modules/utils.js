@@ -3,13 +3,17 @@ import * as types from '../mutation-types'
 // initial state
 const state = {
 	preview_files: [],
-	load_preview: false
+	load_preview: false,
+	parent_folder_id:  null,
+	load_new_folder_dig: false,
 }
 
 // getters
 const getters = {
 	// Returns an array all categories
 	previewLoaded: state => state.load_preview,
+	newFolderDigLoaded: state => state.load_new_folder_dig,
+	parentFolderId: state => state.parent_folder_id,
 	perviewFiles: state => state.preview_files,
 }
 
@@ -20,6 +24,12 @@ const actions = {
 	},
 	stopPreview({commit}) {
 		commit(types.UNLOAD_PREVIEW)
+	},
+	openNewFolder({commit}, {folder_id}) {
+		commit(types.LOAD_NEW_DIG_FOLDER,{data: {folder_id}})
+	},
+	closeNewFolder({commit}) {
+		commit(types.UNLOAD_NEW_DIG_FOLDER)
 	}
 }
 
@@ -34,6 +44,15 @@ const mutations = {
 	[types.UNLOAD_PREVIEW](state) {
 		state.preview_files = [];
 		state.load_preview = false
+	},
+	[types.LOAD_NEW_DIG_FOLDER](state,{data}) {
+		state.parent_folder_id = data.folder_id || null;
+		state.load_new_folder_dig = true;
+	},
+
+	[types.UNLOAD_NEW_DIG_FOLDER](state) {
+		state.parent_folder_id = null;
+		state.load_new_folder_dig = false;
 	}
 }
 

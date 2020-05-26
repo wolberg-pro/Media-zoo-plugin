@@ -23,13 +23,13 @@
 							<el-breadcrumb separator-class="el-icon-arrow-right">
 								<el-breadcrumb-item :to="{ path: '/' }">root</el-breadcrumb-item>
 							</el-breadcrumb>
-							<el-menu mode="horizontal" class="el-menu-horizontal-actions" @select="handleSelect" >
+							<el-menu mode="horizontal" class="el-menu-horizontal-actions">
 								<el-submenu index="1">
 									<template slot="title">
 										<i class="el-icon-upload"></i>
 										<span slot="title">New</span>
 									</template>
-									<el-menu-item index="1-1">Create Folder</el-menu-item>
+									<el-menu-item index="1-1" @click="onCreateFolder">Create Folder</el-menu-item>
 									<el-menu-item index="1-2">Upload File/s</el-menu-item>
 								</el-submenu>
 							</el-menu>
@@ -45,13 +45,25 @@
 				</div>
 			</el-col>
 		</el-row>
+
+		<el-dialog title="New Folder" center destroy-on-close	:visible.sync="newFolderDigLoaded"  @close="onCreateFolderDialogClose()">
+			<new-folder />
+		</el-dialog>
 	</div>
 </template>
 
 <script>
 	import GridView from "./MediaViews/GridView";
+	import NewFolder from "./partials/dialogs/NewFolder";
+	import {mapGetters} from "vuex";
 
 	export default {
+		computed: {
+			...mapGetters({
+				newFolderDigLoaded: 'newFolderDigLoaded',
+				parentFolderId: 'parentFolderId'
+			}),
+		},
 		data() {
 			return {
 				activeMenuSelectedIndex: "1",
@@ -59,11 +71,16 @@
 		},
 		components: {
 			GridView,
+			NewFolder
 		},
 		methods: {
-			handleSelect(key, keyPath) {
-				console.log(key, keyPath);
-			}
+			onCreateFolder() {
+				this.$store.dispatch('openNewFolder', {folder_id: null});
+			},
+			onCreateFolderDialogClose() {
+				this.$store.dispatch('closeNewFolder');
+			},
+			onUploadFiles() {}
 		}
 	};
 </script>

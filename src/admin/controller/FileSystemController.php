@@ -26,10 +26,9 @@ class FileSystemController extends Controller
 
 	public function create(WP_REST_Request $request)
 	{
-		$queryParams = $request->get_file_params();
-		$folder_id = (isset($queryParams['folder_id']) && is_numeric($queryParams['folder_id'])) ? intval($queryParams['folder_id']) : null;
-		$action_type = (isset($queryParams['type'])) ? trim(strtolower($queryParams['type'])) : null;
-		$params = $request->get_body_params();
+		$params = json_decode($request->get_body());
+		$action_type = (isset($params->type)) ? trim(strtolower($params->type)) : null;
+		$parent_folder_id = (isset($params->parent_folder_id) && is_numeric($params->parent_folder_id)) ? intval($params->parent_folder_id) : null;
 		$data = new \stdClass();
 		$data->status = false;
 		$data->action = $action_type;
@@ -37,10 +36,12 @@ class FileSystemController extends Controller
 			case 'upload_files':
 				break;
 			case 'folder':
-				$folder_name = sanitize_file_name(trim($params['folder_name']));
-				$folder_color = sanitize_hex_color(trim($params['folder_color']));
-				$folder_description = sanitize_textarea_field(trim($params['folder_description']));
-				$folderObject = FileSystemService::getInstance()->createFolder($folder_name, $folder_color, $folder_description);
+				$folder_name = sanitize_file_name(trim($params->folder_name));
+				$folder_color = sanitize_hex_color(trim($params->folder_color));
+				$folder_description = sanitize_textarea_field(trim($params->folder_description));
+				$folderObject = FileSystemService::getInstance()->createFolder($folder_name, $folder_color, $folder_description,$parent_folder_id);
+				$data->status = true;
+				$data->folder = $folderObject;
 				break;
 			default:
 				$data->action = 'ignored';

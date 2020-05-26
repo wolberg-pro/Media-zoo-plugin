@@ -2,6 +2,7 @@ import axios from "axios";
 import Vue from 'vue';
 import Element from 'element-ui';
 import {Form} from 'element-ui';
+import locale from 'element-ui/lib/locale/lang/en'
 
 // import 'element-ui/lib/theme-chalk/reset.css'
 // import 'element-ui/lib/theme-chalk/index.css'
@@ -21,7 +22,7 @@ try {
 } catch (e) {
 	console.log(e);
 }
-Vue.use(Element, {size: 'small', zIndex: 29000});
+Vue.use(Element, {locale, size: 'small', zIndex: 29000});
 
 Vue.component(Form.name, Form);
 new Vue({
