@@ -1,3 +1,6 @@
+.el-menu-item.is-active[data-v-22846202] {
+  color: inherit;
+}
 @charset "UTF-8";
 
 .el-pagination--small .arrow.disabled,.el-table .hidden-columns,.el-table td.is-hidden>*,.el-table th.is-hidden>*,.el-table--hidden{
@@ -83273,9 +83276,6 @@ h4 {
   opacity: 0.75;
   line-height: 20px;
   margin: 0;
-}
-.el-menu-item.is-active[data-v-c9041b78] {
-  color: inherit;
 }
 .page-content[data-v-566aa9ce] p {
   margin-bottom: 1rem;

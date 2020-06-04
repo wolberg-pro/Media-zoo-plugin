@@ -39,7 +39,7 @@ class FileSystemController extends Controller
 				$folder_name = sanitize_file_name(trim($params->folder_name));
 				$folder_color = sanitize_hex_color(trim($params->folder_color));
 				$folder_description = sanitize_textarea_field(trim($params->folder_description));
-				$folderObject = FileSystemService::getInstance()->createFolder($folder_name, $folder_color, $folder_description,$parent_folder_id);
+				$folderObject = FileSystemService::getInstance()->createFolder($folder_name, $folder_color, $folder_description, $parent_folder_id);
 				$data->status = true;
 				$data->folder = $folderObject;
 				break;
@@ -47,12 +47,22 @@ class FileSystemController extends Controller
 				$data->action = 'ignored';
 		}
 		return $data;
-
+	}
+	public function deleteFolder($route, WP_REST_Request $request)
+	{
+		$data = new \stdClass();
+		$params = json_decode($request->get_body());
+		$data->status = false;
+		if (FileSystemQuery::getInstance()->deleteFolders($params->folders)) {
+			$data->status =  true;
+		} else {
+			$data->message = "One or more folders not existed please reload page";
+		}
+		return $data;
 	}
 
 	public function permissionFileSystem($route, WP_REST_Request $request)
 	{
 		return current_user_can($route['permission']);
 	}
-
 }

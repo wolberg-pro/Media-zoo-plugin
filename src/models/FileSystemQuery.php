@@ -100,8 +100,19 @@ class FileSystemQuery
 				if (strcmp($mine_type, 'image')) {
 					$attachmentInfo['alt'] = get_post_meta($id, '_wp_attachment_image_alt', true);
 				}
-				$file = new File($id, $author, $registerDate, $title, $name
-					, $path, $url, $thumb, $mine_type, (is_array($metaData)) ? $metaData : [], (is_array($attachmentInfo)) ? $attachmentInfo : []);
+				$file = new File(
+					$id,
+					$author,
+					$registerDate,
+					$title,
+					$name,
+					$path,
+					$url,
+					$thumb,
+					$mine_type,
+					(is_array($metaData)) ? $metaData : [],
+					(is_array($attachmentInfo)) ? $attachmentInfo : []
+				);
 				array_push($files, $file);
 			}
 		}
@@ -140,7 +151,8 @@ class FileSystemQuery
 		}
 		return $folders;
 	}
-	public function getFolder(int $folder_id) {
+	public function getFolder(int $folder_id)
+	{
 		global $wpdb;
 		$query = $wpdb->prepare('
 						select
@@ -181,14 +193,46 @@ class FileSystemQuery
 		return false;
 	}
 
+	public function deleteFolders(array $folder_ids)
+	{
+		global $wpdb;
+		$folder_ids =  explode(',', array_map(function ($folder_id) {
+			return intval($folder_id);
+		}, $folder_ids));
+		$query = $wpdb->prepare('
+					DELETE
+					from ' . $wpdb->prefix . 'media_folders as folder
+					where folder.`id` in (%s)', $folder_ids);
+		$wpdb->query($query);
+	}
+
+	public function hasFolderExistedByFolderID(array $folder_ids)
+	{
+		global $wpdb;
+		$folder_ids =  explode(',', array_map(function ($folder_id) {
+			return intval($folder_id);
+		}, $folder_ids));
+		$query = $wpdb->prepare('
+					select
+					count(folder.`id`)  as total
+					from ' . $wpdb->prefix . 'media_folders as folder
+					where folder.`id` in (%s)
+					order by folder.`id`', $folder_ids);
+		$results = $wpdb->get_row($query);
+		if (!empty($results) && count($folder_ids) == $results->count) {
+			return true;
+		}
+		return false;
+	}
+
 	public function createFolder(string $folder_name, ?string $folder_color, ?string $folder_description, ?int $folder_id)
 	{
 		global $wpdb;
-		$wpdb->insert($wpdb->prefix . 'media_folders',array(
-			'name'=>$folder_name,
-			'color'=>$folder_color,
-			'description'=>$folder_description,
-			'parent_id' =>$folder_id
+		$wpdb->insert($wpdb->prefix . 'media_folders', array(
+			'name' => $folder_name,
+			'color' => $folder_color,
+			'description' => $folder_description,
+			'parent_id' => $folder_id
 		));
 		$insert_id = $wpdb->insert_id;
 		return $this->getFolder($insert_id);

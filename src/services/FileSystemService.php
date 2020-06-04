@@ -63,12 +63,28 @@ class FileSystemService
 		return FileSystemQuery::getInstance()->getCurrentLevelMediaFolders($folder_id);
 	}
 
-	public function createFolder(string $folder_name, ?string $folder_color, ?string $folder_description, ?int $folder_id)
+	public function isFolderExist(array $folder_id)
 	{
-		if (FileSystemQuery::getInstance()->hasFolderOnCurrentLevel($folder_name,$folder_id)) {
+		if (FileSystemQuery::getInstance()->hasFolderExistedByFolderID($folder_id)) {
 			return false;
 		}
-		return FileSystemQuery::getInstance()->createFolder($folder_name,$folder_color,$folder_description,$folder_id);
+		return true;
 	}
 
+	public function deleteFolders(array $folder_ids)
+	{
+		if ($this->isFolderExist($folder_ids)) {
+			FileSystemQuery::getInstance()->deleteFolders($folder_ids);
+			return true;
+		}
+		return false;
+	}
+
+	public function createFolder(string $folder_name, ?string $folder_color, ?string $folder_description, ?int $folder_id)
+	{
+		if (FileSystemQuery::getInstance()->hasFolderOnCurrentLevel($folder_name, $folder_id)) {
+			return false;
+		}
+		return FileSystemQuery::getInstance()->createFolder($folder_name, $folder_color, $folder_description, $folder_id);
+	}
 }

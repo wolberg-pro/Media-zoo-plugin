@@ -32,6 +32,10 @@
 									<el-menu-item index="1-1" @click="onCreateFolder">Create Folder</el-menu-item>
 									<el-menu-item index="1-2">Upload File/s</el-menu-item>
 								</el-submenu>
+							<el-menu-item index="2">
+								<i class="el-icon-close"></i>
+								<span slot="title">Remove Selected Items</span>
+							</el-menu-item>
 							</el-menu>
 							<div class="nav-page px-4 py-2 m-2">
 								<el-row>
