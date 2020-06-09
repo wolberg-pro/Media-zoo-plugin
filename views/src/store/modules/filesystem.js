@@ -57,7 +57,7 @@ const actions = {
 	}) {
 		commit(types.SELECT_ALL_ITEMS);
 	},
-	ClearAllMarkItems({
+	clearAllMarkItems({
 		commit
 	}) {
 		commit(types.CLEAR_MARK_ITEMS);
@@ -151,12 +151,16 @@ const mutations = {
 	[types.CLEAR_MARK_ITEMS](state) {
 		state.files.forEach(item => item.mark = false);
 		state.folders.forEach(item => item.mark = false);
+		state.files = [...state.files];
+		state.folders = [...state.folders];
 		state.markItemsStats_files = 0;
 		state.markItemsStats_folders = 0;
 	},
 	[types.SELECT_ALL_ITEMS](state) {
 		state.files.forEach(item => item.mark = true);
 		state.folders.forEach(item => item.mark = true);
+		state.files = [...state.files];
+		state.folders = [...state.folders];
 		state.markItemsStats_files = state.files.length;
 		state.markItemsStats_folders = state.folders.length;
 	}

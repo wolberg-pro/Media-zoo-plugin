@@ -6,11 +6,11 @@
     :class="{ active: hover }"
   >
     <div class="absolute left-auto bottom-0" v-show="hover" @click="triggerMarkMediaItem()">
-      <i class="el-icon-circle-plus-outline text-6xl object-none object-center" v-if="!item.mark"></i>
-      <i
-        class="el-icon-remove-outline text-6xl object-none object-center"
-        v-if="item.mark"
-      ></i>
+      <i class="el-icon-circle-plus-outline text-sm object-none object-center" v-if="!item.mark"></i>
+      <i class="el-icon-remove-outline text-sm object-none object-center" v-if="item.mark"></i>
+    </div>
+    <div class="absolute left-auto bottom-0" v-show="item.mark &&!hover">
+      <i class="el-icon-circle-check text-green-700 text-sm object-none object-center"></i>
     </div>
     <div class="flex flex-col px-4 py-2 m-2" v-if="type == 'file'" @click="previewImages(item)">
       <div class="avatar">
@@ -43,10 +43,6 @@
         </div>
         <div v-else class="badge-text text-gray-700 text-justify">{{ item.name }}</div>
       </div>
-	    <i
-	        class="el-icon-circle-check text-green-700 text-sm object-none object-center"
-	        v-if="item.mark"
-	      ></i>
     </div>
   </div>
 </template>
@@ -61,8 +57,11 @@ export default {
   data() {
     return {
       hover: false
-    };
+    }
   },
+  mounted() {
+    this.hover  = false;
+	},
   methods: {
     previewImages(item) {
       this.$store.dispatch("startPreview", {
@@ -73,7 +72,9 @@ export default {
     isFileImage(item) {
       return item.file_mine_type.toLowerCase().indexOf("image") != -1;
     },
-    isFile(item) { return !!item.file_mine_type;},
+    isFile(item) {
+      return !!item.file_mine_type;
+    },
     triggerMarkMediaItem() {
       if (!this.item.mark) {
         this.$store.dispatch("addMarkItem", {
