@@ -1,5 +1,31 @@
-.el-menu-item.is-active[data-v-22846202] {
-  color: inherit;
+.badge-text[data-v-022feece] {
+  margin-left: 10px;
+}
+.badge[data-v-022feece] {
+  background-color: #000;
+  color: #fff;
+  margin-left: 5px;
+  display: inline-block;
+  padding-left: 8px;
+  padding-right: 8px;
+  width: 15px;
+  height: 15px;
+  text-align: center;
+}
+.badge[data-v-022feece] {
+  border-radius: 50%;
+}
+.list-enter[data-v-022feece],
+.list-leave-to[data-v-022feece] {
+  visibility: hidden;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+}
+.list-enter-active[data-v-022feece],
+.list-leave-active[data-v-022feece] {
+  transition: all 0.3s;
 }
 @charset "UTF-8";
 
@@ -83253,29 +83279,15 @@ h4 {
     transition-delay: 1000ms;
   }
 }
-.badge-text[data-v-1ec62d4b] {
-  margin-left: 10px;
-}
-.badge[data-v-1ec62d4b] {
-  background-color: #000;
-  color: #fff;
-  margin-left: 5px;
-  display: inline-block;
-  padding-left: 8px;
-  padding-right: 8px;
-  width: 15px;
-  height: 15px;
-  text-align: center
-}
-.badge[data-v-1ec62d4b] {
-  border-radius: 50%
-}
 .el-carousel__item h3[data-v-e31f93c4] {
   color: #475669;
   font-size: 14px;
   opacity: 0.75;
   line-height: 20px;
   margin: 0;
+}
+.el-menu-item.is-active[data-v-09a013ad] {
+  color: inherit;
 }
 .page-content[data-v-566aa9ce] p {
   margin-bottom: 1rem;
