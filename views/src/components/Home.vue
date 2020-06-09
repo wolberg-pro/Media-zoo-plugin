@@ -6,9 +6,9 @@
 					<div class="nav-page px-4 py-2 m-2">
 						<el-menu mode="horizontal" class="el-menu-horizontal-actions" @select="handleSelect">
 							<el-menu-item index="1" disabled>
-								<div class="flex flex-col-reverse divide-y divide-y-reverse  divide-gray-400 mt-3 items-center w-20">
-									<div class="text-center text-xs leading-tight h-6">{{this.totalItemsSelected}} Selected</div>
-									<div class="text-center text-xs leading-tight h-6">{{this.totalItems}} Items</div>
+								<div class="flex flex-col-reverse divide-y divide-y-reverse  divide-gray-900 mt-3 items-center w-20">
+									<div class="text-center text-xs leading-tight h-6 text-blue-700">{{this.totalItemsSelected}} Selected</div>
+									<div class="text-center text-xs leading-tight h-6 text-blue-700">{{this.totalItems}} Items</div>
 								</div>
 							</el-menu-item>
 							<el-submenu index="2">
@@ -43,10 +43,6 @@
 									<el-menu-item index="1-1" @click="onCreateFolder">Create Folder</el-menu-item>
 									<el-menu-item index="1-2">Upload File/s</el-menu-item>
 								</el-submenu>
-							<el-menu-item index="2">
-								<i class="el-icon-close"></i>
-								<span slot="title">Remove Selected Items</span>
-							</el-menu-item>
 							</el-menu>
 							<div class="nav-page px-4 py-2 m-2">
 								<el-row>
@@ -76,13 +72,13 @@
 		computed: {
 			...mapGetters({
 				newFolderDigLoaded: 'newFolderDigLoaded',
+				totalItemsSelected: 'totalMarkEntities',
+				totalItems: 'totalEntities',
 				parentFolderId: 'parentFolderId'
 			}),
 		},
 		data() {
 			return {
-				totalItemsSelected: 12,
-				totalItems: 40,
 				activeMenuSelectedIndex: "1",
 			};
 		},

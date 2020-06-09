@@ -7,10 +7,8 @@ import * as types from '../mutation-types'
 const state = {
 	files: [],
 	folders: [],
-	markItemsStats: {
-		files: 0,
-		folders: 0,
-	},
+	markItemsStats_files: 0,
+	markItemsStats_folders: 0,
 	loaded: false,
 	createFolderloaded: false,
 	createFolderStatus: false
@@ -21,7 +19,10 @@ const getters = {
 	// Returns an array all categories
 	allFiles: state => state.files,
 	allFolders: state => state.folders,
-	allMarkStats: state => state.markItemsStats,
+	allMarkStatsFiles: state => state.markItemsStats_files,
+	allMarkStatsFolders: state => state.markItemsStats_folders,
+	totalEntities: state => state.files.length + state.folders.length,
+	totalMarkEntities: state => state.markItemsStats_files + state.markItemsStats_folders,
 	allFilesLoaded: state => state.loaded,
 	createFolderLoad: state => state.createFolderloaded,
 	createFolderStatus: state => state.createFolderStatus
@@ -35,15 +36,21 @@ const actions = {
 		entity_id,
 		is_file
 	}) {
-		commit(types.ADD_MARK_ITEM, entity_id, is_file);
+		commit(types.ADD_MARK_ITEM, {
+			entity_id,
+			is_file
+		});
 	},
-	remvoeMarkItem({
+	removeMarkItem({
 		commit
 	}, {
 		entity_id,
 		is_file
 	}) {
-		commit(types.REMOVE_MARK_ITEM, entity_id, is_file);
+		commit(types.REMOVE_MARK_ITEM, {
+			entity_id,
+			is_file
+		});
 	},
 	markAllItemsAsMark({
 		commit
@@ -112,44 +119,46 @@ const mutations = {
 	[types.CREATE_FOLDER_LOAD](state, bool) {
 		state.createFolderloaded = bool
 	},
-	[types.ADD_MARK_ITEM](state, entity_id, is_file) {
+	[types.ADD_MARK_ITEM](state, {
+		entity_id,
+		is_file
+	}) {
 		if (is_file) {
 			const file = state.files.find(item => item.id === entity_id);
 			file.mark = true;
-			state.markItemsStats.files++;
+			state.markItemsStats_files++;
 		} else {
 			const folder = state.folders.find(item => item.id === entity_id);
 			folder.mark = true;
-			state.markItemsStats.folders++;
+			state.markItemsStats_folders++;
 		}
 	},
-	[types.REMOVE_MARK_ITEM](state, entity_id, is_file) {
+	[types.REMOVE_MARK_ITEM](state, {
+		entity_id,
+		is_file
+	}) {
 		if (is_file) {
 			const file = state.files.find(item => item.id === entity_id);
 			file.mark = false;
-			state.markItemsStats.files--;
+			state.markItemsStats_files--;
 
 		} else {
 			const folder = state.folders.find(item => item.id === entity_id);
 			folder.mark = false;
-			state.markItemsStats.folders--;
+			state.markItemsStats_folders--;
 		}
 	},
 	[types.CLEAR_MARK_ITEMS](state) {
 		state.files.forEach(item => item.mark = false);
 		state.folders.forEach(item => item.mark = false);
-		state.markItemsStats = {
-			files: 0,
-			folders: 0
-		};
+		state.markItemsStats_files = 0;
+		state.markItemsStats_folders = 0;
 	},
 	[types.SELECT_ALL_ITEMS](state) {
 		state.files.forEach(item => item.mark = true);
 		state.folders.forEach(item => item.mark = true);
-		state.markItemsStats = {
-			files: state.files.length,
-			folders: state.folders.length
-		};
+		state.markItemsStats_files = state.files.length;
+		state.markItemsStats_folders = state.folders.length;
 	}
 }
 

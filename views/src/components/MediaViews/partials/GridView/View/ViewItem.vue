@@ -5,10 +5,10 @@
     @mouseleave="hover = false"
     :class="{ active: hover }"
   >
-    <div class="absolute left-auto" v-show="hover" @click="triggerMarkMediaItem()">
+    <div class="absolute left-auto bottom-0" v-show="hover" @click="triggerMarkMediaItem()">
       <i class="el-icon-circle-plus-outline text-6xl object-none object-center" v-if="!item.mark"></i>
       <i
-        class="el-icon-circle-remove-outline text-6xl object-none object-center"
+        class="el-icon-remove-outline text-6xl object-none object-center"
         v-if="item.mark"
       ></i>
     </div>
@@ -43,11 +43,11 @@
         </div>
         <div v-else class="badge-text text-gray-700 text-justify">{{ item.name }}</div>
       </div>
+	    <i
+	        class="el-icon-circle-check text-green-700 text-sm object-none object-center"
+	        v-if="item.mark"
+	      ></i>
     </div>
-    <i
-        class="el-icon-circle-circle-check text-green-700 text-6xl object-none object-center"
-        v-if="item.mark"
-      ></i>
   </div>
 </template>
 
@@ -81,11 +81,12 @@ export default {
           entity_id: this.item.id
         });
       } else {
-        this.$store.dispatch("remvoeMarkItem", {
+        this.$store.dispatch("removeMarkItem", {
           is_file: this.isFile(this.item),
           entity_id: this.item.id
         });
       }
+      this.hover = false;
     }
   }
 };
