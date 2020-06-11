@@ -1,3 +1,6 @@
+.el-menu-item.is-active[data-v-30082bc8] {
+  color: inherit;
+}
 @charset "UTF-8";
 
 .el-pagination--small .arrow.disabled,.el-table .hidden-columns,.el-table td.is-hidden>*,.el-table th.is-hidden>*,.el-table--hidden{
@@ -83250,10 +83253,13 @@ h4 {
     transition-delay: 1000ms;
   }
 }
-.badge-text[data-v-35996e16] {
+.mediaItem.active > .showSelectedMark[data-v-4a803161] {
+  display: none;
+}
+.badge-text[data-v-4a803161] {
   margin-left: 10px;
 }
-.badge[data-v-35996e16] {
+.badge[data-v-4a803161] {
   background-color: #000;
   color: #fff;
   margin-left: 5px;
@@ -83264,19 +83270,19 @@ h4 {
   height: 15px;
   text-align: center;
 }
-.badge[data-v-35996e16] {
+.badge[data-v-4a803161] {
   border-radius: 50%;
 }
-.list-enter[data-v-35996e16],
-.list-leave-to[data-v-35996e16] {
+.list-enter[data-v-4a803161],
+.list-leave-to[data-v-4a803161] {
   visibility: hidden;
   height: 0;
   margin: 0;
   padding: 0;
   opacity: 0;
 }
-.list-enter-active[data-v-35996e16],
-.list-leave-active[data-v-35996e16] {
+.list-enter-active[data-v-4a803161],
+.list-leave-active[data-v-4a803161] {
   transition: all 0.3s;
 }
 .el-carousel__item h3[data-v-e31f93c4] {
@@ -83285,9 +83291,6 @@ h4 {
   opacity: 0.75;
   line-height: 20px;
   margin: 0;
-}
-.el-menu-item.is-active[data-v-70f59d56] {
-  color: inherit;
 }
 .page-content[data-v-566aa9ce] p {
   margin-bottom: 1rem;

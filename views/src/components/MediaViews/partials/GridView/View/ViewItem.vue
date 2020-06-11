@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-40 divide-y divide-gray-400 relative"
+    class="h-40 divide-y divide-gray-400 relative mediaItem"
     @mouseover="hover = true"
     @mouseleave="hover = false"
     :class="{ active: hover }"
@@ -9,7 +9,7 @@
       <i class="el-icon-circle-plus-outline text-sm object-none object-center" v-if="!item.mark"></i>
       <i class="el-icon-remove-outline text-sm object-none object-center" v-if="item.mark"></i>
     </div>
-    <div class="absolute left-auto bottom-0" v-show="item.mark &&!hover">
+    <div class="showSelectedMark absolute left-auto bottom-0" v-if="item.mark">
       <i class="el-icon-circle-check text-green-700 text-sm object-none object-center"></i>
     </div>
     <div class="flex flex-col px-4 py-2 m-2" v-if="type == 'file'" @click="previewImages(item)">
@@ -95,6 +95,9 @@ export default {
 
 
 <style type="postcss" scoped>
+.mediaItem.active > .showSelectedMark {
+  display: none;
+}
 .badge-text {
   margin-left: 10px;
 }

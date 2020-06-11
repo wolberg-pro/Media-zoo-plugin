@@ -20,9 +20,13 @@
               <el-submenu index="2">
                 <template slot="title">Selection Tools</template>
                 <el-menu-item index="2-1" @click="onMarkSelectAll()">Select all</el-menu-item>
-                <el-menu-item index="2-2" @click="onClearSelection()" :disabled="totalItemsSelected > 0">Clear Selection</el-menu-item>
+                <el-menu-item
+                  index="2-2"
+                  @click="onClearSelection()"
+                  :disabled="totalItemsSelected > 0"
+                >Clear Selection</el-menu-item>
               </el-submenu>
-              <el-menu-item index="3">
+              <el-menu-item index="3" @click="onDeleteSelection()">
                 <i class="el-icon-picture-outline"></i>
                 <span slot="title">Delete Media</span>
               </el-menu-item>
@@ -83,6 +87,8 @@ import { mapGetters } from "vuex";
 export default {
   computed: {
     ...mapGetters({
+      allFilesMarked: "allFilesMarked",
+      allFoldersMarked: "allFoldersMarked",
       newFolderDigLoaded: "newFolderDigLoaded",
       totalItemsSelected: "totalMarkEntities",
       totalItems: "totalEntities",
@@ -112,7 +118,15 @@ export default {
     onClearSelection() {
       this.$store.dispatch("clearAllMarkItems");
       this.$forceUpdate();
-
+    },
+    onDeleteSelection() {
+    const file_ids = this.allFilesMarked.map(item=> {
+      return item.ID;
+    });
+    const folder_ids = this.allFoldersMarked.map(item=> {
+      return item.ID;
+    });
+      this.$store.dispatch("deleteMediaItems",{folder_ids , file_ids});
     },
     onUploadFiles() {}
   }

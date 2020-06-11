@@ -12,7 +12,7 @@ export const ApiFileSystem = {
 				cb(e);
 			});
 	},
-	createFolder(folder_name, folder_color , folder_description , parent_folder_id, cb) {
+	createFolder(folder_name, folder_color, folder_description, parent_folder_id, cb) {
 		axios
 			.post(_wp_ROOT_URL + SETTINGS.API_CORE_PATH + 'files/create', {
 				type: 'folder',
@@ -20,6 +20,19 @@ export const ApiFileSystem = {
 				folder_name,
 				folder_color,
 				folder_description
+			})
+			.then(response => {
+				cb(response.data);
+			})
+			.catch(e => {
+				cb(e);
+			});
+	},
+	deleteMedia(folder_ids, file_ids, cb) {
+		axios
+			.post(_wp_ROOT_URL + SETTINGS.API_CORE_PATH + 'media/remove', {
+				folders: folder_ids,
+				files: file_ids
 			})
 			.then(response => {
 				cb(response.data);

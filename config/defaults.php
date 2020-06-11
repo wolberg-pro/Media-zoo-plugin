@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin configuration file
  *
@@ -30,7 +31,7 @@ $plugin_slug_routes = [
 			'namespace' => '\MediaZoo\MediaZooPlugin\admin\controller\TestController@test',
 			'dependency' => 'TestController.php',
 			'validation' => 'validationTest',
-			'permission' => 'manage_options',
+			'permission' => 'upload_files',
 			'permissionCallback' => 'permissionTest'
 		], [
 			'version' => 'v1',
@@ -38,7 +39,7 @@ $plugin_slug_routes = [
 			'method' => 'GET',
 			'namespace' => '\MediaZoo\MediaZooPlugin\admin\controller\FileSystemController@index',
 			'dependency' => 'FileSystemController.php',
-			'permission' => 'manage_options',
+			'permission' => 'upload_files',
 			'permissionCallback' => 'permissionFileSystem'
 		], [
 			'version' => 'v1',
@@ -46,7 +47,31 @@ $plugin_slug_routes = [
 			'method' => 'POST',
 			'namespace' => '\MediaZoo\MediaZooPlugin\admin\controller\FileSystemController@create',
 			'dependency' => 'FileSystemController.php',
-			'permission' => 'manage_options',
+			'permission' => 'upload_files',
+			'permissionCallback' => 'permissionFileSystem'
+		], [
+			'version' => 'v1',
+			'route' => 'files/remove',
+			'method' => 'DELETE',
+			'namespace' => '\MediaZoo\MediaZooPlugin\admin\controller\FileSystemController@deleteFiles',
+			'dependency' => 'FileSystemController.php',
+			'permission' => 'upload_files',
+			'permissionCallback' => 'permissionFileSystem'
+		], [
+			'version' => 'v1',
+			'route' => 'folder/remove',
+			'method' => 'DELETE',
+			'namespace' => '\MediaZoo\MediaZooPlugin\admin\controller\FileSystemController@deleteFolders',
+			'dependency' => 'FileSystemController.php',
+			'permission' => 'upload_files',
+			'permissionCallback' => 'permissionFileSystem'
+		], [
+			'version' => 'v1',
+			'route' => 'media/remove',
+			'method' => 'DELETE',
+			'namespace' => '\MediaZoo\MediaZooPlugin\admin\controller\FileSystemController@deleteMedia',
+			'dependency' => 'FileSystemController.php',
+			'permission' => 'upload_files',
 			'permissionCallback' => 'permissionFileSystem'
 		],
 	]

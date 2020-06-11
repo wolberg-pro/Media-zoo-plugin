@@ -65,7 +65,7 @@ class FileSystemQuery
 						post.`post_excerpt` as caption,post.`post_content` as description, post.`guid` ,post.`post_mime_type`
 						from ' . $wpdb->prefix . 'posts as post
 						left join ' . $wpdb->prefix . 'users as user on user.`ID` = post.`post_author`
-						where post.`post_type` = \'attachment\' and post.`post_meida_folder_id` IS NULL
+						where post.`post_type` = \'attachment\' and post.`post_media_folder_id` IS NULL
 						order by post.`post_date`');
 		} else {
 			$query = $wpdb->prepare('
@@ -74,7 +74,7 @@ class FileSystemQuery
 						post.`post_excerpt` as caption,post.`post_content` as description, post.`guid` ,post.`post_mime_type`
 						from ' . $wpdb->prefix . 'posts as post
 						left join ' . $wpdb->prefix . 'users as user on user.`ID` = post.`post_author`
-						where post.`post_type` = \'attachment\' and post.`post_meida_folder_id` = %d`
+						where post.`post_type` = \'attachment\' and post.`post_media_folder_id` = %d`
 						order by post.`post_date`', $folder_id);
 		}
 		$results = $wpdb->get_results($query);

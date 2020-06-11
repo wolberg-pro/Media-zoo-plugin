@@ -74,10 +74,27 @@ class FileSystemService
 	public function deleteFolders(array $folder_ids)
 	{
 		if ($this->isFolderExist($folder_ids)) {
+			// fetching files
+			$files = [];
+			foreach ($folder_ids as $folder_id) {
+				$files = array_merge($files, $this->getFiles($folder_id));
+			}
+			// let delete folder file
+			foreach ($files as $file) {
+				wp_delete_attachment($file->ID);
+			}
+
 			FileSystemQuery::getInstance()->deleteFolders($folder_ids);
 			return true;
 		}
 		return false;
+	}
+
+	public function deleteFiles(array $files_ids)
+	{
+		foreach ($files_ids as $file_id) {
+			wp_delete_attachment($file_id);
+		}
 	}
 
 	public function createFolder(string $folder_name, ?string $folder_color, ?string $folder_description, ?int $folder_id)

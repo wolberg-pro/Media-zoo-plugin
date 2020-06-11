@@ -48,16 +48,36 @@ class FileSystemController extends Controller
 		}
 		return $data;
 	}
-	public function deleteFolder($route, WP_REST_Request $request)
+	public function deleteFolders($route, WP_REST_Request $request)
 	{
 		$data = new \stdClass();
 		$params = json_decode($request->get_body());
 		$data->status = false;
-		if (FileSystemQuery::getInstance()->deleteFolders($params->folders)) {
+		if (FileSystemService::getInstance()->deleteFolders($params->folders)) {
 			$data->status =  true;
 		} else {
 			$data->message = "One or more folders not existed please reload page";
 		}
+		return $data;
+	}
+
+	public function deleteFiles($route, WP_REST_Request $request)
+	{
+		$data = new \stdClass();
+		$params = json_decode($request->get_body());
+		FileSystemService::getInstance()->deleteFiles($params->files);
+		$data->status = true;
+		return $data;
+	}
+	public function deleteMedia($route, WP_REST_Request $request)
+	{
+		$data = new \stdClass();
+		$data->operators = [
+			'file' => $this->deleteFiles($route, $request),
+			'folder' => $this->deleteFolders($route, $request),
+		];
+		$data->files = FileSystemService::getInstance()->GetFiles($folder_id);
+		$data->folders = FileSystemService::getInstance()->getFolders($folder_id);
 		return $data;
 	}
 

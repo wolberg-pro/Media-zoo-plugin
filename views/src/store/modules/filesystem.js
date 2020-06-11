@@ -19,9 +19,11 @@ const getters = {
 	// Returns an array all categories
 	allFiles: state => state.files,
 	allFolders: state => state.folders,
+	allFilesMarked: state => state.files.filter(item => !!item.mark),
+	allFoldersMarked: state => state.folders.filter(item => !!item.mark),
 	allMarkStatsFiles: state => state.markItemsStats_files,
 	allMarkStatsFolders: state => state.markItemsStats_folders,
-	totalEntities: state => state.files.length + state.folders.length,
+	totalEntities: state => (state.files) ? state.files.length : 0 + (state.folders) ? state.folders.length : 0,
 	totalMarkEntities: state => state.markItemsStats_files + state.markItemsStats_folders,
 	allFilesLoaded: state => state.loaded,
 	createFolderLoad: state => state.createFolderloaded,
@@ -30,6 +32,25 @@ const getters = {
 
 // actions
 const actions = {
+	deleteMediaItems({
+		commit
+	}, {
+		folder_ids,
+		file_ids
+	}) {
+		commit(types.FILES_LOADED, false);
+		ApiFileSystem.deleteMediaItems(folder_ids, file_ids, data => {
+			const {
+				files,
+				folders
+			} = data;
+			commit(types.STORE_FETCHED_FILES, {
+				files,
+				folders
+			})
+			commit(types.FILES_LOADED, true)
+		})
+	},
 	addMarkItem({
 		commit
 	}, {
@@ -151,16 +172,12 @@ const mutations = {
 	[types.CLEAR_MARK_ITEMS](state) {
 		state.files.forEach(item => item.mark = false);
 		state.folders.forEach(item => item.mark = false);
-		state.files = [...state.files];
-		state.folders = [...state.folders];
 		state.markItemsStats_files = 0;
 		state.markItemsStats_folders = 0;
 	},
 	[types.SELECT_ALL_ITEMS](state) {
 		state.files.forEach(item => item.mark = true);
 		state.folders.forEach(item => item.mark = true);
-		state.files = [...state.files];
-		state.folders = [...state.folders];
 		state.markItemsStats_files = state.files.length;
 		state.markItemsStats_folders = state.folders.length;
 	}
