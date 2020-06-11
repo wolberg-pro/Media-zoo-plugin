@@ -63,9 +63,9 @@ class FileSystemService
 		return FileSystemQuery::getInstance()->getCurrentLevelMediaFolders($folder_id);
 	}
 
-	public function isFolderExist(array $folder_id)
+	public function isFolderEmpty(array $folder_id)
 	{
-		if (FileSystemQuery::getInstance()->hasFolderExistedByFolderID($folder_id)) {
+		if (FileSystemQuery::getInstance()->hasFoldersWithinFolderID($folder_id)) {
 			return false;
 		}
 		return true;
@@ -73,7 +73,7 @@ class FileSystemService
 
 	public function deleteFolders(array $folder_ids)
 	{
-		if ($this->isFolderExist($folder_ids)) {
+		if ($this->isFolderEmpty($folder_ids)) {
 			// fetching files
 			$files = [];
 			foreach ($folder_ids as $folder_id) {
@@ -86,7 +86,7 @@ class FileSystemService
 
 			FileSystemQuery::getInstance()->deleteFolders($folder_ids);
 			return true;
-		}
+		} 
 		return false;
 	}
 

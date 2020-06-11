@@ -89,6 +89,7 @@ export default {
     ...mapGetters({
       allFilesMarked: "allFilesMarked",
       allFoldersMarked: "allFoldersMarked",
+      currentFolderID: "currentFolderID",
       newFolderDigLoaded: "newFolderDigLoaded",
       totalItemsSelected: "totalMarkEntities",
       totalItems: "totalEntities",
@@ -120,13 +121,15 @@ export default {
       this.$forceUpdate();
     },
     onDeleteSelection() {
-    const file_ids = this.allFilesMarked.map(item=> {
-      return item.ID;
-    });
-    const folder_ids = this.allFoldersMarked.map(item=> {
-      return item.ID;
-    });
-      this.$store.dispatch("deleteMediaItems",{folder_ids , file_ids});
+      const file_ids = this.allFilesMarked;
+      const folder_ids = this.allFoldersMarked;
+      if (file_ids.length > 0  || folder_ids.length > 0) {
+	      this.$store.dispatch("deleteMediaItems", {
+	        currentFolderID: this.currentFolderID|| null,
+	        folder_ids,
+	        file_ids
+	      });
+			}
     },
     onUploadFiles() {}
   }

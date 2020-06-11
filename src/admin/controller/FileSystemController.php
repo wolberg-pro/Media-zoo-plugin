@@ -48,7 +48,7 @@ class FileSystemController extends Controller
 		}
 		return $data;
 	}
-	public function deleteFolders($route, WP_REST_Request $request)
+	public function deleteFolders(WP_REST_Request $request)
 	{
 		$data = new \stdClass();
 		$params = json_decode($request->get_body());
@@ -56,12 +56,12 @@ class FileSystemController extends Controller
 		if (FileSystemService::getInstance()->deleteFolders($params->folders)) {
 			$data->status =  true;
 		} else {
-			$data->message = "One or more folders not existed please reload page";
+			$data->message = "One or more folders Not empty and has folders within at please delete them";
 		}
 		return $data;
 	}
 
-	public function deleteFiles($route, WP_REST_Request $request)
+	public function deleteFiles(WP_REST_Request $request)
 	{
 		$data = new \stdClass();
 		$params = json_decode($request->get_body());
@@ -69,15 +69,17 @@ class FileSystemController extends Controller
 		$data->status = true;
 		return $data;
 	}
-	public function deleteMedia($route, WP_REST_Request $request)
+
+	public function deleteMediaItems(WP_REST_Request $request)
 	{
 		$data = new \stdClass();
+		$params = json_decode($request->get_body());
 		$data->operators = [
-			'file' => $this->deleteFiles($route, $request),
-			'folder' => $this->deleteFolders($route, $request),
+			'file' => $this->deleteFiles($request),
+			'folder' => $this->deleteFolders($request),
 		];
-		$data->files = FileSystemService::getInstance()->GetFiles($folder_id);
-		$data->folders = FileSystemService::getInstance()->getFolders($folder_id);
+		$data->files = FileSystemService::getInstance()->GetFiles($params->folder_id);
+		$data->folders = FileSystemService::getInstance()->getFolders($params->folder_id);
 		return $data;
 	}
 

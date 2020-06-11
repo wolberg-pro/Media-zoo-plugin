@@ -7,8 +7,11 @@ import * as types from '../mutation-types'
 const state = {
 	files: [],
 	folders: [],
+	markFiles: [],
+	markFolders: [],
 	markItemsStats_files: 0,
 	markItemsStats_folders: 0,
+	current_folder_id: null,
 	loaded: false,
 	createFolderloaded: false,
 	createFolderStatus: false
@@ -19,8 +22,9 @@ const getters = {
 	// Returns an array all categories
 	allFiles: state => state.files,
 	allFolders: state => state.folders,
-	allFilesMarked: state => state.files.filter(item => !!item.mark),
-	allFoldersMarked: state => state.folders.filter(item => !!item.mark),
+	currentFolderID: state => state.current_folder_id || null,
+	allFilesMarked: state => state.markFiles,
+	allFoldersMarked: state => state.markFolders,
 	allMarkStatsFiles: state => state.markItemsStats_files,
 	allMarkStatsFolders: state => state.markItemsStats_folders,
 	totalEntities: state => (state.files) ? state.files.length : 0 + (state.folders) ? state.folders.length : 0,
@@ -35,11 +39,12 @@ const actions = {
 	deleteMediaItems({
 		commit
 	}, {
+		current_folder_id,
 		folder_ids,
 		file_ids
 	}) {
 		commit(types.FILES_LOADED, false);
-		ApiFileSystem.deleteMediaItems(folder_ids, file_ids, data => {
+		ApiFileSystem.deleteMediaItems(current_folder_id,folder_ids, file_ids, data => {
 			const {
 				files,
 				folders
@@ -61,6 +66,7 @@ const actions = {
 			entity_id,
 			is_file
 		});
+		commit(types.UPDATE_MARK_MEDIA_ITEMS);
 	},
 	removeMarkItem({
 		commit
@@ -72,16 +78,19 @@ const actions = {
 			entity_id,
 			is_file
 		});
+		commit(types.UPDATE_MARK_MEDIA_ITEMS);
 	},
 	markAllItemsAsMark({
 		commit
 	}) {
 		commit(types.SELECT_ALL_ITEMS);
+		commit(types.UPDATE_MARK_MEDIA_ITEMS);
 	},
 	clearAllMarkItems({
 		commit
 	}) {
 		commit(types.CLEAR_MARK_ITEMS);
+		commit(types.UPDATE_MARK_MEDIA_ITEMS);
 	},
 	getFiles({
 		commit
@@ -98,6 +107,7 @@ const actions = {
 			})
 			commit(types.FILES_LOADED, true)
 			commit(types.INCREMENT_LOADING_PROGRESS)
+			commit(types.UPDATE_MARK_MEDIA_ITEMS);
 		})
 	},
 	createFolder({
@@ -139,6 +149,10 @@ const mutations = {
 	},
 	[types.CREATE_FOLDER_LOAD](state, bool) {
 		state.createFolderloaded = bool
+	},
+	[types.UPDATE_MARK_MEDIA_ITEMS](state) {
+		state.markFiles = [...state.files.filter(file => file.mark).map(file => file.ID)];
+		state.markFolders = [...state.folders.filter(folder => folder.mark).map(folder => folder.id)];
 	},
 	[types.ADD_MARK_ITEM](state, {
 		entity_id,

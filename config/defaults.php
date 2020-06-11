@@ -52,7 +52,7 @@ $plugin_slug_routes = [
 		], [
 			'version' => 'v1',
 			'route' => 'files/remove',
-			'method' => 'DELETE',
+			'method' => 'POST',
 			'namespace' => '\MediaZoo\MediaZooPlugin\admin\controller\FileSystemController@deleteFiles',
 			'dependency' => 'FileSystemController.php',
 			'permission' => 'upload_files',
@@ -60,7 +60,7 @@ $plugin_slug_routes = [
 		], [
 			'version' => 'v1',
 			'route' => 'folder/remove',
-			'method' => 'DELETE',
+			'method' => 'POST',
 			'namespace' => '\MediaZoo\MediaZooPlugin\admin\controller\FileSystemController@deleteFolders',
 			'dependency' => 'FileSystemController.php',
 			'permission' => 'upload_files',
@@ -68,8 +68,8 @@ $plugin_slug_routes = [
 		], [
 			'version' => 'v1',
 			'route' => 'media/remove',
-			'method' => 'DELETE',
-			'namespace' => '\MediaZoo\MediaZooPlugin\admin\controller\FileSystemController@deleteMedia',
+			'method' => 'POST',
+			'namespace' => '\MediaZoo\MediaZooPlugin\admin\controller\FileSystemController@deleteMediaItems',
 			'dependency' => 'FileSystemController.php',
 			'permission' => 'upload_files',
 			'permissionCallback' => 'permissionFileSystem'

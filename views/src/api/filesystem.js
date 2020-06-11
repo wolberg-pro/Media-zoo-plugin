@@ -28,9 +28,10 @@ export const ApiFileSystem = {
 				cb(e);
 			});
 	},
-	deleteMediaItems(folder_ids, file_ids, cb) {
+	deleteMediaItems(folder_id, folder_ids, file_ids, cb) {
 		axios
 			.post(_wp_ROOT_URL + SETTINGS.API_CORE_PATH + 'media/remove', {
+				folder_id,
 				folders: folder_ids,
 				files: file_ids
 			})

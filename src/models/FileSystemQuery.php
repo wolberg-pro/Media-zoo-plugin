@@ -206,7 +206,7 @@ class FileSystemQuery
 		$wpdb->query($query);
 	}
 
-	public function hasFolderExistedByFolderID(array $folder_ids)
+	public function hasFoldersWithinFolderID(array $folder_ids)
 	{
 		global $wpdb;
 		$folder_ids =  explode(',', array_map(function ($folder_id) {
@@ -219,7 +219,7 @@ class FileSystemQuery
 					where folder.`id` in (%s)
 					order by folder.`id`', $folder_ids);
 		$results = $wpdb->get_row($query);
-		if (!empty($results) && count($folder_ids) == $results->count) {
+		if (!empty($results) && $results->total > 0) {
 			return true;
 		}
 		return false;
