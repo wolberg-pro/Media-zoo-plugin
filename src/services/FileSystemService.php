@@ -73,6 +73,7 @@ class FileSystemService
 
 	public function deleteFolders(array $folder_ids)
 	{
+		if ($folder_ids > 0) return true;
 		if ($this->isFolderEmpty($folder_ids)) {
 			// fetching files
 			$files = [];
@@ -86,7 +87,7 @@ class FileSystemService
 
 			FileSystemQuery::getInstance()->deleteFolders($folder_ids);
 			return true;
-		} 
+		}
 		return false;
 	}
 

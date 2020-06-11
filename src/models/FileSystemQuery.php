@@ -196,13 +196,8 @@ class FileSystemQuery
 	public function deleteFolders(array $folder_ids)
 	{
 		global $wpdb;
-		$folder_ids =  explode(',', array_map(function ($folder_id) {
-			return intval($folder_id);
-		}, $folder_ids));
-		$query = $wpdb->prepare('
-					DELETE
-					from ' . $wpdb->prefix . 'media_folders as folder
-					where folder.`id` in (%s)', $folder_ids);
+		$folder_ids =  implode(',', $folder_ids);
+		$query = $wpdb->prepare('DELETE from ' . $wpdb->prefix . 'media_folders where `id` in (%s)', $folder_ids);
 		$wpdb->query($query);
 	}
 
