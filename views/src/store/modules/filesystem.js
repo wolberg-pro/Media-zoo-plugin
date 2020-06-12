@@ -151,7 +151,7 @@ const mutations = {
 		state.createFolderloaded = bool
 	},
 	[types.UPDATE_MARK_MEDIA_ITEMS](state) {
-		state.markFiles = [...state.files.filter(file => file.mark).map(file => file.ID)];
+		state.markFiles = [...state.files.filter(file => file.mark).map(file => file.id)];
 		state.markFolders = [...state.folders.filter(folder => folder.mark).map(folder => folder.id)];
 	},
 	[types.ADD_MARK_ITEM](state, {
@@ -188,10 +188,14 @@ const mutations = {
 		state.folders.forEach(item => item.mark = false);
 		state.markItemsStats_files = 0;
 		state.markItemsStats_folders = 0;
+		state.markFiles = [];
+		state.markFolders = [];
 	},
 	[types.SELECT_ALL_ITEMS](state) {
 		state.files.forEach(item => item.mark = true);
 		state.folders.forEach(item => item.mark = true);
+		state.markFiles = [...state.files.map(file => file.id)];
+		state.markFolders = [...state.folders.map(folder => folder.id)];
 		state.markItemsStats_files = state.files.length;
 		state.markItemsStats_folders = state.folders.length;
 	}
