@@ -26,7 +26,7 @@
                   :disabled="totalItemsSelected > 0"
                 >Clear Selection</el-menu-item>
               </el-submenu>
-              <el-menu-item index="3" @click="onDeleteSelection()">
+              <el-menu-item index="3" @click="onDeleteSelectionConfirm = true">
                 <i class="el-icon-picture-outline"></i>
                 <span slot="title">Delete Media</span>
               </el-menu-item>
@@ -66,7 +66,13 @@
         </div>
       </el-col>
     </el-row>
-
+    <el-dialog title="Warning" :visible.sync="onDeleteSelectionConfirm" width="30%" center>
+      <span>Are You sure you wise delete the folders/files</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="onDeleteSelectionConfirm = false">Cancel</el-button>
+        <el-button type="primary" @click="onDeleteSelection()">Confirm</el-button>
+      </span>
+    </el-dialog>
     <el-dialog
       title="New Folder"
       center
@@ -98,6 +104,7 @@ export default {
   },
   data() {
     return {
+      onDeleteSelectionConfirm: false,
       activeMenuSelectedIndex: "1"
     };
   },
@@ -123,13 +130,14 @@ export default {
     onDeleteSelection() {
       const file_ids = this.allFilesMarked;
       const folder_ids = this.allFoldersMarked;
-      if (file_ids.length > 0  || folder_ids.length > 0) {
-	      this.$store.dispatch("deleteMediaItems", {
-	        currentFolderID: this.currentFolderID|| null,
-	        folder_ids,
-	        file_ids
-	      });
-			}
+      if (file_ids.length > 0 || folder_ids.length > 0) {
+        this.$store.dispatch("deleteMediaItems", {
+          currentFolderID: this.currentFolderID || null,
+          folder_ids,
+          file_ids
+        });
+      }
+      this.onDeleteSelectionConfirm = false;
     },
     onUploadFiles() {}
   }
