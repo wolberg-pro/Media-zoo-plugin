@@ -47,7 +47,7 @@
                     <span slot="title">New</span>
                   </template>
                   <el-menu-item index="1-1" @click="onCreateFolder">Create Folder</el-menu-item>
-                  <el-menu-item index="1-2">Upload File/s</el-menu-item>
+                  <el-menu-item index="1-2" @click="onUploadDialog = true">Upload File/s</el-menu-item>
                 </el-submenu>
               </el-menu>
               <div class="nav-page px-4 py-2 m-2">
@@ -69,6 +69,72 @@
         <el-button type="primary" @click="onDeleteSelection()">Confirm</el-button>
       </span>
     </el-dialog>
+    <el-dialog title="Upload New File" :visible.sync="onUploadDialog" width="30%" center>
+      <el-form ref="form" :model="form" label-width="120px">
+        <el-form-item label="File" prop="upload" required>
+          <el-upload
+            class="upload-file"
+            drag
+            :action="fileUploadUrl"
+            :auto-upload="false"
+            ref="upload"
+            :on-change="handleUploadChange"
+            :before-upload="handleBeforeUpload"
+            :file-list="fileList"
+            :on-progress="handleProgress"
+            :on-success="handleSuccess"
+          >
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">
+              Drop file here or
+              <em>click to upload</em>
+            </div>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="Media Name" prop="name" required>
+          <el-input
+            placeholder="Media Name input"
+            v-model="form.name"
+            maxlength="100"
+            minlength="3"
+            show-word-limit
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="Media Alt" prop="alt">
+          <el-input
+            placeholder="Media Alt input"
+            v-model="form.alt"
+            maxlength="50"
+            minlength="3"
+            show-word-limit
+          ></el-input>
+        </el-form-item>
+
+        <el-form-item label="Media caption" prop="caption">
+          <el-input
+            placeholder="Media Caption input"
+            v-model="form.caption"
+            maxlength="50"
+            minlength="3"
+            show-word-limit
+          ></el-input>
+        </el-form-item>
+
+        <el-form-item label="Media Description" prop="description">
+          <el-input
+            type="textarea"
+            placeholder="Media Description input"
+            v-model="form.description"
+          ></el-input>
+        </el-form-item>
+
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="onUploadReset()">Cancel</el-button>
+          <el-button type="primary" @click="onUploadSubmit()">Upload!</el-button>
+        </span>
+      </el-form>
+      <el-progress type="dashboard" :percentage="percentage" :color="colors"></el-progress>
+    </el-dialog>
     <el-dialog
       title="New Folder"
       center
@@ -85,6 +151,7 @@
 import GridView from "./MediaViews/GridView";
 import NewFolder from "./partials/dialogs/NewFolder";
 import { mapGetters } from "vuex";
+import SETTINGS from "../settings";
 
 export default {
   computed: {
@@ -100,6 +167,44 @@ export default {
   },
   data() {
     return {
+      fileUploadUrl: _wp_ROOT_URL + SETTINGS.API_CORE_PATH + "files/upload",
+      form: {
+        description: "",
+        caption: "",
+        alt: "",
+        name: ""
+      },
+      formRules: {
+        alt: {
+          min: 3,
+          max: 50,
+          message: "Length should be 3 to 50",
+          trigger: "blur"
+        },
+        name: {
+          required: true,
+          min: 3,
+          max: 100,
+          message: "Length should be 3 to 100",
+          trigger: "blur"
+        },
+        caption: {
+          min: 3,
+          max: 50,
+          message: "Length should be 3 to 50",
+          trigger: "blur"
+        }
+      },
+      fileList: [],
+      percentage: 10,
+      colors: [
+        { color: "#f56c6c", percentage: 20 },
+        { color: "#e6a23c", percentage: 40 },
+        { color: "#5cb87a", percentage: 60 },
+        { color: "#1989fa", percentage: 80 },
+        { color: "#6f7ad3", percentage: 100 }
+      ],
+      onUploadDialog: false,
       onDeleteSelectionConfirm: false,
       activeMenuSelectedIndex: "1"
     };
@@ -109,6 +214,82 @@ export default {
     NewFolder
   },
   methods: {
+    onUploadReset() {
+      this.$refs.upload.clearFiles();
+      this.$refs["form"].resetFields();
+      onUploadDialog = false;
+    },
+    onUploadSubmit() {
+      this.$refs["form"].validate(valid => {
+        if (valid) {
+          this.$refs.upload.data = {
+            name: this.form.name,
+            alt: this.form.alt,
+            caption: this.form.caption,
+            description: this.form.description
+          };
+          this.$refs.upload.headers = axios.defaults.headers.common;
+          this.$refs.upload.submit();
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    },
+
+    handleProgress(ev, file, fileLIst) {
+      file.raw["status"] = "uploading";
+    },
+    handleSuccess(res, file, fileLIst) {
+      file.raw["status"] = "success";
+    },
+    handleUploadChange(file, fileList) {
+      this.fileList = fileList.slice(-1);
+    },
+    // handleBeforeUpload(file) {
+    //   const allowedCsvMime = [
+    //     'text/csv',
+    //     'text/plain',
+    //     'application/csv',
+    //     'text/comma-separated-values',
+    //     'application/excel',
+    //     'application/vnd.ms-excel',
+    //     'application/vnd.msexcel',
+    //     'text/anytext',
+    //     'application/octet-stream',
+    //     'application/txt',
+    //   ];
+    //   if (allowedCsvMime.includes(file.type)) {
+    //     return true;
+    //   } else {
+    //     this.$message.error(
+    //       'You can only upload CSV files. No other file types are allowed'
+    //     );
+    //     this.fileList.pop(file);
+    //   }
+    submitUpload() {
+      const formData = new FormData();
+      formData.append("csvfile", this.fileList[0].raw);
+      axios
+        .post("http://127.0.0.1:8000/api/cards/csvupload", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          },
+          onUploadProgress: function(progressEvent) {
+            this.uploadPercentage = parseInt(
+              Math.round((progressEvent.loaded * 100) / progressEvent.total)
+            );
+          }.bind(this)
+        })
+        .then(() => {
+          this.$message.success("Success");
+          this.getCardList({ page: 1 });
+          // this.fileList = []; //Temporary depicts that the file has been uploaded
+        })
+        .catch(() => {
+          alert("error");
+        });
+    },
     onCreateFolder() {
       this.$store.dispatch("openNewFolder", { folder_id: null });
     },

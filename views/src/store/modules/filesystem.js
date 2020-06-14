@@ -9,6 +9,10 @@ const state = {
 	folders: [],
 	markFiles: [],
 	markFolders: [],
+	uploadFileProcess: 0,
+	uploadFileIndecator: false,
+	uploadFailed: false,
+	uploadFailedMessage: '',
 	markItemsStats_files: 0,
 	markItemsStats_folders: 0,
 	current_folder_id: null,
@@ -23,6 +27,10 @@ const getters = {
 	allFiles: state => state.files,
 	allFolders: state => state.folders,
 	currentFolderID: state => state.current_folder_id || null,
+	uploadFileIndecator: state=> state.uploadFileIndecator,
+	uploadFileProcess: state => state.uploadFileProcess,
+	uploadFileFailerStatus: state => state.uploadFileFailerStatus,
+	uploadFileFailerMesseage: state => state.uploadFailedMessage,
 	allFilesMarked: state => state.markFiles,
 	allFoldersMarked: state => state.markFolders,
 	allMarkStatsFiles: state => state.markItemsStats_files,
@@ -36,6 +44,37 @@ const getters = {
 
 // actions
 const actions = {
+	uploadFile({
+		commit
+	}, {
+		file,
+		name,
+		alt,
+		caption,
+		description
+	}) {
+		commit(types.UPLOAD_MEDIA_ITEM_START);
+		commit(types.UPLOAD_MEDIA_ITEM_RESET_PROGRESS);
+		ApiFileSystem.uploadFile({
+			file,
+			name,
+			alt,
+			caption,
+			description
+		}, commit, data => {
+			const {
+				files,
+				folders
+			} = data;
+			if (files && folders) {
+				commit(types.STORE_FETCHED_FILES, {
+					files,
+					folders
+				});
+			}
+			commit(types.UPLOAD_MEDIA_ITEM_ENDED);
+		})
+	},
 	deleteMediaItems({
 		commit
 	}, {
@@ -44,7 +83,7 @@ const actions = {
 		file_ids
 	}) {
 		commit(types.FILES_LOADED, false);
-		ApiFileSystem.deleteMediaItems(current_folder_id,folder_ids, file_ids, data => {
+		ApiFileSystem.deleteMediaItems(current_folder_id, folder_ids, file_ids, data => {
 			const {
 				files,
 				folders
@@ -140,7 +179,25 @@ const mutations = {
 		state.files = files
 		state.folders = folders;
 	},
-
+	[types.UPLOAD_MEDIA_ITEM_START](state) {
+		state.uploadFileIndecator = true;
+		state.uploadFailedMessage = "";
+		state.uploadFailed = false;
+	},
+	[types.UPLOAD_MEDIA_ITEM_RESET_PROGRESS](state) {
+		state.uploadFileProcess = 0;
+	},
+	[types.UPLOAD_MEDIA_ITEM_FAILED](state, e) {
+		console.error(e);
+		state.uploadFailedMessage = "Upload cancel something happened";
+		state.uploadFailed = true;
+	},
+	[types.UPLOAD_MEDIA_ITEM_PROGRESS](state, val) {
+		state.uploadFileProcess = val;
+	},
+	[types.UPLOAD_MEDIA_ITEM_ENDED](state) {
+		state.uploadFileIndecator = false;
+	},
 	[types.FILES_LOADED](state, bool) {
 		state.loaded = bool
 	},
