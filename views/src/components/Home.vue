@@ -30,10 +30,6 @@
                 <i class="el-icon-picture-outline"></i>
                 <span slot="title">Delete Media</span>
               </el-menu-item>
-              <el-menu-item index="4">
-                <i class="el-icon-picture-outline"></i>
-                <span slot="title">Move Media</span>
-              </el-menu-item>
             </el-menu>
           </div>
           <el-card class="box-card">

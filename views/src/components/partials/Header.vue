@@ -30,7 +30,7 @@
 				</svg>
 			</button>
 		</div>
-		<div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+		<!-- <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
 			<div class="text-sm lg:flex-grow">
 				<router-link :to="{ name: 'Ping'}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
 					Pings
@@ -45,7 +45,7 @@
 					Coming Soon
 				</a>
 			</div>
-		</div>
+		</div> -->
 	</nav>
 </template>
 
