@@ -10,7 +10,8 @@ const state = {
 	markFiles: [],
 	markFolders: [],
 	uploadFileProcess: 0,
-	uploadFileIndecator: false,
+	uploadFileIndicatorDialog: false,
+	uploadFileIndicator: false,
 	uploadFailed: false,
 	uploadFailedMessage: '',
 	markItemsStats_files: 0,
@@ -27,7 +28,8 @@ const getters = {
 	allFiles: state => state.files,
 	allFolders: state => state.folders,
 	currentFolderID: state => state.current_folder_id || null,
-	uploadFileIndecator: state=> state.uploadFileIndecator,
+	uploadFileIndicatorDialog: state => state.uploadFileIndicatorDialog,
+	uploadFileIndicator: state => state.uploadFileIndicator,
 	uploadFileProcess: state => state.uploadFileProcess,
 	uploadFileFailerStatus: state => state.uploadFileFailerStatus,
 	uploadFileFailerMesseage: state => state.uploadFailedMessage,
@@ -60,7 +62,8 @@ const actions = {
 			name,
 			alt,
 			caption,
-			description
+			description,
+			folder_id
 		}, commit, data => {
 			const {
 				files,
@@ -73,7 +76,13 @@ const actions = {
 				});
 			}
 			commit(types.UPLOAD_MEDIA_ITEM_ENDED);
+			commit(types.UPLOAD_MEDIA_ITEM_TRIGGER_DIALOG);
 		})
+	},
+	triggerFileUploadDialog({
+		commit
+	}) {
+		commit(types.UPLOAD_MEDIA_ITEM_TRIGGER_DIALOG)
 	},
 	deleteMediaItems({
 		commit
@@ -172,6 +181,9 @@ const actions = {
 
 // mutations
 const mutations = {
+	[types.UPLOAD_MEDIA_ITEM_TRIGGER_DIALOG](state) {
+		state.uploadFileIndicatorDialog = !state.uploadFileIndicatorDialog;
+	},
 	[types.STORE_FETCHED_FILES](state, {
 		files,
 		folders

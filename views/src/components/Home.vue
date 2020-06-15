@@ -47,7 +47,7 @@
                     <span slot="title">New</span>
                   </template>
                   <el-menu-item index="1-1" @click="onCreateFolder">Create Folder</el-menu-item>
-                  <el-menu-item index="1-2" @click="onUploadDialog = true">Upload File/s</el-menu-item>
+                  <el-menu-item index="1-2" @click="onUploadFiles()">Upload File/s</el-menu-item>
                 </el-submenu>
               </el-menu>
               <div class="nav-page px-4 py-2 m-2">
@@ -70,7 +70,7 @@
       </span>
     </el-dialog>
     <el-dialog title="Upload New File" :visible.sync="onUploadDialog" width="30%" center>
-      <el-form ref="form" :model="form" label-width="120px">
+      <el-form ref="form" :model="form" label-width="120px" v-if="uploadFileIndicator">
         <el-form-item label="File" prop="upload" required>
           <el-upload
             class="upload-file"
@@ -79,9 +79,7 @@
             :auto-upload="false"
             ref="upload"
             :on-change="handleUploadChange"
-            :before-upload="handleBeforeUpload"
             :file-list="fileList"
-            :on-progress="handleProgress"
             :on-success="handleSuccess"
           >
             <i class="el-icon-upload"></i>
@@ -133,7 +131,7 @@
           <el-button type="primary" @click="onUploadSubmit()">Upload!</el-button>
         </span>
       </el-form>
-      <el-progress type="dashboard" :percentage="percentage" :color="colors"></el-progress>
+      <el-progress type="dashboard" :percentage="uploadFileProcess" :color="colors" v-else></el-progress>
     </el-dialog>
     <el-dialog
       title="New Folder"
@@ -162,6 +160,10 @@ export default {
       newFolderDigLoaded: "newFolderDigLoaded",
       totalItemsSelected: "totalMarkEntities",
       totalItems: "totalEntities",
+      uploadFileProcess: "uploadFileProcess",
+      uploadFileIndicator: "uploadFileIndicator",
+      uploadFailed: "uploadFailed",
+      uploadFailedMessage: "uploadFailedMessage",
       parentFolderId: "parentFolderId"
     })
   },
@@ -222,16 +224,16 @@ export default {
     onUploadSubmit() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          this.$refs.upload.data = {
+          this.$store.dispatch("uploadFile", {
+            file: this.fileList[0].raw,
             name: this.form.name,
+            folder_id: null,
             alt: this.form.alt,
             caption: this.form.caption,
             description: this.form.description
-          };
-          this.$refs.upload.headers = axios.defaults.headers.common;
-          this.$refs.upload.submit();
+          });
         } else {
-          console.log("error submit!!");
+          alert("not valid form");
           return false;
         }
       });
@@ -267,29 +269,6 @@ export default {
     //     );
     //     this.fileList.pop(file);
     //   }
-    submitUpload() {
-      const formData = new FormData();
-      formData.append("csvfile", this.fileList[0].raw);
-      axios
-        .post("http://127.0.0.1:8000/api/cards/csvupload", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data"
-          },
-          onUploadProgress: function(progressEvent) {
-            this.uploadPercentage = parseInt(
-              Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            );
-          }.bind(this)
-        })
-        .then(() => {
-          this.$message.success("Success");
-          this.getCardList({ page: 1 });
-          // this.fileList = []; //Temporary depicts that the file has been uploaded
-        })
-        .catch(() => {
-          alert("error");
-        });
-    },
     onCreateFolder() {
       this.$store.dispatch("openNewFolder", { folder_id: null });
     },
@@ -316,7 +295,9 @@ export default {
       }
       this.onDeleteSelectionConfirm = false;
     },
-    onUploadFiles() {}
+    onUploadFiles() {
+			this.$store.dispatch("triggerFileUploadDialog");
+    }
   }
 };
 </script>

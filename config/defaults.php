@@ -57,6 +57,14 @@ $plugin_slug_routes = [
 			'dependency' => 'FileSystemController.php',
 			'permission' => 'upload_files',
 			'permissionCallback' => 'permissionFileSystem'
+		],  [
+			'version' => 'v1',
+			'route' => 'files/upload',
+			'method' => 'POST',
+			'namespace' => '\MediaZoo\MediaZooPlugin\admin\controller\FileSystemController@uploadFile',
+			'dependency' => 'FileSystemController.php',
+			'permission' => 'upload_files',
+			'permissionCallback' => 'permissionFileSystem'
 		], [
 			'version' => 'v1',
 			'route' => 'folder/remove',

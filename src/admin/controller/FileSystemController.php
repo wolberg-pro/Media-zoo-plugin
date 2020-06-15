@@ -82,6 +82,16 @@ class FileSystemController extends Controller
 		$data->folders = FileSystemService::getInstance()->getFolders($params->folder_id);
 		return $data;
 	}
+	public function uploadFile(WP_REST_Request $request)
+	{
+		$file = $request->get_file_params('file');
+		$data = new \stdClass();
+		$params = json_decode($request->get_body());
+		FileSystemService::getInstance()->uploadNewMediaItem($file, $params);
+		$data->files = FileSystemService::getInstance()->GetFiles($params->folder_id);
+		$data->folders = FileSystemService::getInstance()->getFolders($params->folder_id);
+		return $data;
+	}
 
 	public function permissionFileSystem($route, WP_REST_Request $request)
 	{
