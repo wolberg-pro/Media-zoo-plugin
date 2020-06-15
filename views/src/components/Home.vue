@@ -69,8 +69,8 @@
         <el-button type="primary" @click="onDeleteSelection()">Confirm</el-button>
       </span>
     </el-dialog>
-    <el-dialog title="Upload New File" :visible.sync="onUploadDialog" width="30%" center>
-      <el-form ref="form" :model="form" label-width="120px" v-if="uploadFileIndicator">
+    <el-dialog title="Upload New File" :visible.sync="uploadFileIndicatorDialog" width="30%" center>
+      <el-form ref="form" :model="form" label-width="120px" v-if="!uploadFileIndicator">
         <el-form-item label="File" prop="upload" required>
           <el-upload
             class="upload-file"
@@ -131,7 +131,11 @@
           <el-button type="primary" @click="onUploadSubmit()">Upload!</el-button>
         </span>
       </el-form>
-      <el-progress type="dashboard" :percentage="uploadFileProcess" :color="colors" v-else></el-progress>
+      <div class='flex content-start flex-no-wrap' v-else>
+        <div class="w-1/3 p-2">&nbsp;</div>
+				<div><el-progress type="dashboard" :percentage="uploadFileProcess" :color="colors" ></el-progress></div>
+        <div class="w-1/3 p-2">&nbsp;</div>
+      </div>
     </el-dialog>
     <el-dialog
       title="New Folder"
@@ -162,6 +166,7 @@ export default {
       totalItems: "totalEntities",
       uploadFileProcess: "uploadFileProcess",
       uploadFileIndicator: "uploadFileIndicator",
+      uploadFileIndicatorDialog: "uploadFileIndicatorDialog",
       uploadFailed: "uploadFailed",
       uploadFailedMessage: "uploadFailedMessage",
       parentFolderId: "parentFolderId"
