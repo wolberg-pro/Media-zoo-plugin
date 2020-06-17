@@ -69,7 +69,13 @@
         <el-button type="primary" @click="onDeleteSelection()">Confirm</el-button>
       </span>
     </el-dialog>
-    <el-dialog title="Upload New File" :visible.sync="uploadFileIndicatorDialog" :show-close='false' width="50%" center>
+    <el-dialog
+      title="Upload New File"
+      :visible.sync="uploadFileIndicatorDialog"
+      :show-close="false"
+      width="50%"
+      center
+    >
       <el-form ref="form" :model="form" label-width="120px" v-if="!uploadFileIndicator">
         <el-form-item label="File" prop="file">
           <el-upload
@@ -316,6 +322,13 @@ export default {
       if (this.$refs.upload) {
         this.$refs.upload.clearFiles();
         this.$refs["form"].resetFields();
+        this.form = {
+          description: "",
+          caption: "",
+          file: "",
+          alt: "",
+          name: ""
+        };
       }
     }
   }

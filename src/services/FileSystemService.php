@@ -118,6 +118,7 @@ class FileSystemService
 				'post_parent' => null,
 				'post_media_folder_id' => $params['folder_id'],
 				'post_title' => $params['name'],
+				'guid' => $upload_file['url'],
 				'post_content' => $params['description'],
 				'post_excerpt' => $params['caption'],
 				'post_status' => 'inherit'

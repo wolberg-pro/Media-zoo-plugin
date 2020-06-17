@@ -1,5 +1,9 @@
-.el-menu-item.is-active[data-v-a36a09e6] {
-  color: inherit;
+.el-carousel__item h3[data-v-16542359] {
+  color: #475669;
+  font-size: 14px;
+  opacity: 0.75;
+  line-height: 20px;
+  margin: 0;
 }
 @charset "UTF-8";
 
@@ -83285,12 +83289,8 @@ h4 {
 .list-leave-active[data-v-4a803161] {
   transition: all 0.3s;
 }
-.el-carousel__item h3[data-v-e31f93c4] {
-  color: #475669;
-  font-size: 14px;
-  opacity: 0.75;
-  line-height: 20px;
-  margin: 0;
+.el-menu-item.is-active[data-v-446a5551] {
+  color: inherit;
 }
 .page-content[data-v-566aa9ce] p {
   margin-bottom: 1rem;

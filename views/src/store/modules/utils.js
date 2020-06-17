@@ -3,8 +3,9 @@ import * as types from '../mutation-types'
 // initial state
 const state = {
 	preview_files: [],
+	preview_current_item: {},
 	load_preview: false,
-	parent_folder_id:  null,
+	parent_folder_id: null,
 	load_new_folder_dig: false,
 }
 
@@ -15,29 +16,55 @@ const getters = {
 	newFolderDigLoaded: state => state.load_new_folder_dig,
 	parentFolderId: state => state.parent_folder_id,
 	perviewFiles: state => state.preview_files,
+	perviewCurrentSelectItem: state => state.preview_current_item,
 }
 
 // actions
 const actions = {
-	startPreview({commit}, {files,item}) {
-		commit(types.LOAD_PREVIEW,{data: {files,item}})
+	startPreview({
+		commit
+	}, {
+		files,
+		item
+	}) {
+		commit(types.LOAD_PREVIEW, {
+			data: {
+				files,
+				item
+			}
+		})
 	},
-	stopPreview({commit}) {
+	stopPreview({
+		commit
+	}) {
 		commit(types.UNLOAD_PREVIEW)
 	},
-	openNewFolder({commit}, {folder_id}) {
-		commit(types.LOAD_NEW_DIG_FOLDER,{data: {folder_id}})
+	openNewFolder({
+		commit
+	}, {
+		folder_id
+	}) {
+		commit(types.LOAD_NEW_DIG_FOLDER, {
+			data: {
+				folder_id
+			}
+		})
 	},
-	closeNewFolder({commit}) {
+	closeNewFolder({
+		commit
+	}) {
 		commit(types.UNLOAD_NEW_DIG_FOLDER)
 	}
 }
 
 // mutations
 const mutations = {
-	[types.LOAD_PREVIEW](state,{data}) {
+	[types.LOAD_PREVIEW](state, {
+		data
+	}) {
 		state.preview_files = data.files.filter(val => val.file_mine_type.toLowerCase().indexOf('image') != -1 && data.item.id != val.id);
 		state.preview_files.unshift(data.item);
+		state.preview_current_item = data.item;
 		state.load_preview = true
 	},
 
@@ -45,7 +72,9 @@ const mutations = {
 		state.preview_files = [];
 		state.load_preview = false
 	},
-	[types.LOAD_NEW_DIG_FOLDER](state,{data}) {
+	[types.LOAD_NEW_DIG_FOLDER](state, {
+		data
+	}) {
 		state.parent_folder_id = data.folder_id || null;
 		state.load_new_folder_dig = true;
 	},

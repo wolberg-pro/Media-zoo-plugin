@@ -5,7 +5,7 @@
 		<div v-else>No Files Uploaded</div>
 
 		<el-dialog title="Preview File" width="80%" center destroy-on-close	:visible.sync="previewLoaded"  @close="onDisplayPreviewClose()">
-			<preview-image :items="previewFiles"/>
+			<preview-image :items="previewFiles" :selected="perviewCurrentSelectItem"/>
 		</el-dialog>
 	</div>
 </template>
@@ -23,6 +23,7 @@
 				allFolders: 'allFolders',
 				previewLoaded: 'previewLoaded',
 				previewFiles: 'perviewFiles',
+				perviewCurrentSelectItem: 'perviewCurrentSelectItem',
 				allFilesLoaded: 'allFilesLoaded',
 			}),
 		},
