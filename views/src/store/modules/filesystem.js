@@ -31,8 +31,8 @@ const getters = {
 	uploadFileIndicatorDialog: state => state.uploadFileIndicatorDialog,
 	uploadFileIndicator: state => state.uploadFileIndicator,
 	uploadFileProcess: state => state.uploadFileProcess,
-	uploadFileFailerStatus: state => state.uploadFileFailerStatus,
-	uploadFileFailerMesseage: state => state.uploadFailedMessage,
+	uploadFileFailedStatus: state => state.uploadFileFailerStatus,
+	uploadFileFailedMessage: state => state.uploadFailedMessage,
 	allFilesMarked: state => state.markFiles,
 	allFoldersMarked: state => state.markFolders,
 	allMarkStatsFiles: state => state.markItemsStats_files,
@@ -46,6 +46,13 @@ const getters = {
 
 // actions
 const actions = {
+	resetFileUploadState({
+		commit
+	}) {
+		commit(types.UPLOAD_MEDIA_ITEM_ENDED);
+		commit(types.UPLOAD_MEDIA_ITEM_RESET_PROGRESS);
+	},
+
 	uploadFile({
 		commit
 	}, {
@@ -53,18 +60,19 @@ const actions = {
 		name,
 		alt,
 		caption,
-		description
+		description,
+		folder_id
 	}) {
+		const fd = new FormData();
+		fd.append('file', file);
+		fd.append('name', name);
+		fd.append('alt', alt);
+		fd.append('caption', caption);
+		fd.append('description', description);
+		fd.append('folder_id', folder_id);
 		commit(types.UPLOAD_MEDIA_ITEM_START);
 		commit(types.UPLOAD_MEDIA_ITEM_RESET_PROGRESS);
-		ApiFileSystem.uploadFile({
-			file,
-			name,
-			alt,
-			caption,
-			description,
-			folder_id
-		}, commit, data => {
+		ApiFileSystem.uploadFile(fd, commit, data => {
 			const {
 				files,
 				folders
@@ -75,8 +83,10 @@ const actions = {
 					folders
 				});
 			}
-			commit(types.UPLOAD_MEDIA_ITEM_ENDED);
-			commit(types.UPLOAD_MEDIA_ITEM_TRIGGER_DIALOG);
+			setTimeout(() => {
+				commit(types.UPLOAD_MEDIA_ITEM_ENDED);
+				commit(types.UPLOAD_MEDIA_ITEM_TRIGGER_DIALOG);
+			}, 2000);
 		})
 	},
 	triggerFileUploadDialog({
@@ -192,7 +202,7 @@ const mutations = {
 		state.folders = folders;
 	},
 	[types.UPLOAD_MEDIA_ITEM_START](state) {
-		state.uploadFileIndecator = true;
+		state.uploadFileIndicator = true;
 		state.uploadFailedMessage = "";
 		state.uploadFailed = false;
 	},
@@ -208,7 +218,7 @@ const mutations = {
 		state.uploadFileProcess = val;
 	},
 	[types.UPLOAD_MEDIA_ITEM_ENDED](state) {
-		state.uploadFileIndecator = false;
+		state.uploadFileIndicator = false;
 	},
 	[types.FILES_LOADED](state, bool) {
 		state.loaded = bool

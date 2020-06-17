@@ -108,9 +108,9 @@ class FileSystemService
 
 	public function uploadNewMediaItem($file , $params) {
 
-		$filename = basename($file);
+		$filename = $file['name'];
 
-		$upload_file = wp_upload_bits($filename, null, file_get_contents($file));
+		$upload_file = wp_upload_bits($filename, null, file_get_contents($file['tmp_name']));
 		if (!$upload_file['error']) {
 			$wp_filetype = wp_check_filetype($filename, null);
 			$attachment = array(

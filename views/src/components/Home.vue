@@ -69,9 +69,9 @@
         <el-button type="primary" @click="onDeleteSelection()">Confirm</el-button>
       </span>
     </el-dialog>
-    <el-dialog title="Upload New File" :visible.sync="uploadFileIndicatorDialog" width="30%" center>
+    <el-dialog title="Upload New File" :visible.sync="uploadFileIndicatorDialog" :show-close='false' width="50%" center>
       <el-form ref="form" :model="form" label-width="120px" v-if="!uploadFileIndicator">
-        <el-form-item label="File" prop="upload" required>
+        <el-form-item label="File" prop="file">
           <el-upload
             class="upload-file"
             drag
@@ -80,6 +80,7 @@
             ref="upload"
             :on-change="handleUploadChange"
             :file-list="fileList"
+            list-type="picture"
             :on-success="handleSuccess"
           >
             <i class="el-icon-upload"></i>
@@ -91,7 +92,7 @@
         </el-form-item>
         <el-form-item label="Media Name" prop="name" required>
           <el-input
-            placeholder="Media Name input"
+            placeholder="Name input"
             v-model="form.name"
             maxlength="100"
             minlength="3"
@@ -100,7 +101,7 @@
         </el-form-item>
         <el-form-item label="Media Alt" prop="alt">
           <el-input
-            placeholder="Media Alt input"
+            placeholder="Alt input"
             v-model="form.alt"
             maxlength="50"
             minlength="3"
@@ -108,7 +109,7 @@
           ></el-input>
         </el-form-item>
 
-        <el-form-item label="Media caption" prop="caption">
+        <el-form-item label="caption" prop="caption">
           <el-input
             placeholder="Media Caption input"
             v-model="form.caption"
@@ -118,24 +119,25 @@
           ></el-input>
         </el-form-item>
 
-        <el-form-item label="Media Description" prop="description">
+        <el-form-item label="Description" prop="description">
           <el-input
             type="textarea"
             placeholder="Media Description input"
             v-model="form.description"
           ></el-input>
         </el-form-item>
-
-        <span slot="footer" class="dialog-footer">
-          <el-button @click="onUploadReset()">Cancel</el-button>
-          <el-button type="primary" @click="onUploadSubmit()">Upload!</el-button>
-        </span>
       </el-form>
-      <div class='flex content-start flex-no-wrap' v-else>
+      <div class="flex content-start flex-no-wrap" v-else>
         <div class="w-1/3 p-2">&nbsp;</div>
-				<div><el-progress type="dashboard" :percentage="uploadFileProcess" :color="colors" ></el-progress></div>
+        <div>
+          <el-progress type="dashboard" :percentage="uploadFileProcess" :color="colors"></el-progress>
+        </div>
         <div class="w-1/3 p-2">&nbsp;</div>
       </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="onUploadReset()">Cancel</el-button>
+        <el-button :disabled="uploadFileIndicator" type="primary" @click="onUploadSubmit()">Upload!</el-button>
+      </span>
     </el-dialog>
     <el-dialog
       title="New Folder"
@@ -167,8 +169,8 @@ export default {
       uploadFileProcess: "uploadFileProcess",
       uploadFileIndicator: "uploadFileIndicator",
       uploadFileIndicatorDialog: "uploadFileIndicatorDialog",
-      uploadFailed: "uploadFailed",
-      uploadFailedMessage: "uploadFailedMessage",
+      uploadFailed: "uploadFileFailedStatus",
+      uploadFailedMessage: "uploadFileFailedMessage",
       parentFolderId: "parentFolderId"
     })
   },
@@ -178,10 +180,15 @@ export default {
       form: {
         description: "",
         caption: "",
+        file: "",
         alt: "",
         name: ""
       },
       formRules: {
+        file: {
+          required: true,
+          message: "Please upload Media Item"
+        },
         alt: {
           min: 3,
           max: 50,
@@ -222,9 +229,11 @@ export default {
   },
   methods: {
     onUploadReset() {
-      this.$refs.upload.clearFiles();
-      this.$refs["form"].resetFields();
-      onUploadDialog = false;
+      if (this.$refs.upload) {
+        this.$refs.upload.clearFiles();
+        this.$refs["form"].resetFields();
+      }
+      this.$store.dispatch("triggerFileUploadDialog");
     },
     onUploadSubmit() {
       this.$refs["form"].validate(valid => {
@@ -248,6 +257,7 @@ export default {
       file.raw["status"] = "uploading";
     },
     handleSuccess(res, file, fileLIst) {
+      this.form.file = res.url;
       file.raw["status"] = "success";
     },
     handleUploadChange(file, fileList) {
@@ -301,7 +311,12 @@ export default {
       this.onDeleteSelectionConfirm = false;
     },
     onUploadFiles() {
-			this.$store.dispatch("triggerFileUploadDialog");
+      this.$store.dispatch("resetFileUploadState");
+      this.$store.dispatch("triggerFileUploadDialog");
+      if (this.$refs.upload) {
+        this.$refs.upload.clearFiles();
+        this.$refs["form"].resetFields();
+      }
     }
   }
 };
