@@ -80,17 +80,17 @@
 
 <script>
 	export default {
-		props: ['items'],
+		props: ['items','selected'],
 		data() {
 			return {
-				selectItem: this.items[0],
+				selectItem: this.selected,
 				editMode: 'false',
 				labelPosition: 'left',
 				form: {
-					description:  '',
-					caption: '',
-					alt: '',
-					name: ''
+					description:  this.selected.file_info.description,
+					caption: this.selected.file_info.caption,
+					alt: this.selected.file_info.alt,
+					name: this.selected.name
 				},
 				formRules: {
 					alt: {min: 3, max: 50, message: 'Length should be 3 to 50', trigger: 'blur'},
