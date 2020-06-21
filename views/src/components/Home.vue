@@ -37,11 +37,29 @@
               <span>Media Zoo Assest Control</span>
             </div>
             <div class="actions px-4 py-2 m-2">
-              <el-breadcrumb separator-class="el-icon-arrow-right">
-                <el-breadcrumb-item @click="onRootFolderPath()">root</el-breadcrumb-item>
-                <el-breadcrumb-item v-for="(item, index) in folderLocation" v-bind:key="item.id"  @click="onFolderPath(item.id, index)">{{item.name}}</el-breadcrumb-item>
-
-              </el-breadcrumb>
+              <nav class="bg-grey-light p-3 rounded font-sans w-full m-4">
+                <ol class="list-reset flex text-grey-dark">
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      class="text-blue font-bold"
+                      @click="onRootFolderPath()"
+                    >root</a>
+                  </li>
+                  <template v-for="(item, index) in folderLocation">
+                    <li>
+                      <span class="mx-2">/</span>
+                    </li>
+                    <li>
+                      <a
+                        href="javascript:void(0)"
+                        class="text-blue font-bold"
+                        @click="onFolderPath(item.id, index)"
+                      >{{item.name}}</a>
+                    </li>
+                  </template>
+                </ol>
+              </nav>
               <el-menu mode="horizontal" class="el-menu-horizontal-actions">
                 <el-submenu index="1">
                   <template slot="title">
@@ -296,8 +314,8 @@ export default {
     onRootFolderPath() {
       this.$store.dispatch("clearFolderLocation");
     },
-    onFolderPath(folder_id , index) {
-      this.$store.dispatch("goToFolderLocation" , {folder_id , index});
+    onFolderPath(folder_id, index) {
+      this.$store.dispatch("goToFolderLocation", { folder_id, index });
     },
     onCreateFolder() {
       this.$store.dispatch("openNewFolder", { folder_id: null });

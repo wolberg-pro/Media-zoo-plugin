@@ -59,8 +59,7 @@ const actions = {
 				} = data;
 				commit(types.STORE_FETCHED_FILES, {
 					files,
-					folders,
-					current_folder
+					folders
 				})
 				commit(types.FILES_LOADED, true)
 				commit(types.CLEAR_MARK_ITEMS);
@@ -95,7 +94,7 @@ const actions = {
 		folder
 	}) {
 		commit(types.FILES_LOADED, false)
-		ApiFileSystem.getFiles(folder.is-dragging, data => {
+		ApiFileSystem.getFiles(folder.id, data => {
 			const {
 				files,
 				folders
