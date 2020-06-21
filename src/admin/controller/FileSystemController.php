@@ -16,11 +16,12 @@ class FileSystemController extends Controller
 
 	public function index(WP_REST_Request $request)
 	{
-		$queryParams = $request->get_file_params();
+		$queryParams = $request->get_query_params();
 		$folder_id = (isset($queryParams['folder_id']) && is_numeric($queryParams['folder_id'])) ? intval($queryParams['folder_id']) : null;
 		$data = new \stdClass();
 		$data->files = FileSystemService::getInstance()->GetFiles($folder_id);
 		$data->folders = FileSystemService::getInstance()->getFolders($folder_id);
+		$data->current_folder = FileSystemService::getInstance()->getFolderInfo($folder_id);
 		return $data;
 	}
 
@@ -80,6 +81,7 @@ class FileSystemController extends Controller
 		];
 		$data->files = FileSystemService::getInstance()->GetFiles($params->folder_id);
 		$data->folders = FileSystemService::getInstance()->getFolders($params->folder_id);
+		$data->current_folder = FileSystemService::getInstance()->getFolderInfo($folder_id);
 		return $data;
 	}
 	public function uploadFile(WP_REST_Request $request)
@@ -91,6 +93,7 @@ class FileSystemController extends Controller
 		$folder_id = (strtolower(trim($params['folder_id'])) == 'null') ?  null : intval(trim($params['folder_id']));
 		$data->files = FileSystemService::getInstance()->GetFiles($folder_id);
 		$data->folders = FileSystemService::getInstance()->getFolders($folder_id);
+		$data->current_folder = FileSystemService::getInstance()->getFolderInfo($folder_id);
 		return $data;
 	}
 

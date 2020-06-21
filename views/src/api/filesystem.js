@@ -3,9 +3,13 @@ import SETTINGS from "../settings";
 import * as types from '../store/mutation-types'
 
 export const ApiFileSystem = {
-	getFiles(cb) {
+	getFiles(folder_id, cb) {
+		let queryString = "";
+		if (folder_id) {
+			queryString = '?folder_id=' + folder_id
+		}
 		axios
-			.get(_wp_ROOT_URL + SETTINGS.API_CORE_PATH + 'files/all')
+			.get(_wp_ROOT_URL + SETTINGS.API_CORE_PATH + 'files/all' + queryString)
 			.then(response => {
 				cb(response.data);
 			})
@@ -31,7 +35,7 @@ export const ApiFileSystem = {
 			})
 			.catch(e => {
 				cb(e);
-				commit(types.UPLOAD_MEDIA_ITEM_FAILED , e);
+				commit(types.UPLOAD_MEDIA_ITEM_FAILED, e);
 			});
 	},
 	createFolder(folder_name, folder_color, folder_description, parent_folder_id, cb) {

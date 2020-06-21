@@ -38,7 +38,9 @@
             </div>
             <div class="actions px-4 py-2 m-2">
               <el-breadcrumb separator-class="el-icon-arrow-right">
-                <el-breadcrumb-item :to="{ path: '/' }">root</el-breadcrumb-item>
+                <el-breadcrumb-item @click="onRootFolderPath()">root</el-breadcrumb-item>
+                <el-breadcrumb-item v-for="(item, index) in folderLocation" v-bind:key="item.id"  @click="onFolderPath(item.id, index)">{{item.name}}</el-breadcrumb-item>
+
               </el-breadcrumb>
               <el-menu mode="horizontal" class="el-menu-horizontal-actions">
                 <el-submenu index="1">
@@ -167,6 +169,7 @@ export default {
   computed: {
     ...mapGetters({
       allFilesMarked: "allFilesMarked",
+      folderLocation: "folderLocation",
       allFoldersMarked: "allFoldersMarked",
       currentFolderID: "currentFolderID",
       newFolderDigLoaded: "newFolderDigLoaded",
@@ -290,6 +293,12 @@ export default {
     //     );
     //     this.fileList.pop(file);
     //   }
+    onRootFolderPath() {
+      this.$store.dispatch("clearFolderLocation");
+    },
+    onFolderPath(folder_id , index) {
+      this.$store.dispatch("goToFolderLocation" , {folder_id , index});
+    },
     onCreateFolder() {
       this.$store.dispatch("openNewFolder", { folder_id: null });
     },

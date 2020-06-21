@@ -9,6 +9,7 @@ const state = {
 	folders: [],
 	markFiles: [],
 	markFolders: [],
+	folderPath: [],
 	uploadFileProcess: 0,
 	uploadFileIndicatorDialog: false,
 	uploadFileIndicator: false,
@@ -27,6 +28,7 @@ const getters = {
 	// Returns an array all categories
 	allFiles: state => state.files,
 	allFolders: state => state.folders,
+	folderLocation: state => state.folderPath,
 	currentFolderID: state => state.current_folder_id || null,
 	uploadFileIndicatorDialog: state => state.uploadFileIndicatorDialog,
 	uploadFileIndicator: state => state.uploadFileIndicator,
@@ -46,6 +48,67 @@ const getters = {
 
 // actions
 const actions = {
+	clearFolderLocation({
+			commit
+		}) {
+			commit(types.FILES_LOADED, false)
+			ApiFileSystem.getFiles(null, data => {
+				const {
+					files,
+					folders
+				} = data;
+				commit(types.STORE_FETCHED_FILES, {
+					files,
+					folders,
+					current_folder
+				})
+				commit(types.FILES_LOADED, true)
+				commit(types.CLEAR_MARK_ITEMS);
+				commit(types.clearFolderLocation);
+			})
+	},
+	goToFolderLocation({
+		commit
+	}, {
+		folder_id,
+		index
+	}) {
+
+		commit(types.FILES_LOADED, false)
+		ApiFileSystem.getFiles(folder_id, data => {
+			const {
+				files,
+				folders
+			} = data;
+			commit(types.STORE_FETCHED_FILES, {
+				files,
+				folders
+			})
+			commit(types.FILES_LOADED, true)
+			commit(types.CLEAR_MARK_ITEMS);
+			commit(types.CHANGE_FOLDER_BY_LOCATION, index);
+		})
+	},
+	goToFolder({
+		commit
+	}, {
+		folder
+	}) {
+		commit(types.FILES_LOADED, false)
+		ApiFileSystem.getFiles(folder.is-dragging, data => {
+			const {
+				files,
+				folders
+			} = data;
+			commit(types.STORE_FETCHED_FILES, {
+				files,
+				folders
+			})
+			commit(types.FILES_LOADED, true)
+			commit(types.CLEAR_MARK_ITEMS);
+			commit(types.CHANGE_FOLDER, folder);
+		})
+	},
 	resetFileUploadState({
 		commit
 	}) {
@@ -152,21 +215,31 @@ const actions = {
 	},
 	getFiles({
 		commit
+	}, {
+		folder_id
 	}) {
-		commit(types.FILES_LOADED, false)
-		ApiFileSystem.getFiles(data => {
-			const {
-				files,
-				folders
-			} = data;
-			commit(types.STORE_FETCHED_FILES, {
-				files,
-				folders
+		if (folder_id) {
+			this.goToFolder({
+				commit
+			}, {
+				folder_id
 			})
-			commit(types.FILES_LOADED, true)
-			commit(types.INCREMENT_LOADING_PROGRESS)
-			commit(types.UPDATE_MARK_MEDIA_ITEMS);
-		})
+		} else {
+			commit(types.FILES_LOADED, false)
+			ApiFileSystem.getFiles(null, data => {
+				const {
+					files,
+					folders
+				} = data;
+				commit(types.STORE_FETCHED_FILES, {
+					files,
+					folders
+				})
+				commit(types.FILES_LOADED, true)
+				commit(types.INCREMENT_LOADING_PROGRESS)
+				commit(types.UPDATE_MARK_MEDIA_ITEMS);
+			})
+		}
 	},
 	createFolder({
 		commit
@@ -191,6 +264,18 @@ const actions = {
 
 // mutations
 const mutations = {
+	[types.CLEAR_FOLDER](state) {
+		state.folderPath = [];
+		state.currentFolderID = null;
+	},
+	[types.CHANGE_FOLDER](state, current_folder) {
+		state.folderPath = [...state.folderPath, current_folder];
+		state.currentFolderID = current_folder.id;
+	},
+	[types.CHANGE_FOLDER_BY_LOCATION](state,  folder_idx) {
+		state.folderPath = state.folderPath.slice(0, folder_idx);
+		state.currentFolderID = state.folderPath[state.folderPath.length].id;
+	},
 	[types.UPLOAD_MEDIA_ITEM_TRIGGER_DIALOG](state) {
 		state.uploadFileIndicatorDialog = !state.uploadFileIndicatorDialog;
 	},

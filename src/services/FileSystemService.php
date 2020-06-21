@@ -105,8 +105,19 @@ class FileSystemService
 		}
 		return FileSystemQuery::getInstance()->createFolder($folder_name, $folder_color, $folder_description, $folder_id);
 	}
+	public function getFolderInfo($folder_id)
+	{
+		if ($folder_id) {
+			$folderData = FileSystemQuery::getInstance()->GetFolder($folder_id);
+			if ($folderData) {
+				return $folderData;
+			}
+		}
+		return null;
+	}
 
-	public function uploadNewMediaItem($file , $params) {
+	public function uploadNewMediaItem($file, $params)
+	{
 
 		$filename = $file['name'];
 
