@@ -9,6 +9,12 @@ const state = {
 	folders: [],
 	markFiles: [],
 	markFolders: [],
+	folderPath: [],
+	uploadFileProcess: 0,
+	uploadFileIndicatorDialog: false,
+	uploadFileIndicator: false,
+	uploadFailed: false,
+	uploadFailedMessage: '',
 	markItemsStats_files: 0,
 	markItemsStats_folders: 0,
 	current_folder_id: null,
@@ -22,7 +28,13 @@ const getters = {
 	// Returns an array all categories
 	allFiles: state => state.files,
 	allFolders: state => state.folders,
+	folderLocation: state => state.folderPath,
 	currentFolderID: state => state.current_folder_id || null,
+	uploadFileIndicatorDialog: state => state.uploadFileIndicatorDialog,
+	uploadFileIndicator: state => state.uploadFileIndicator,
+	uploadFileProcess: state => state.uploadFileProcess,
+	uploadFileFailedStatus: state => state.uploadFileFailerStatus,
+	uploadFileFailedMessage: state => state.uploadFailedMessage,
 	allFilesMarked: state => state.markFiles,
 	allFoldersMarked: state => state.markFolders,
 	allMarkStatsFiles: state => state.markItemsStats_files,
@@ -36,6 +48,114 @@ const getters = {
 
 // actions
 const actions = {
+	clearFolderLocation({
+			commit
+		}) {
+			commit(types.FILES_LOADED, false)
+			ApiFileSystem.getFiles(null, data => {
+				const {
+					files,
+					folders
+				} = data;
+				commit(types.STORE_FETCHED_FILES, {
+					files,
+					folders
+				})
+				commit(types.FILES_LOADED, true)
+				commit(types.CLEAR_MARK_ITEMS);
+				commit(types.clearFolderLocation);
+			})
+	},
+	goToFolderLocation({
+		commit
+	}, {
+		folder_id,
+		index
+	}) {
+
+		commit(types.FILES_LOADED, false)
+		ApiFileSystem.getFiles(folder_id, data => {
+			const {
+				files,
+				folders
+			} = data;
+			commit(types.STORE_FETCHED_FILES, {
+				files,
+				folders
+			})
+			commit(types.FILES_LOADED, true)
+			commit(types.CLEAR_MARK_ITEMS);
+			commit(types.CHANGE_FOLDER_BY_LOCATION, index);
+		})
+	},
+	goToFolder({
+		commit
+	}, {
+		folder
+	}) {
+		commit(types.FILES_LOADED, false)
+		ApiFileSystem.getFiles(folder.id, data => {
+			const {
+				files,
+				folders
+			} = data;
+			commit(types.STORE_FETCHED_FILES, {
+				files,
+				folders
+			})
+			commit(types.FILES_LOADED, true)
+			commit(types.CLEAR_MARK_ITEMS);
+			commit(types.CHANGE_FOLDER, folder);
+		})
+	},
+	resetFileUploadState({
+		commit
+	}) {
+		commit(types.UPLOAD_MEDIA_ITEM_ENDED);
+		commit(types.UPLOAD_MEDIA_ITEM_RESET_PROGRESS);
+	},
+
+	uploadFile({
+		commit
+	}, {
+		file,
+		name,
+		alt,
+		caption,
+		description,
+		folder_id
+	}) {
+		const fd = new FormData();
+		fd.append('file', file);
+		fd.append('name', name);
+		fd.append('alt', alt);
+		fd.append('caption', caption);
+		fd.append('description', description);
+		fd.append('folder_id', folder_id);
+		commit(types.UPLOAD_MEDIA_ITEM_START);
+		commit(types.UPLOAD_MEDIA_ITEM_RESET_PROGRESS);
+		ApiFileSystem.uploadFile(fd, commit, data => {
+			const {
+				files,
+				folders
+			} = data;
+			if (files && folders) {
+				commit(types.STORE_FETCHED_FILES, {
+					files,
+					folders
+				});
+			}
+			setTimeout(() => {
+				commit(types.UPLOAD_MEDIA_ITEM_ENDED);
+				commit(types.UPLOAD_MEDIA_ITEM_TRIGGER_DIALOG);
+			}, 2000);
+		})
+	},
+	triggerFileUploadDialog({
+		commit
+	}) {
+		commit(types.UPLOAD_MEDIA_ITEM_TRIGGER_DIALOG)
+	},
 	deleteMediaItems({
 		commit
 	}, {
@@ -44,7 +164,7 @@ const actions = {
 		file_ids
 	}) {
 		commit(types.FILES_LOADED, false);
-		ApiFileSystem.deleteMediaItems(current_folder_id,folder_ids, file_ids, data => {
+		ApiFileSystem.deleteMediaItems(current_folder_id, folder_ids, file_ids, data => {
 			const {
 				files,
 				folders
@@ -94,21 +214,31 @@ const actions = {
 	},
 	getFiles({
 		commit
+	}, {
+		folder_id
 	}) {
-		commit(types.FILES_LOADED, false)
-		ApiFileSystem.getFiles(data => {
-			const {
-				files,
-				folders
-			} = data;
-			commit(types.STORE_FETCHED_FILES, {
-				files,
-				folders
+		if (folder_id) {
+			this.goToFolder({
+				commit
+			}, {
+				folder_id
 			})
-			commit(types.FILES_LOADED, true)
-			commit(types.INCREMENT_LOADING_PROGRESS)
-			commit(types.UPDATE_MARK_MEDIA_ITEMS);
-		})
+		} else {
+			commit(types.FILES_LOADED, false)
+			ApiFileSystem.getFiles(null, data => {
+				const {
+					files,
+					folders
+				} = data;
+				commit(types.STORE_FETCHED_FILES, {
+					files,
+					folders
+				})
+				commit(types.FILES_LOADED, true)
+				commit(types.INCREMENT_LOADING_PROGRESS)
+				commit(types.UPDATE_MARK_MEDIA_ITEMS);
+			})
+		}
 	},
 	createFolder({
 		commit
@@ -133,6 +263,21 @@ const actions = {
 
 // mutations
 const mutations = {
+	[types.CLEAR_FOLDER](state) {
+		state.folderPath = [];
+		state.currentFolderID = null;
+	},
+	[types.CHANGE_FOLDER](state, current_folder) {
+		state.folderPath = [...state.folderPath, current_folder];
+		state.currentFolderID = current_folder.id;
+	},
+	[types.CHANGE_FOLDER_BY_LOCATION](state,  folder_idx) {
+		state.folderPath = state.folderPath.slice(0, folder_idx);
+		state.currentFolderID = state.folderPath[state.folderPath.length].id;
+	},
+	[types.UPLOAD_MEDIA_ITEM_TRIGGER_DIALOG](state) {
+		state.uploadFileIndicatorDialog = !state.uploadFileIndicatorDialog;
+	},
 	[types.STORE_FETCHED_FILES](state, {
 		files,
 		folders
@@ -140,7 +285,25 @@ const mutations = {
 		state.files = files
 		state.folders = folders;
 	},
-
+	[types.UPLOAD_MEDIA_ITEM_START](state) {
+		state.uploadFileIndicator = true;
+		state.uploadFailedMessage = "";
+		state.uploadFailed = false;
+	},
+	[types.UPLOAD_MEDIA_ITEM_RESET_PROGRESS](state) {
+		state.uploadFileProcess = 0;
+	},
+	[types.UPLOAD_MEDIA_ITEM_FAILED](state, e) {
+		console.error(e);
+		state.uploadFailedMessage = "Upload cancel something happened";
+		state.uploadFailed = true;
+	},
+	[types.UPLOAD_MEDIA_ITEM_PROGRESS](state, val) {
+		state.uploadFileProcess = val;
+	},
+	[types.UPLOAD_MEDIA_ITEM_ENDED](state) {
+		state.uploadFileIndicator = false;
+	},
 	[types.FILES_LOADED](state, bool) {
 		state.loaded = bool
 	},

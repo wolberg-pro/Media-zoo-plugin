@@ -33,5 +33,6 @@ new Vue({
 	created() {
 		this.$store.commit(types.RESET_LOADING_PROGRESS);
 		this.$store.commit(types.CLEAR_MARK_ITEMS);
+		this.$store.commit(types.CLEAR_FOLDER);
 	},
 });

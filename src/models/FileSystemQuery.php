@@ -151,22 +151,6 @@ class FileSystemQuery
 		}
 		return $folders;
 	}
-	public function getFolder(int $folder_id)
-	{
-		global $wpdb;
-		$query = $wpdb->prepare('
-						select
-						folder.`id`,  folder.`name`, folder.`color`, folder.`description`
-						from ' . $wpdb->prefix . 'media_folders as folder
-						where folder.`id` = %d
-						order by folder.`id`', $folder_id);
-		$row = $wpdb->get_row($query);
-		$id = intval($row->id);
-		$name = $row->name;
-		$color = $row->color;
-		$description = $row->description;
-		return new Folder($id, $name, $color, $description);
-	}
 
 	public function hasFolderOnCurrentLevel(string $folder_name, ?int $folder_id = null)
 	{
@@ -220,6 +204,25 @@ class FileSystemQuery
 		return false;
 	}
 
+	public function GetFolder(int $folder_id)
+	{
+		global $wpdb;
+		$query = $wpdb->prepare('
+					select
+					folder.`id` ,  folder.`name`, folder.`color`, folder.`description`
+					from ' . $wpdb->prefix . 'media_folders as folder
+					where folder.`id` = %d
+					order by folder.`id`', $folder_id);
+		$row = $wpdb->get_row($query);
+		if ($row) {
+			$id = intval($row->id);
+			$name = $row->name;
+			$color = $row->color;
+			$description = $row->description;
+			return new Folder($id, $name, $color, $description);
+		}
+		return false;
+	}
 	public function createFolder(string $folder_name, ?string $folder_color, ?string $folder_description, ?int $folder_id)
 	{
 		global $wpdb;

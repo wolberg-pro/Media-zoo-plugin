@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <div class="flex flex-col px-4 py-2 m-2" v-else>
+    <div class="flex flex-col px-4 py-2 m-2" v-else @click="onGoToFolder({id:item.id, name:item.name  })">
       <div class="avatar">
         <i class="el-icon-folder text-5xl"></i>
       </div>
@@ -57,11 +57,11 @@ export default {
   data() {
     return {
       hover: false
-    }
+    };
   },
   mounted() {
-    this.hover  = false;
-	},
+    this.hover = false;
+  },
   methods: {
     previewImages(item) {
       this.$store.dispatch("startPreview", {
@@ -74,6 +74,11 @@ export default {
     },
     isFile(item) {
       return !!item.file_mine_type;
+    },
+    onGoToFolder(folder) {
+      this.$store.dispatch("goToFolder", {
+        folder
+      });
     },
     triggerMarkMediaItem() {
       if (!this.item.mark) {
