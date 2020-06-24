@@ -66,7 +66,7 @@ class MediaZoo
 	/**
 	 * Overall C
 	 */
-	protected ConfigInterface $config;
+	protected $config;
 
 	/**
 	 * Define the core functionality of the plugin.

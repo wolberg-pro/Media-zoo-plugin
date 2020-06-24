@@ -13,7 +13,7 @@ class FileSystemQuery
 	/**
 	 * @var FileSystemQuery hold the main login
 	 */
-	private static ?FileSystemQuery $instance = null;
+	private static $instance = null;
 
 	/**
 	 * Instantiate a Plugin object.

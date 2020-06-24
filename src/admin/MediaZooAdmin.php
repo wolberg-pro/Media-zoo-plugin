@@ -23,7 +23,7 @@ class MediaZooAdmin
 	 * @access   private
 	 * @var      string $plugin_name The ID of this plugin.
 	 */
-	private string $plugin_name;
+	private $plugin_name;
 
 	/**
 	 * The version of this plugin.
@@ -32,7 +32,7 @@ class MediaZooAdmin
 	 * @access   private
 	 * @var      string $version The current version of this plugin.
 	 */
-	private string $version;
+	private $version;
 
 
 	/**
@@ -43,7 +43,7 @@ class MediaZooAdmin
 	 * @access   protected
 	 * @var      Loader $loader Maintains and registers all hooks for the plugin.
 	 */
-	protected ?Loader $loader = null;
+	protected $loader = null;
 
 	/**
 	 * Initialize the class and set its properties.

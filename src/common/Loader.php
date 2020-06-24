@@ -28,7 +28,7 @@ class Loader extends MediaZooHelperLoader
 	/**
 	 * @var Loader hold the main login
 	 */
-	private static ?Loader $instance = null;
+	private static $instance = null;
 
 
 	/**

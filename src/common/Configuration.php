@@ -38,11 +38,11 @@ class Configuration
 	 *
 	 * @var self
 	 */
-	private static ?Configuration $instance = null;
+	private static $instance = null;
 	/**
 	 * @var ConfigInterface hold the main login
 	 */
-	protected ConfigInterface $configObject;
+	protected $configObject;
 
 
 	/**

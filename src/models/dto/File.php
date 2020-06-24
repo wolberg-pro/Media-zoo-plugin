@@ -8,17 +8,17 @@ use DateTime;
 
 class File
 {
-	public int $id;
-	public string $author;
-	public string $registerDateTime;
-	public string $title;
-	public string $name;
-	public string $file_path;
-	public string $file_url;
-	public string $file_thumb_url;
-	public string $file_mine_type;
-	public array $file_meta_data;
-	public array $file_info;
+	public $id;
+	public $author;
+	public $registerDateTime;
+	public $title;
+	public $name;
+	public $file_path;
+	public $file_url;
+	public $file_thumb_url;
+	public $file_mine_type;
+	public $file_meta_data;
+	public $file_info;
 
 	/***
 	 * File constructor.
@@ -34,17 +34,17 @@ class File
 	 * @param array $file_metaData
 	 * @param array $file_info
 	 */
-	public function __construct(int $id,
-															string $author,
-															string $registerDateTime,
-															string $title,
-															string $name,
-															string $path,
-															string $url,
-															string $thoumb,
-															string $mine_type,
-															array $file_metaData,
-															array $file_info)
+	public function __construct($id,
+															$author,
+															$registerDateTime,
+															$title,
+															$name,
+															$path,
+															$url,
+															$thoumb,
+															$mine_type,
+															$file_metaData,
+															$file_info)
 	{
 		$this->id = $id;
 		$this->author = $author;

@@ -11,7 +11,7 @@ class MigrationHandller
 	/**
 	 * @var MigrationHandller hold the main login
 	 */
-	private static ?MigrationHandller $instance = null;
+	private static $instance = null;
 
 
 	/**
@@ -50,9 +50,8 @@ class MigrationHandller
 
 		return self::$instance;
 	}
-	private array $loaded_migrations = [];
+	private $loaded_migrations = [];
 	private function load_dependencies() {
-		$loaded_migrations = [];
 		$config = Configuration::getInstance()->getConfig();
 		if ($config->hasKey('Migration.load')) {
 			foreach ($config->getKey('Migration.load') as $migrate) {

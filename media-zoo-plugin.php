@@ -17,7 +17,7 @@
  * Author:            Sivan Wolberg
  * Author URI:        https://garyjones.io
  * Text Domain:       media-zoo-plugin
- * Requires PHP:      7.4
+ * Requires PHP:      7.0
  * Requires WP:       5.3
  */
 
@@ -28,6 +28,7 @@ if (!defined('WPINC')) {
 	die;
 }
 
+require_once __DIR__ . '/vendor/autoload.php';
 require_once(__DIR__ . '/src/common/functions.php');
 
 if (!defined('MediaZoo_DIR')) {
@@ -39,10 +40,6 @@ if (!defined('MediaZoo_URL')) {
 }
 
 define('MediaZoo_VERSION', '1.0.0');
-// Load Composer autoloader.
-if (file_exists(__DIR__ . '/vendor/autoload.php')) {
-	require_once __DIR__ . '/vendor/autoload.php';
-}
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-plugin-name-activator.php

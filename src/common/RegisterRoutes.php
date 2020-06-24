@@ -17,7 +17,7 @@ class RegisterRoutes
 	/**
 	 * @var RegisterRoutes hold the main login
 	 */
-	private static ?RegisterRoutes $instance = null;
+	private static $instance = null;
 
 
 	/**

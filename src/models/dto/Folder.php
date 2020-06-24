@@ -7,10 +7,10 @@ namespace MediaZoo\MediaZooPlugin\models\dto;
 class Folder
 {
 
-	public int $id;
-	public string $name;
-	public ?string $color;
-	public ?string $description;
+	public $id;
+	public $name;
+	public $color;
+	public $description;
 
 	/***
 	 * Folder constructor.
@@ -19,10 +19,10 @@ class Folder
 	 * @param string|null $color
 	 * @param string|null $description
 	 */
-	public function __construct(int $id,
-															string $name,
-															?string $color,
-															?string $description)
+	public function __construct($id,
+															$name,
+															$color,
+															$description)
 	{
 		$this->id = $id;
 		$this->name = $name;
