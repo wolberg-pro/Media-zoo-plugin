@@ -11,7 +11,7 @@ wp_localize_script( 'wp-api', 'wpApiSettings', array(
 <script>
 	_wp_ASSEST_URL = '<?php echo MediaZoo_URL . 'views/dist'; ?>';
 	_wp_API_URL = '<?php echo MediaZoo_URL; ?>';
-	_wp_ROOT_URL = '<?php echo get_site_url() .'/index.php/'; ?>';
+	_wp_ROOT_URL = '<?php echo get_site_url() .'/'; ?>';
 	_wp_nonce = '<?php echo wp_create_nonce( 'wp_rest' ) ?>';
 </script>
 

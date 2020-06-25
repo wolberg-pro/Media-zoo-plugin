@@ -15,7 +15,7 @@ class FileSystemService
 	/**
 	 * @var FileSystemService hold the main login
 	 */
-	private static ?FileSystemService $instance = null;
+	private static $instance = null;
 
 
 	/**

@@ -2,7 +2,7 @@
   <div>
     <sort-bar :options="options" v-if="true == 0" />
     <comp-view
-      v-if="allFiles.length > 0"
+      v-if="allFiles.length > 0 || allFolders.length > 0"
       :files="allFiles"
       :folders="allFolders"
       :dataLoad="allFilesLoaded"

@@ -16,6 +16,7 @@ abstract class Migration
 
 	protected function runQuery(array $queries) {
 		global $wpdb;
+		$wpdb->show_errors();
 		if (is_array($queries)) {
 			foreach ($queries as $query) {
 				$wpdb->query($query);

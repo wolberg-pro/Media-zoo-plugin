@@ -1,3 +1,15 @@
+.el-menu-item.is-active[data-v-7dfcd3d3] {
+  color: inherit;
+}
+.page-content[data-v-566aa9ce] p {
+  margin-bottom: 1rem;
+}
+.logo-cls-1[data-v-566d3d05] {
+  fill: #ffffff;
+}
+.site-header[data-v-566d3d05] {
+  background: linear-gradient(to right, #92025f, #3b1e58);
+}
 @charset "UTF-8";
 
 .el-pagination--small .arrow.disabled,.el-table .hidden-columns,.el-table td.is-hidden>*,.el-table th.is-hidden>*,.el-table--hidden{
@@ -3759,10 +3771,6 @@
   color:#606266
 }
 
-.el-date-editor .el-range-input::-webkit-input-placeholder{
-  color:#C0C4CC
-}
-
 .el-date-editor .el-range-input:-ms-input-placeholder{
   color:#C0C4CC
 }
@@ -3875,10 +3883,6 @@
   background-color:#F5F7FA;
   color:#C0C4CC;
   cursor:not-allowed
-}
-
-.el-range-editor.is-disabled input::-webkit-input-placeholder{
-  color:#C0C4CC
 }
 
 .el-range-editor.is-disabled input:-ms-input-placeholder{
@@ -11406,10 +11410,6 @@
   box-sizing:border-box
 }
 
-.el-cascader__search-input::-webkit-input-placeholder{
-  color:#C0C4CC
-}
-
 .el-cascader__search-input:-ms-input-placeholder{
   color:#C0C4CC
 }
@@ -11817,10 +11817,6 @@
   transition:border-color .2s cubic-bezier(.645,.045,.355,1)
 }
 
-.el-textarea__inner::-webkit-input-placeholder{
-  color:#C0C4CC
-}
-
 .el-textarea__inner:-ms-input-placeholder{
   color:#C0C4CC
 }
@@ -11860,10 +11856,6 @@
   border-color:#E4E7ED;
   color:#C0C4CC;
   cursor:not-allowed
-}
-
-.el-textarea.is-disabled .el-textarea__inner::-webkit-input-placeholder{
-  color:#C0C4CC
 }
 
 .el-textarea.is-disabled .el-textarea__inner:-ms-input-placeholder{
@@ -11978,10 +11970,6 @@
   text-align:center
 }
 
-.el-input__inner::-webkit-input-placeholder{
-  color:#C0C4CC
-}
-
 .el-input__inner:-ms-input-placeholder{
   color:#C0C4CC
 }
@@ -12046,10 +12034,6 @@
   border-color:#E4E7ED;
   color:#C0C4CC;
   cursor:not-allowed
-}
-
-.el-input.is-disabled .el-input__inner::-webkit-input-placeholder{
-  color:#C0C4CC
 }
 
 .el-input.is-disabled .el-input__inner:-ms-input-placeholder{
@@ -14733,7 +14717,46 @@
 .el-popconfirm__action{
   text-align:right;
   margin:0
-}/* Don't want tailwindcss?
+}.mediaItem.active > .showSelectedMark[data-v-14ff9d49] {
+  display: none;
+}
+.badge-text[data-v-14ff9d49] {
+  margin-left: 10px;
+}
+.badge[data-v-14ff9d49] {
+  background-color: #000;
+  color: #fff;
+  margin-left: 5px;
+  display: inline-block;
+  padding-left: 8px;
+  padding-right: 8px;
+  width: 15px;
+  height: 15px;
+  text-align: center;
+}
+.badge[data-v-14ff9d49] {
+  border-radius: 50%;
+}
+.list-enter[data-v-14ff9d49],
+.list-leave-to[data-v-14ff9d49] {
+  visibility: hidden;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+}
+.list-enter-active[data-v-14ff9d49],
+.list-leave-active[data-v-14ff9d49] {
+  transition: all 0.3s;
+}
+.el-carousel__item h3[data-v-eb2bc412] {
+  color: #475669;
+  font-size: 14px;
+  opacity: 0.75;
+  line-height: 20px;
+  margin: 0;
+}
+/* Don't want tailwindcss?
    Simply remove the import
    statement below and write
    your CSS as normal! */
@@ -83249,57 +83272,6 @@ h4 {
   .xl\:delay-1000 {
     transition-delay: 1000ms;
   }
-}
-.mediaItem.active > .showSelectedMark[data-v-4567f96c] {
-  display: none;
-}
-.badge-text[data-v-4567f96c] {
-  margin-left: 10px;
-}
-.badge[data-v-4567f96c] {
-  background-color: #000;
-  color: #fff;
-  margin-left: 5px;
-  display: inline-block;
-  padding-left: 8px;
-  padding-right: 8px;
-  width: 15px;
-  height: 15px;
-  text-align: center;
-}
-.badge[data-v-4567f96c] {
-  border-radius: 50%;
-}
-.list-enter[data-v-4567f96c],
-.list-leave-to[data-v-4567f96c] {
-  visibility: hidden;
-  height: 0;
-  margin: 0;
-  padding: 0;
-  opacity: 0;
-}
-.list-enter-active[data-v-4567f96c],
-.list-leave-active[data-v-4567f96c] {
-  transition: all 0.3s;
-}
-.el-carousel__item h3[data-v-16542359] {
-  color: #475669;
-  font-size: 14px;
-  opacity: 0.75;
-  line-height: 20px;
-  margin: 0;
-}
-.el-menu-item.is-active[data-v-3fa187d0] {
-  color: inherit;
-}
-.page-content[data-v-566aa9ce] p {
-  margin-bottom: 1rem;
-}
-.logo-cls-1[data-v-6c2cb40b] {
-  fill: #ffffff;
-}
-.site-header[data-v-6c2cb40b] {
-  background: linear-gradient(to right, #92025f, #3b1e58);
 }
 
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzdHlsZXMuY3NzIiwic291cmNlUm9vdCI6IiJ9*/

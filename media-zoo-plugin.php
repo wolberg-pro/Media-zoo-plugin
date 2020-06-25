@@ -49,6 +49,7 @@ define('MediaZoo_VERSION', '1.0.0');
 register_activation_hook(__FILE__, function () {
 	require_once plugin_dir_path(__FILE__) . 'src/class-plugin-name-activator.php';
 	MediaZoo_Activator::activate();
+
 });
 
 /**
