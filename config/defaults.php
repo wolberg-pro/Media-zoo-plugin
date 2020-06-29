@@ -95,7 +95,7 @@ $plugin_slug_settings = [
 			'parent_slug' => 'options-general.php',
 			'page_title' => __('Media Zoo File Control', 'Media Zoo File Control'),
 			'menu_title' => __('Media Zoo', 'Media Zoo'),
-			'capability' => 'manage_options',
+			'capability' => 'upload_files',
 			'menu_slug' => 'media-zoo',
 			'view' => 'Media-zoo-plugin/views/admin-page.php'
 
